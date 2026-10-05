@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  SITE DE APRESENTAÇÃO - MODELO BASE                          ║
+  ╠══════════════════════════════════════════════════════════════╣
+  ║  COMO ADAPTAR PARA UM NOVO CLIENTE (3 passos):               ║
+  ║                                                              ║
+  ║  1. CORES      → bloco "CORES" logo abaixo, no <style>       ║
+  ║  2. CONTATOS   → bloco "DADOS DO CLIENTE", no <script>       ║
+  ║  3. TEXTOS E FOTOS → procure por "EDITE:" no corpo da página ║
+  ║                                                              ║
+  ║  Dica: use Ctrl+F e procure "EDITE" para achar tudo que      ║
+  ║  precisa ser trocado.                                        ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<!-- EDITE: título que aparece na aba do navegador e no Google -->
+<title>Seu Negócio | Presença Digital Profissional</title>
+<meta name="description" content="Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar." />
+<meta name="theme-color" content="#F6F5F1" />
+
+<!-- Tailwind CSS e fontes -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<script>
+  // Configuração do Tailwind: define as duas fontes usadas no site
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],          // textos corridos
+          serif: ['"Instrument Serif"', 'serif']  // títulos
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     CORES  (edite só aqui e o site inteiro muda)
+     ═══════════════════════════════════════════════════════════ */
+  :root {
+    --bg:     #F6F5F1;   /* fundo principal (off-white)          */
+    --bg-alt: #ECEBE6;   /* fundo das seções alternadas          */
+    --ink:    #14171A;   /* cor do texto                         */
+    --muted:  #666B73;   /* texto secundário (cinza)             */
+    --line:   #D8D8D2;   /* linhas finas e bordas                */
+    --accent: #1B365D;   /* AZUL principal (botões, destaques)   */
+    --accent-dark: #11233D; /* azul mais escuro (hover dos botões) */
+  }
+
+  /* Outras opções de azul, se quiser testar:
+     Azul petróleo → --accent: #164B5C;
+     Azul royal    → --accent: #234A8C;
+     Azul acinzentado → --accent: #3A5673;  */
+
+
+  /* ═══════════════════════════════════════════════════════════
+     BASE
+     ═══════════════════════════════════════════════════════════ */
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+
+  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.015em; }
+  .serif em { font-style: italic; color: var(--accent); }   /* palavra em destaque nos títulos */
+  .muted { color: var(--muted); }
+
+  /* Textinho pequeno em maiúsculas acima dos títulos ("01 — Sobre nós") */
+  .eyebrow {
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════
+     ANIMAÇÕES AO ROLAR
+     O JavaScript adiciona a classe ".in" quando o item aparece na tela.
+     Use o atributo style="--d:.2s" para atrasar uma animação.
+     ═══════════════════════════════════════════════════════════ */
+
+  /* .reveal → sobe suavemente e aparece */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* .grow → o texto cresce de leve ao aparecer */
+  .grow {
+    opacity: 0;
+    transform: scale(.9) translateY(20px);
+    transform-origin: left top;
+    transition: opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .grow.in { opacity: 1; transform: none; }
+
+  /* .split → título que aparece palavra por palavra
+     (o JavaScript separa as palavras automaticamente) */
+  .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+  .word > span {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 1s cubic-bezier(.2,.7,.2,1);
+    transition-delay: calc(var(--i) * 70ms);
+  }
+  .split.in .word > span { transform: none; }
+
+  /* .curtain → foto que se abre como uma cortina */
+  .curtain {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1.4s cubic-bezier(.7,0,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .curtain.in { clip-path: inset(0 0 0 0); }
+
+  /* .rule → linha fina que se desenha da esquerda para a direita */
+  .rule {
+    height: 1px;
+    background: var(--line);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.4s cubic-bezier(.7,0,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .rule.in { transform: none; }
+
+
+  /* ═══════════════════════════════════════════════════════════
+     COMPONENTES
+     ═══════════════════════════════════════════════════════════ */
+
+  /* Caixa de foto (mostra um espaço cinza enquanto não há imagem) */
+  .photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .photo img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+  }
+  .photo:hover img { transform: scale(1.04); }
+  .photo .placeholder {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    padding: 1rem; text-align: center;
+    color: var(--muted); font-size: .85rem;
+  }
+
+  /* Botões */
+  .btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    padding: 1rem 1.75rem;
+    font-size: .95rem; font-weight: 500;
+    border-radius: 999px;
+    transition: all .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .btn-solid { background: var(--accent); color: #fff; }                 /* botão azul cheio */
+  .btn-solid:hover { background: var(--accent-dark); }
+  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }      /* botão só com borda */
+  .btn-outline:hover { background: var(--ink); color: var(--bg); }
+  .btn .arrow { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+  .btn:hover .arrow { transform: translate(3px, -3px); }
+
+  /* Linha de serviço (lista da seção Serviços) */
+  .service {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 2.25rem 0;
+    border-top: 1px solid var(--line);
+    transition: padding .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .service:last-child { border-bottom: 1px solid var(--line); }
+  .service::before {                                  /* fundo que aparece no hover */
+    content: ""; position: absolute; inset: 0 -1.5rem; z-index: -1;
+    background: var(--bg);
+    opacity: 0; transition: opacity .4s; border-radius: 6px;
+  }
+  .service:hover::before { opacity: 1; }
+  .service:hover { padding-left: .75rem; }
+  .service .circle {                                  /* círculo com seta */
+    width: 2.75rem; height: 2.75rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    display: none; place-items: center;
+    transition: all .4s;
+  }
+  .service:hover .circle { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(-45deg); }
+  @media (min-width: 768px) {
+    .service { grid-template-columns: 4rem 1.1fr 1.4fr auto; align-items: center; }
+    .service .circle { display: grid; }
+  }
+
+  /* Menu do topo */
+  #nav { border-bottom: 1px solid transparent; transition: background .4s, border-color .4s; }
+  #nav.scrolled { background: rgba(246,245,241,.88); backdrop-filter: blur(14px); border-color: var(--line); }
+  .nav-link { position: relative; }
+  .nav-link::after {                                  /* sublinhado animado */
+    content: ""; position: absolute; left: 0; bottom: -4px;
+    height: 1px; width: 100%; background: var(--ink);
+    transform: scaleX(0); transform-origin: right; transition: transform .4s;
+  }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* Barra fina de progresso no topo da página */
+  #progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 100; background: var(--accent); }
+
+  /* Seção de contato (fundo azul) */
+  .section-dark { background: var(--accent); color: #F6F5F1; }
+  .section-dark .muted { color: rgba(246,245,241,.68); }
+
+  /* Respeita quem desativou animações no celular/computador */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .reveal, .grow, .word > span { opacity: 1 !important; transform: none !important; }
+    .curtain { clip-path: none !important; }
+    .rule { transform: none !important; }
+  }
+</style>
+</head>
+
+<body class="font-sans antialiased">
+
+<div id="progress"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     MENU DO TOPO
+     ═══════════════════════════════════════════════════════════ -->
+<header id="nav" class="fixed top-0 inset-x-0 z-50">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10 h-20 flex items-center justify-between">
+
+    <!-- EDITE: logo do cliente (texto ou <img src="logo.png" class="h-8">) -->
+    <a href="#inicio" class="serif text-2xl">SUA LOGO AQUI</a>
+
+    <!-- Links (aparecem só no computador) -->
+    <nav class="hidden md:flex items-center gap-9 text-sm">
+      <a href="#sobre"    class="nav-link">Sobre</a>
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#espaco"   class="nav-link">Espaço</a>
+      <a href="#local"    class="nav-link">Localização</a>
+      <a href="#contato"  class="btn btn-solid !py-2.5 !px-5 !text-sm">Fale conosco</a>
+    </nav>
+
+    <!-- Botão do menu no celular -->
+    <button id="menuButton" class="md:hidden w-10 h-10 grid place-items-center" aria-label="Abrir menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h16M3 15h16"/></svg>
+    </button>
+  </div>
+
+  <!-- Menu aberto no celular -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-[var(--line)] bg-[var(--bg)] px-5 py-6 space-y-5 text-lg serif">
+    <a href="#sobre"    class="block">Sobre</a>
+    <a href="#servicos" class="block">Serviços</a>
+    <a href="#espaco"   class="block">Espaço</a>
+    <a href="#local"    class="block">Localização</a>
+    <a href="#contato"  class="block">Fale conosco</a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     1) INÍCIO (primeira tela)
+     ═══════════════════════════════════════════════════════════ -->
+<section id="inicio" class="relative pt-36 sm:pt-44 pb-20">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <p class="eyebrow">Apresentação institucional</p>
+
+    <!-- EDITE: título principal. Use <em>palavras</em> para deixar em itálico azul -->
+    <h1 id="heroTitle" class="split serif mt-6 text-[3rem] leading-[1.02] sm:text-7xl lg:text-[6.5rem] max-w-6xl">
+      Seu negócio merece uma <em>presença digital</em> profissional.
+    </h1>
+
+    <div class="mt-12 grid lg:grid-cols-12 gap-10 items-end">
+
+      <!-- Texto e botões -->
+      <div class="lg:col-span-5">
+        <!-- EDITE: subtítulo -->
+        <p class="grow text-lg sm:text-xl muted leading-relaxed" style="--d:.7s" data-hero>
+          Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar.
+        </p>
+
+        <div class="grow mt-9 flex flex-col sm:flex-row gap-3" style="--d:.9s" data-hero>
+          <a href="#servicos" class="btn btn-solid">Conheça nossos serviços <span class="arrow">↗</span></a>
+          <a href="#contato"  class="btn btn-outline">Fale conosco</a>
+        </div>
+      </div>
+
+      <!-- Foto principal -->
+      <div class="lg:col-span-7">
+        <div class="photo curtain aspect-[16/10]" style="--d:.5s" data-hero>
+          <!-- EDITE: para usar uma foto, troque a linha abaixo por:
+               <img src="foto-principal.jpg" alt="Descrição da foto" /> -->
+          <div class="placeholder">[Imagem principal do negócio]</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     2) SOBRE NÓS
+     ═══════════════════════════════════════════════════════════ -->
+<section id="sobre" class="py-24 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <div class="rule"></div>
+
+    <div class="mt-10 grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-3 reveal">
+        <p class="eyebrow">01 — Sobre nós</p>
+      </div>
+
+      <div class="lg:col-span-9 grid md:grid-cols-2 gap-12 lg:gap-16">
+
+        <!-- EDITE: textos -->
+        <div>
+          <h2 class="split serif text-5xl sm:text-6xl leading-[1.05]">Conheça nossa <em>empresa</em></h2>
+          <p class="reveal mt-8 text-lg muted leading-relaxed" style="--d:.15s">
+            Aqui você pode contar um pouco sobre sua empresa, sua história e o que torna seu trabalho especial.
+          </p>
+          <p class="reveal mt-5 text-lg muted leading-relaxed" style="--d:.25s">
+            Um espaço para transmitir confiança e mostrar ao cliente por que escolher o seu negócio.
+          </p>
+        </div>
+
+        <!-- EDITE: foto do cliente ou do estabelecimento -->
+        <div class="photo curtain aspect-[4/5]">
+          <div class="placeholder">[Sua foto ou foto do estabelecimento]</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     3) SERVIÇOS
+     Para adicionar um serviço, copie um bloco <a class="service"> inteiro.
+     ═══════════════════════════════════════════════════════════ -->
+<section id="servicos" class="py-24 sm:py-36" style="background:var(--bg-alt)">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-3 reveal">
+        <p class="eyebrow">02 — Serviços</p>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="split serif text-5xl sm:text-7xl leading-[1.02]">O que <em>oferecemos</em></h2>
+        <p class="reveal mt-6 text-lg muted max-w-xl" style="--d:.15s">
+          Conheça alguns dos nossos principais serviços e soluções.
+        </p>
+      </div>
+    </div>
+
+    <!-- Lista de serviços -->
+    <div class="mt-16 lg:ml-[25%]">
+
+      <!-- EDITE: Serviço 01 -->
+      <a href="#contato" class="service reveal">
+        <span class="serif text-3xl muted">01</span>
+        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 01</h3>
+        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Uma breve descrição do serviço oferecido pela sua empresa.</p>
+        <span class="circle">→</span>
+      </a>
+
+      <!-- EDITE: Serviço 02 -->
+      <a href="#contato" class="service reveal" style="--d:.1s">
+        <span class="serif text-3xl muted">02</span>
+        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 02</h3>
+        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Explique de forma simples como esse serviço pode ajudar seu cliente.</p>
+        <span class="circle">→</span>
+      </a>
+
+      <!-- EDITE: Serviço 03 -->
+      <a href="#contato" class="service reveal" style="--d:.2s">
+        <span class="serif text-3xl muted">03</span>
+        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 03</h3>
+        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Destaque mais uma opção, especialidade ou produto do seu negócio.</p>
+        <span class="circle">→</span>
+      </a>
+
+    </div>
+
+    <div class="reveal mt-14 lg:ml-[25%]">
+      <a href="#contato" class="btn btn-outline">Ver todos os serviços <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     4) NOSSO ESPAÇO (galeria com 3 fotos)
+     ═══════════════════════════════════════════════════════════ -->
+<section id="espaco" class="py-24 sm:py-36">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-3 reveal">
+        <p class="eyebrow">03 — Nosso espaço</p>
+      </div>
+      <div class="lg:col-span-9">
+        <h2 class="split serif text-5xl sm:text-7xl leading-[1.02]">Conheça um <em>pouco mais</em></h2>
+        <p class="reveal mt-6 text-lg muted max-w-2xl" style="--d:.15s">
+          Use este espaço para apresentar seu ambiente, seus produtos, sua equipe ou alguns dos trabalhos realizados.
+        </p>
+      </div>
+    </div>
+
+    <!-- EDITE: as 3 fotos (cada uma desce um pouco mais que a anterior, de propósito) -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+      <div class="col-span-2 md:col-span-1">
+        <div class="photo curtain aspect-[3/4]"><div class="placeholder">[Foto 01]</div></div>
+      </div>
+      <div class="md:mt-16">
+        <div class="photo curtain aspect-[3/4]" style="--d:.15s"><div class="placeholder">[Foto 02]</div></div>
+      </div>
+      <div class="md:mt-32">
+        <div class="photo curtain aspect-[3/4]" style="--d:.3s"><div class="placeholder">[Foto 03]</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     5) POR QUE ESCOLHER A GENTE (3 diferenciais)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-24 sm:py-36 border-t border-[var(--line)]">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <p class="eyebrow reveal">04 — Por que escolher a gente?</p>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-x-10 gap-y-14">
+
+      <!-- EDITE: diferencial 01 -->
+      <div>
+        <div class="rule"></div>
+        <p class="serif text-6xl muted mt-8 reveal">01</p>
+        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.1s">Atendimento de qualidade</h3>
+        <p class="reveal mt-4 muted text-lg" style="--d:.2s">Um atendimento pensado para cada cliente.</p>
+      </div>
+
+      <!-- EDITE: diferencial 02 -->
+      <div>
+        <div class="rule" style="--d:.15s"></div>
+        <p class="serif text-6xl muted mt-8 reveal" style="--d:.15s">02</p>
+        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.25s">Experiência e confiança</h3>
+        <p class="reveal mt-4 muted text-lg" style="--d:.35s">Profissionalismo em cada detalhe.</p>
+      </div>
+
+      <!-- EDITE: diferencial 03 -->
+      <div>
+        <div class="rule" style="--d:.3s"></div>
+        <p class="serif text-6xl muted mt-8 reveal" style="--d:.3s">03</p>
+        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.4s">Facilidade e praticidade</h3>
+        <p class="reveal mt-4 muted text-lg" style="--d:.5s">Entre em contato de forma rápida e simples.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     6) LOCALIZAÇÃO
+     ═══════════════════════════════════════════════════════════ -->
+<section id="local" class="py-24 sm:py-36" style="background:var(--bg-alt)">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+    <div class="grid lg:grid-cols-12 gap-12">
+
+      <div class="lg:col-span-3 reveal">
+        <p class="eyebrow">05 — Localização</p>
+      </div>
+
+      <div class="lg:col-span-9 grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+        <div>
+          <h2 class="split serif text-5xl sm:text-6xl leading-[1.05]">Venha nos <em>conhecer</em></h2>
+
+          <div class="mt-12 space-y-9">
+            <!-- EDITE: endereço -->
+            <div class="reveal">
+              <p class="eyebrow">Seu endereço aqui</p>
+              <p class="serif text-2xl sm:text-3xl mt-3">Rua Exemplo, 000 – Centro – Sua Cidade/SP</p>
+            </div>
+
+            <!-- EDITE: horários -->
+            <div class="reveal" style="--d:.1s">
+              <p class="eyebrow">Horário de atendimento</p>
+              <p class="mt-3 text-lg">Segunda a sexta: 08h às 18h</p>
+              <p class="text-lg">Sábado: 08h às 12h</p>
+            </div>
+          </div>
+
+          <!-- O link deste botão vem do bloco "DADOS DO CLIENTE" lá embaixo -->
+          <a data-link="mapa" href="#" target="_blank" rel="noopener" class="btn btn-solid mt-12 reveal" style="--d:.2s">
+            Ver no mapa <span class="arrow">↗</span>
+          </a>
+        </div>
+
+        <!-- EDITE: mapa. Para usar o Google Maps, troque o placeholder por:
+             <iframe src="LINK_DE_INCORPORAR_DO_GOOGLE_MAPS" class="absolute inset-0 w-full h-full border-0" loading="lazy"></iframe> -->
+        <div class="photo curtain aspect-[4/5]" style="--d:.2s">
+          <div class="placeholder">[Mapa]</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     7) CONTATO (seção azul)
+     ═══════════════════════════════════════════════════════════ -->
+<section id="contato" class="section-dark py-28 sm:py-44">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10">
+
+    <p class="eyebrow reveal" style="color:rgba(246,245,241,.6)">06 — Entre em contato</p>
+
+    <h2 class="split serif mt-8 text-[3.5rem] leading-[1] sm:text-8xl lg:text-[9rem]">
+      Vamos <em style="color:#fff">conversar?</em>
+    </h2>
+
+    <div class="mt-14 grid lg:grid-cols-12 gap-10 items-end">
+
+      <div class="lg:col-span-6">
+        <p class="grow text-lg sm:text-xl muted leading-relaxed">
+          Tem alguma dúvida ou quer saber mais sobre nossos serviços? Entre em contato diretamente pelo WhatsApp.
+        </p>
+        <!-- O link do WhatsApp vem do bloco "DADOS DO CLIENTE" -->
+        <a data-link="whatsapp" href="#" target="_blank" rel="noopener"
+           class="btn mt-9 reveal" style="background:#F6F5F1; color:var(--accent)">
+          Falar pelo WhatsApp <span class="arrow">↗</span>
+        </a>
+      </div>
+
+      <!-- Telefone e Instagram: o texto e o link vêm do bloco "DADOS DO CLIENTE" -->
+      <div class="lg:col-span-6 lg:pl-16 space-y-5 reveal" style="--d:.2s">
+        <div class="border-t border-white/20 pt-5 flex justify-between gap-4">
+          <span class="muted">Telefone</span>
+          <a data-link="telefone" data-text="telefoneTexto" href="#" class="hover:underline">(00) 00000-0000</a>
+        </div>
+        <div class="border-t border-white/20 pt-5 flex justify-between gap-4">
+          <span class="muted">Instagram</span>
+          <a data-link="instagram" data-text="instagramTexto" href="#" target="_blank" rel="noopener" class="hover:underline">@seunegocio</a>
+        </div>
+        <div class="border-t border-white/20"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     RODAPÉ
+     ═══════════════════════════════════════════════════════════ -->
+<footer class="py-14" style="background:var(--ink); color:#F6F5F1">
+  <div class="mx-auto max-w-7xl px-5 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+
+    <div>
+      <!-- EDITE: logo e frase final -->
+      <p class="serif text-3xl">SUA LOGO AQUI</p>
+      <p class="mt-4 text-white/60 max-w-sm">Seu negócio, agora também com uma presença digital profissional.</p>
+    </div>
+
+    <div class="flex gap-8 text-sm text-white/70">
+      <a data-link="instagram" href="#" target="_blank" rel="noopener" class="hover:text-white transition">Instagram</a>
+      <a data-link="whatsapp"  href="#" target="_blank" rel="noopener" class="hover:text-white transition">WhatsApp</a>
+      <a href="#local" class="hover:text-white transition">Localização</a>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+/* ───────────────────────────────────────────────────────────
+   DADOS DO CLIENTE  → EDITE: troque só os valores entre aspas
+   Os botões do site já puxam daqui automaticamente.
+   ─────────────────────────────────────────────────────────── */
+const CLIENTE = {
+  whatsapp:       "5500000000000",   // só números: 55 + DDD + número
+  mensagem:       "Olá! Vim pelo site e gostaria de mais informações.",
+  telefoneTexto:  "(00) 00000-0000", // como aparece escrito na tela
+  instagramUser:  "seunegocio",      // sem o @
+  mapa:           "https://maps.google.com"  // link do Google Maps
+};
+
+
+/* ───────────────────────────────────────────────────────────
+   1) Preenche os links com os dados do cliente
+   ─────────────────────────────────────────────────────────── */
+const apenasNumeros = CLIENTE.whatsapp.replace(/\D/g, "");
+
+const links = {
+  whatsapp:  `https://wa.me/${apenasNumeros}?text=${encodeURIComponent(CLIENTE.mensagem)}`,
+  telefone:  `tel:+${apenasNumeros}`,
+  instagram: `https://instagram.com/${CLIENTE.instagramUser}`,
+  mapa:      CLIENTE.mapa
+};
+
+const textos = {
+  telefoneTexto:  CLIENTE.telefoneTexto,
+  instagramTexto: "@" + CLIENTE.instagramUser
+};
+
+document.querySelectorAll("[data-link]").forEach(el => {
+  el.href = links[el.dataset.link];
+});
+document.querySelectorAll("[data-text]").forEach(el => {
+  el.textContent = textos[el.dataset.text];
+});
+
+
+/* ───────────────────────────────────────────────────────────
+   2) Títulos que aparecem palavra por palavra
+      Pega todo elemento com a classe "split" e separa as palavras.
+   ─────────────────────────────────────────────────────────── */
+function separarPalavras(titulo) {
+  let contador = 0;
+
+  function processar(no) {
+    // Se for texto, quebra em palavras
+    if (no.nodeType === Node.TEXT_NODE) {
+      const fragmento = document.createDocumentFragment();
+
+      no.textContent.split(/(\s+)/).forEach(parte => {
+        if (!parte.trim()) {                       // espaço em branco: mantém
+          fragmento.appendChild(document.createTextNode(parte));
+          return;
+        }
+        const caixa = document.createElement("span");
+        caixa.className = "word";
+        const palavra = document.createElement("span");
+        palavra.style.setProperty("--i", contador++);   // ordem da palavra (para o atraso)
+        palavra.textContent = parte;
+        caixa.appendChild(palavra);
+        fragmento.appendChild(caixa);
+      });
+
+      no.replaceWith(fragmento);
+    }
+    // Se for uma tag (ex.: <em>), entra nela e continua
+    else if (no.nodeType === Node.ELEMENT_NODE) {
+      [...no.childNodes].forEach(processar);
+    }
+  }
+
+  [...titulo.childNodes].forEach(processar);
+}
+
+document.querySelectorAll(".split").forEach(separarPalavras);
+
+
+/* ───────────────────────────────────────────────────────────
+   3) Anima os elementos quando aparecem na tela
+   ─────────────────────────────────────────────────────────── */
+const observador = new IntersectionObserver((entradas) => {
+  entradas.forEach(entrada => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add("in");       // dispara a animação do CSS
+      observador.unobserve(entrada.target);     // anima só uma vez
+    }
+  });
+}, { threshold: 0.18, rootMargin: "0px 0px -50px 0px" });
+
+const animaveis = document.querySelectorAll(".reveal, .grow, .split, .curtain, .rule");
+
+animaveis.forEach(el => {
+  const ehPrimeiraTela = el.hasAttribute("data-hero") || el.id === "heroTitle";
+
+  if (ehPrimeiraTela) {
+    // Itens da primeira tela animam assim que a página carrega
+    setTimeout(() => el.classList.add("in"), 150);
+  } else {
+    observador.observe(el);
+  }
+});
+
+
+/* ───────────────────────────────────────────────────────────
+   4) Menu do topo: fundo ao rolar + barra de progresso
+   ─────────────────────────────────────────────────────────── */
+const menu  = document.getElementById("nav");
+const barra = document.getElementById("progress");
+
+function aoRolar() {
+  const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+  barra.style.width = (window.scrollY / alturaTotal * 100) + "%";
+  menu.classList.toggle("scrolled", window.scrollY > 30);
+}
+window.addEventListener("scroll", aoRolar, { passive: true });
+aoRolar();
+
+
+/* ───────────────────────────────────────────────────────────
+   5) Menu do celular (abrir e fechar)
+   ─────────────────────────────────────────────────────────── */
+const menuCelular = document.getElementById("mobileMenu");
+
+document.getElementById("menuButton").addEventListener("click", () => {
+  menuCelular.classList.toggle("hidden");
+});
+menuCelular.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => menuCelular.classList.add("hidden"));
+});
+
+
+/* ───────────────────────────────────────────────────────────
+   6) Efeito parallax leve nas fotos (elas se movem um pouco ao rolar)
+   ─────────────────────────────────────────────────────────── */
+const semAnimacao = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!semAnimacao) {
+  const fotos = document.querySelectorAll(".photo");
+
+  window.addEventListener("scroll", () => {
+    fotos.forEach(foto => {
+      const caixa = foto.getBoundingClientRect();
+      const visivel = caixa.bottom > 0 && caixa.top < window.innerHeight;
+      if (!visivel) return;
+
+      const conteudo = foto.firstElementChild;   // a <img> ou o placeholder
+      if (!conteudo) return;
+
+      const deslocamento = (caixa.top + caixa.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      conteudo.style.transform = `translateY(${deslocamento * -18}px) scale(1.06)`;
+    });
+  }, { passive: true });
+}
+</script>
+
+</body>
+</html>
