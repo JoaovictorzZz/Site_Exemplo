@@ -24,10 +24,12 @@
 <meta name="description" content="Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar." />
 <meta name="theme-color" content="#F6F5F1" />
 
-<!-- Sem favicon: o ícone vazio abaixo impede o navegador de procurar um favicon.ico.
-     EDITE: para colocar o ícone do cliente, troque a linha abaixo por:
+<!-- Favicon vazio (transparente): impede que o navegador mostre o ícone de outro projeto.
+     EDITE: para usar o ícone do cliente, troque a linha abaixo por:
      <link rel="icon" href="favicon.png" /> -->
-<link rel="icon" href="data:," />
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
+<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
+
 
 <!-- Tailwind CSS e fontes -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -168,6 +170,10 @@
     transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
   }
   .photo:hover img { transform: scale(1.04); }
+  /* Proporção das fotos (CSS puro, não depende do Tailwind) */
+  .ratio-wide     { aspect-ratio: 16 / 10; width: 100%; }
+  .ratio-portrait { aspect-ratio: 4 / 5;   width: 100%; }
+
   .photo .placeholder {
     position: absolute; inset: 0;
     display: grid; place-items: center;
@@ -193,9 +199,29 @@
   /* Galeria da seção "Nosso espaço"
      Cada bloco recebe suas cores pelo atributo style (--tone e --tone-2).
      --on define a cor do texto (escuro nos blocos claros). */
-  .gallery { grid-auto-rows: 150px; }
-  @media (min-width: 640px)  { .gallery { grid-auto-rows: 190px; } }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));   /* celular: 2 colunas */
+    grid-auto-flow: dense;                               /* encaixa os blocos sem buracos */
+    grid-auto-rows: 150px;
+    gap: .75rem;
+    margin-top: 4rem;
+  }
+  @media (min-width: 640px)  { .gallery { grid-auto-rows: 190px; gap: 1rem; } }
+  @media (min-width: 768px)  { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }  /* computador: 4 colunas */
   @media (min-width: 1024px) { .gallery { grid-auto-rows: 230px; } }
+
+  .tile.wide { grid-column: span 2; }   /* bloco largo (2 colunas) */
+  .tile.tall { grid-row: span 2; }      /* bloco alto (2 linhas)   */
+
+  /* .appear → os blocos da galeria surgem subindo e crescendo de leve */
+  .appear {
+    opacity: 0;
+    transform: translateY(24px) scale(.96);
+    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    transition-delay: var(--d, 0s);
+  }
+  .appear.in { opacity: 1; transform: none; }
 
   .tile {
     position: relative;
@@ -280,7 +306,7 @@
   /* Respeita quem desativou animações no celular/computador */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; }
-    .reveal, .grow, .word > span { opacity: 1 !important; transform: none !important; }
+    .reveal, .grow, .appear, .word > span { opacity: 1 !important; transform: none !important; }
     .curtain { clip-path: none !important; }
     .rule { transform: none !important; }
   }
@@ -357,7 +383,7 @@
 
       <!-- Foto principal -->
       <div class="lg:col-span-7">
-        <div class="photo curtain aspect-[16/10]" style="--d:.5s" data-hero>
+        <div class="photo appear ratio-wide" style="--d:.5s" data-hero>
           <!-- EDITE: para usar uma foto, troque a linha abaixo por:
                <img src="foto-principal.jpg" alt="Descrição da foto" /> -->
           <div class="placeholder">[Imagem principal do negócio]</div>
@@ -396,7 +422,7 @@
         </div>
 
         <!-- EDITE: foto do cliente ou do estabelecimento -->
-        <div class="photo curtain aspect-[4/5]">
+        <div class="photo appear ratio-portrait">
           <div class="placeholder">[Sua foto ou foto do estabelecimento]</div>
         </div>
 
@@ -485,49 +511,49 @@
          EDITE: para usar uma foto de verdade, dentro do <figure> troque
          <div class="tile-bg"></div> por:
          <img src="foto.jpg" alt="Descrição da foto" />
-         O tamanho de cada bloco é controlado por "col-span" (largura)
-         e "row-span" (altura).
+         O tamanho de cada bloco é controlado pelas classes "wide" (largo,
+         2 colunas) e "tall" (alto, 2 linhas). Sem elas, o bloco é pequeno.
          ───────────────────────────────────────────────────── -->
-    <div class="gallery mt-16 grid grid-cols-2 md:grid-cols-4 grid-flow-dense gap-3 sm:gap-4">
+    <div class="gallery">
 
       <!-- Bloco 01: grande (2 colunas × 2 linhas) -->
-      <figure class="tile curtain col-span-2 row-span-2" style="--tone:#1B365D; --tone-2:#2F5D8C; --d:0s">
+      <figure class="tile appear wide tall" style="--tone:#1B365D; --tone-2:#2F5D8C; --d:0s">
         <div class="tile-bg"></div>
         <figcaption><span>01</span>Foto 01</figcaption>
       </figure>
 
       <!-- Bloco 02: pequeno -->
-      <figure class="tile curtain" style="--tone:#A9C1DC; --tone-2:#C9D9EA; --on:#14171A; --d:.08s">
+      <figure class="tile appear" style="--tone:#A9C1DC; --tone-2:#C9D9EA; --on:#14171A; --d:.08s">
         <div class="tile-bg"></div>
         <figcaption><span>02</span>Foto 02</figcaption>
       </figure>
 
       <!-- Bloco 03: alto (1 coluna × 2 linhas) -->
-      <figure class="tile curtain row-span-2" style="--tone:#3E6A99; --tone-2:#6F95BD; --d:.16s">
+      <figure class="tile appear tall" style="--tone:#3E6A99; --tone-2:#6F95BD; --d:.16s">
         <div class="tile-bg"></div>
         <figcaption><span>03</span>Foto 03</figcaption>
       </figure>
 
       <!-- Bloco 04: pequeno -->
-      <figure class="tile curtain" style="--tone:#11233D; --tone-2:#1F3F6B; --d:.24s">
+      <figure class="tile appear" style="--tone:#11233D; --tone-2:#1F3F6B; --d:.24s">
         <div class="tile-bg"></div>
         <figcaption><span>04</span>Foto 04</figcaption>
       </figure>
 
       <!-- Bloco 05: pequeno -->
-      <figure class="tile curtain" style="--tone:#DCE6F1; --tone-2:#EEF3F9; --on:#14171A; --d:.32s">
+      <figure class="tile appear" style="--tone:#DCE6F1; --tone-2:#EEF3F9; --on:#14171A; --d:.32s">
         <div class="tile-bg"></div>
         <figcaption><span>05</span>Foto 05</figcaption>
       </figure>
 
       <!-- Bloco 06: largo (2 colunas × 1 linha) -->
-      <figure class="tile curtain col-span-2" style="--tone:#5B84B1; --tone-2:#8BAACB; --d:.4s">
+      <figure class="tile appear wide" style="--tone:#5B84B1; --tone-2:#8BAACB; --d:.4s">
         <div class="tile-bg"></div>
         <figcaption><span>06</span>Foto 06</figcaption>
       </figure>
 
       <!-- Bloco 07: pequeno -->
-      <figure class="tile curtain" style="--tone:#2A4B78; --tone-2:#4A74A8; --d:.48s">
+      <figure class="tile appear" style="--tone:#2A4B78; --tone-2:#4A74A8; --d:.48s">
         <div class="tile-bg"></div>
         <figcaption><span>07</span>Foto 07</figcaption>
       </figure>
@@ -616,7 +642,7 @@
 
         <!-- EDITE: mapa. Para usar o Google Maps, troque o placeholder por:
              <iframe src="LINK_DE_INCORPORAR_DO_GOOGLE_MAPS" class="absolute inset-0 w-full h-full border-0" loading="lazy"></iframe> -->
-        <div class="photo curtain aspect-[4/5]" style="--d:.2s">
+        <div class="photo appear ratio-portrait" style="--d:.2s">
           <div class="placeholder">[Mapa]</div>
         </div>
 
@@ -785,7 +811,12 @@ const observador = new IntersectionObserver((entradas) => {
   });
 }, { threshold: 0.18, rootMargin: "0px 0px -50px 0px" });
 
-const animaveis = document.querySelectorAll(".reveal, .grow, .split, .curtain, .rule");
+const animaveis = document.querySelectorAll(".reveal, .grow, .split, .curtain, .rule, .appear");
+
+// Plano B: se o navegador não suportar o observador, mostra tudo de uma vez
+if (!("IntersectionObserver" in window)) {
+  animaveis.forEach(el => el.classList.add("in"));
+}
 
 animaveis.forEach(el => {
   const ehPrimeiraTela = el.hasAttribute("data-hero") || el.id === "heroTitle";
@@ -793,7 +824,7 @@ animaveis.forEach(el => {
   if (ehPrimeiraTela) {
     // Itens da primeira tela animam assim que a página carrega
     setTimeout(() => el.classList.add("in"), 150);
-  } else {
+  } else if ("IntersectionObserver" in window) {
     observador.observe(el);
   }
 });
