@@ -24,6 +24,11 @@
 <meta name="description" content="Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar." />
 <meta name="theme-color" content="#F6F5F1" />
 
+<!-- Sem favicon: o ícone vazio abaixo impede o navegador de procurar um favicon.ico.
+     EDITE: para colocar o ícone do cliente, troque a linha abaixo por:
+     <link rel="icon" href="favicon.png" /> -->
+<link rel="icon" href="data:," />
+
 <!-- Tailwind CSS e fontes -->
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -184,6 +189,44 @@
   .btn-outline:hover { background: var(--ink); color: var(--bg); }
   .btn .arrow { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
   .btn:hover .arrow { transform: translate(3px, -3px); }
+
+  /* Galeria da seção "Nosso espaço"
+     Cada bloco recebe suas cores pelo atributo style (--tone e --tone-2).
+     --on define a cor do texto (escuro nos blocos claros). */
+  .gallery { grid-auto-rows: 150px; }
+  @media (min-width: 640px)  { .gallery { grid-auto-rows: 190px; } }
+  @media (min-width: 1024px) { .gallery { grid-auto-rows: 230px; } }
+
+  .tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    color: var(--on, #fff);
+    background: var(--tone);
+  }
+  .tile-bg,
+  .tile img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+  }
+  .tile-bg {                                   /* degradê suave + brilho no canto */
+    background:
+      radial-gradient(120% 90% at 85% 0%, rgba(255,255,255,.22), transparent 55%),
+      linear-gradient(135deg, var(--tone), var(--tone-2));
+  }
+  .tile:hover .tile-bg,
+  .tile:hover img { transform: scale(1.07); }
+  .tile figcaption {
+    position: absolute; left: 1rem; bottom: .9rem;
+    display: flex; align-items: baseline; gap: .6rem;
+    font-size: .8rem; letter-spacing: .04em;
+    opacity: .9;
+  }
+  .tile figcaption span {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem; letter-spacing: 0; opacity: .7;
+  }
 
   /* Linha de serviço (lista da seção Serviços) */
   .service {
@@ -436,17 +479,59 @@
       </div>
     </div>
 
-    <!-- EDITE: as 3 fotos (cada uma desce um pouco mais que a anterior, de propósito) -->
-    <div class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-      <div class="col-span-2 md:col-span-1">
-        <div class="photo curtain aspect-[3/4]"><div class="placeholder">[Foto 01]</div></div>
-      </div>
-      <div class="md:mt-16">
-        <div class="photo curtain aspect-[3/4]" style="--d:.15s"><div class="placeholder">[Foto 02]</div></div>
-      </div>
-      <div class="md:mt-32">
-        <div class="photo curtain aspect-[3/4]" style="--d:.3s"><div class="placeholder">[Foto 03]</div></div>
-      </div>
+    <!-- ─────────────────────────────────────────────────────
+         GALERIA (7 blocos que se encaixam, sem espaços vazios)
+         Celular: 2 colunas  |  Computador: 4 colunas
+         EDITE: para usar uma foto de verdade, dentro do <figure> troque
+         <div class="tile-bg"></div> por:
+         <img src="foto.jpg" alt="Descrição da foto" />
+         O tamanho de cada bloco é controlado por "col-span" (largura)
+         e "row-span" (altura).
+         ───────────────────────────────────────────────────── -->
+    <div class="gallery mt-16 grid grid-cols-2 md:grid-cols-4 grid-flow-dense gap-3 sm:gap-4">
+
+      <!-- Bloco 01: grande (2 colunas × 2 linhas) -->
+      <figure class="tile curtain col-span-2 row-span-2" style="--tone:#1B365D; --tone-2:#2F5D8C; --d:0s">
+        <div class="tile-bg"></div>
+        <figcaption><span>01</span>Foto 01</figcaption>
+      </figure>
+
+      <!-- Bloco 02: pequeno -->
+      <figure class="tile curtain" style="--tone:#A9C1DC; --tone-2:#C9D9EA; --on:#14171A; --d:.08s">
+        <div class="tile-bg"></div>
+        <figcaption><span>02</span>Foto 02</figcaption>
+      </figure>
+
+      <!-- Bloco 03: alto (1 coluna × 2 linhas) -->
+      <figure class="tile curtain row-span-2" style="--tone:#3E6A99; --tone-2:#6F95BD; --d:.16s">
+        <div class="tile-bg"></div>
+        <figcaption><span>03</span>Foto 03</figcaption>
+      </figure>
+
+      <!-- Bloco 04: pequeno -->
+      <figure class="tile curtain" style="--tone:#11233D; --tone-2:#1F3F6B; --d:.24s">
+        <div class="tile-bg"></div>
+        <figcaption><span>04</span>Foto 04</figcaption>
+      </figure>
+
+      <!-- Bloco 05: pequeno -->
+      <figure class="tile curtain" style="--tone:#DCE6F1; --tone-2:#EEF3F9; --on:#14171A; --d:.32s">
+        <div class="tile-bg"></div>
+        <figcaption><span>05</span>Foto 05</figcaption>
+      </figure>
+
+      <!-- Bloco 06: largo (2 colunas × 1 linha) -->
+      <figure class="tile curtain col-span-2" style="--tone:#5B84B1; --tone-2:#8BAACB; --d:.4s">
+        <div class="tile-bg"></div>
+        <figcaption><span>06</span>Foto 06</figcaption>
+      </figure>
+
+      <!-- Bloco 07: pequeno -->
+      <figure class="tile curtain" style="--tone:#2A4B78; --tone-2:#4A74A8; --d:.48s">
+        <div class="tile-bg"></div>
+        <figcaption><span>07</span>Foto 07</figcaption>
+      </figure>
+
     </div>
 
   </div>
