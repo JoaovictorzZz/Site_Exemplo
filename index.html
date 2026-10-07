@@ -1,885 +1,1203 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>João Victor | Sites que geram resultados</title>
+<meta name="description" content="Portfólio de sites profissionais para clínicas, estética automotiva, pet shops, sorveterias e empresas." />
+<meta name="theme-color" content="#0b1220" />
 
-<!--
-  ╔══════════════════════════════════════════════════════════════╗
-  ║  SITE DE APRESENTAÇÃO - MODELO BASE                          ║
-  ╠══════════════════════════════════════════════════════════════╣
-  ║  COMO ADAPTAR PARA UM NOVO CLIENTE (3 passos):               ║
-  ║                                                              ║
-  ║  1. CORES      → bloco "CORES" logo abaixo, no <style>       ║
-  ║  2. CONTATOS   → bloco "DADOS DO CLIENTE", no <script>       ║
-  ║  3. TEXTOS E FOTOS → procure por "EDITE:" no corpo da página ║
-  ║                                                              ║
-  ║  Dica: use Ctrl+F e procure "EDITE" para achar tudo que      ║
-  ║  precisa ser trocado.                                        ║
-  ╚══════════════════════════════════════════════════════════════╝
--->
+<!-- Favicon vazio, para o navegador não mostrar ícone de outro projeto -->
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
 
-<!-- EDITE: título que aparece na aba do navegador e no Google -->
-<title>Seu Negócio | Presença Digital Profissional</title>
-<meta name="description" content="Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar." />
-<meta name="theme-color" content="#F6F5F1" />
-
-<!-- Favicon vazio (transparente): impede que o navegador mostre o ícone de outro projeto.
-     EDITE: para usar o ícone do cliente, troque a linha abaixo por:
-     <link rel="icon" href="favicon.png" /> -->
-<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
-<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
-
-
-<!-- Tailwind CSS e fontes -->
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Fontes: cada exemplo de site usa as suas -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@400;600&family=DM+Sans:wght@400;500;700&family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Baloo+2:wght@500;700;800&family=Chewy&family=Fredoka:wght@400;500;600&family=Manrope:wght@400;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
-<script>
-  // Configuração do Tailwind: define as duas fontes usadas no site
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['Inter', 'sans-serif'],          // textos corridos
-          serif: ['"Instrument Serif"', 'serif']  // títulos
-        }
-      }
-    }
-  }
-</script>
+<!--
+  ┌────────────────────────────────────────────────────────────┐
+  │  COMO ESTE ARQUIVO É ORGANIZADO                            │
+  │                                                            │
+  │  1. CSS GERAL       → reset, botões, topo, seções          │
+  │  2. CSS DOS EXEMPLOS → um bloco de cores/fontes por tema   │
+  │  3. HTML            → topo, início, vitrine, 5 exemplos,   │
+  │                       sobre, metodologia, contato          │
+  │  4. JAVASCRIPT      → seu WhatsApp (no começo), animação   │
+  │                       das letras e agendamento de exemplo  │
+  │                                                            │
+  │  Procure por "EDITE" (Ctrl+F) para achar o que trocar.     │
+  └────────────────────────────────────────────────────────────┘
+-->
 
 <style>
-  /* ═══════════════════════════════════════════════════════════
-     CORES  (edite só aqui e o site inteiro muda)
-     ═══════════════════════════════════════════════════════════ */
-  :root {
-    --bg:     #F6F5F1;   /* fundo principal (off-white)          */
-    --bg-alt: #ECEBE6;   /* fundo das seções alternadas          */
-    --ink:    #14171A;   /* cor do texto                         */
-    --muted:  #666B73;   /* texto secundário (cinza)             */
-    --line:   #D8D8D2;   /* linhas finas e bordas                */
-    --accent: #1B365D;   /* AZUL principal (botões, destaques)   */
-    --accent-dark: #11233D; /* azul mais escuro (hover dos botões) */
-  }
+/* ═══════════════════════════════════════════════════════════
+   1. CSS GERAL
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --navy:  #0e1013;   /* fundo escuro (início, contato, rodapé) */
+  --navy2: #15181c;   /* fundo escuro alternativo               */
+  --azul:  #1f6bff;   /* cor principal da sua marca             */
+  --linha: rgba(255,255,255,.14);
 
-  /* Outras opções de azul, se quiser testar:
-     Azul petróleo → --accent: #164B5C;
-     Azul royal    → --accent: #234A8C;
-     Azul acinzentado → --accent: #3A5673;  */
+  /* Seções claras do portfólio (fora dos exemplos) */
+  --papel:  #f6f5f1;  /* fundo claro                            */
+  --papel2: #ecebe6;  /* fundo claro alternativo                */
+  --tinta:  #14171a;  /* texto sobre fundo claro                */
+  --cinza:  #666b73;  /* texto secundário sobre fundo claro     */
+  --linha-clara: #d8d8d2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--navy);
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; border: 0; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ── Botões do portfólio ── */
+.botao {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: 1rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600; font-size: .95rem;
+  transition: transform .3s, background .3s, color .3s;
+}
+.botao:hover { transform: translateY(-2px); }
+.botao-azul { background: var(--azul); color: #fff; }
+.botao-azul:hover { background: #3b82ff; }
+.botao-contorno { border: 1px solid rgba(255,255,255,.55); }
+.botao-contorno:hover { background: #fff; color: var(--navy); }
+
+/* ── Topo (menu) ── */
+.topo {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  transition: background .3s, border-color .3s;
+  border-bottom: 1px solid transparent;
+}
+.topo.rolou {
+  background: rgba(14,16,19,.88);
+  backdrop-filter: blur(12px);
+  border-color: var(--linha);
+}
+.topo-linha { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: .7rem; }
+.logo-jv { font-size: 2rem; font-weight: 300; font-style: italic; letter-spacing: -.08em; }
+.logo-nome { font-weight: 600; line-height: 1.1; }
+.logo-nome small { display: block; font-weight: 400; font-size: .68rem; opacity: .7; }
+.menu { display: flex; align-items: center; gap: 2rem; font-size: .88rem; }
+.menu a:not(.botao) { transition: opacity .3s; }
+.menu a:not(.botao):hover { opacity: .6; }
+.menu .botao { padding: .6rem 1.2rem; font-size: .82rem; }
+.menu-botao { display: none; background: none; color: #fff; font-size: 1.7rem; }
+.menu-celular { display: none; background: var(--navy2); padding: 1rem 24px 1.5rem; }
+.menu-celular a { display: block; padding: .8rem 0; border-bottom: 1px solid var(--linha); }
+.menu-celular.aberto { display: block; }
+
+/* ── Início (hero) ── */
+.hero { padding: 150px 0 90px; background: var(--navy); }
+.hero-grade { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; }
+.etiqueta {
+  display: inline-flex; align-items: center; gap: .8rem;
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+}
+.etiqueta::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.hero h1 {
+  margin: 1.6rem 0;
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 1.02; font-weight: 400; letter-spacing: -.02em;
+}
+.hero h1 em { font-style: italic; color: #8fb4ff; }
+.hero p { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 30rem; }
+.hero-botoes { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+.hero-visual { position: relative; padding-bottom: 50px; }
+
+/* ── Faixa de atalhos: texto simples com um ponto da cor de cada exemplo ── */
+.faixa { padding: 26px 0; background: var(--navy); border-top: 1px solid var(--linha); }
+.faixa .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 40px; }
+.faixa-texto { font-size: .85rem; color: rgba(255,255,255,.55); }
+.pilulas { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.pilula { display: inline-flex; align-items: center; gap: .55rem; font-size: .9rem; font-weight: 500; transition: opacity .3s; }
+.pilula::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ponto); }
+.pilulas:hover .pilula { opacity: .45; }
+.pilulas .pilula:hover { opacity: 1; }
+.p-saude   { --ponto: #e4d8c4; }
+.p-auto    { --ponto: #e10600; }
+.p-pet     { --ponto: #ffd23f; }
+.p-sorvete { --ponto: #ff3d9a; }
+.p-empresa { --ponto: #c8963e; }
+.p-seu::before { background: transparent; border: 1px solid rgba(255,255,255,.7); }
+
+/* ── Seções claras (fora dos exemplos) ── */
+.seu-negocio, .sobre { background: var(--papel); color: var(--tinta); }
+.metodologia { background: var(--papel2); color: var(--tinta); }
+
+.eyebrow { display: block; margin-bottom: 1.4rem; font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--cinza); }
+.titulo-secao { font-family: 'Instrument Serif', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; letter-spacing: -.02em; line-height: 1.05; }
+.sub-secao { margin-top: 1.2rem; color: var(--cinza); max-width: 36rem; line-height: 1.65; }
+
+.secao { padding: 110px 0; }
+
+/* "E o seu negócio?": título à esquerda, lista de ramos em linhas finas */
+.seu-negocio-topo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: end; }
+.seu-negocio .sub-secao { margin-top: 0; }
+.nichos { margin: 3.5rem 0 2.8rem; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 1px solid var(--linha-clara); }
+.nichos span { padding: 1.1rem 0; border-bottom: 1px solid var(--linha-clara); font-size: 1.02rem; }
+.botao-escuro { background: var(--tinta); color: #fff; }
+.botao-escuro:hover { background: #000; }
+
+/* Sobre: texto à esquerda, diferenciais em linhas à direita */
+.sobre-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.sobre p { color: var(--cinza); line-height: 1.75; margin-top: 1.4rem; }
+.vantagens { border-bottom: 1px solid var(--linha-clara); }
+.vantagem { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 1.3rem 0; border-top: 1px solid var(--linha-clara); }
+.vantagem strong { font-weight: 600; }
+.vantagem small { color: var(--cinza); line-height: 1.55; }
+
+/* Metodologia: quatro etapas numeradas */
+.passos { margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.passo { border-top: 1px solid var(--tinta); padding-top: 1.2rem; }
+.passo b { font-family: 'Instrument Serif', serif; font-size: 2.8rem; font-weight: 400; color: var(--cinza); }
+.passo h3 { margin: .6rem 0 .5rem; font-size: 1.1rem; font-weight: 600; }
+.passo p { color: var(--cinza); line-height: 1.6; font-size: .95rem; }
+
+/* Contato */
+.contato { background: var(--navy); }
+.contato .container { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: end; }
+.contato h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.8rem, 6vw, 5.2rem); letter-spacing: -.02em; line-height: 1.02; }
+.contato p { margin-bottom: 2rem; color: rgba(255,255,255,.65); line-height: 1.65; max-width: 26rem; }
+.contato .botao { background: #fff; color: var(--tinta); }
+.contato .botao:hover { background: #dfe8ff; }
+
+.rodape { padding: 32px 0; background: var(--navy); border-top: 1px solid var(--linha); color: rgba(255,255,255,.5); font-size: .85rem; }
+.rodape .container { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.rodape a:hover { color: #fff; }
+
+/* ── Animações de entrada gerais ── */
+.revela { opacity: 0; transform: translateY(30px); transition: opacity .9s, transform .9s cubic-bezier(.2,.7,.2,1); }
+.revela.in { opacity: 1; transform: none; }
 
 
-  /* ═══════════════════════════════════════════════════════════
-     BASE
-     ═══════════════════════════════════════════════════════════ */
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-  ::selection { background: var(--accent); color: #fff; }
+/* ═══════════════════════════════════════════════════════════
+   ANIMAÇÃO DAS LETRAS
+   O JavaScript separa cada título (.letras) em letras e depois
+   adiciona a classe ".in" quando ele aparece na tela.
+   Cada exemplo usa um estilo diferente (anim-suave, anim-forte...).
+   ═══════════════════════════════════════════════════════════ */
+.palavra { display: inline-block; white-space: nowrap; }
+.letra {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity .6s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+  transition-delay: calc(min(var(--i), 45) * 30ms);   /* uma letra após a outra */
+}
+.letras.in .letra { opacity: 1; transform: none; }
 
-  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -.015em; }
-  .serif em { font-style: italic; color: var(--accent); }   /* palavra em destaque nos títulos */
-  .muted { color: var(--muted); }
+/* Suave: sobe devagar (clínica) */
+.anim-suave .letra { transform: translateY(30px); }
 
-  /* Textinho pequeno em maiúsculas acima dos títulos ("01 — Sobre nós") */
-  .eyebrow {
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 500;
-  }
+/* Forte: entra rápido, inclinado, vindo da esquerda (automotivo) */
+.anim-forte .letra {
+  transform: translateX(-80px) skewX(-28deg);
+  transition-duration: .5s, .55s;
+  transition-delay: calc(min(var(--i), 45) * 22ms);
+}
 
+/* Pulo: cai de baixo e quica (pet shop) */
+.anim-pulo .letra {
+  transform: translateY(100px) rotate(-14deg);
+  transition-timing-function: ease, cubic-bezier(.34,1.9,.64,1);
+  transition-duration: .5s, .9s;
+}
 
-  /* ═══════════════════════════════════════════════════════════
-     ANIMAÇÕES AO ROLAR
-     O JavaScript adiciona a classe ".in" quando o item aparece na tela.
-     Use o atributo style="--d:.2s" para atrasar uma animação.
-     ═══════════════════════════════════════════════════════════ */
+/* Pop: surge girando, como uma bolha (sorveteria) */
+.anim-pop .letra {
+  transform: scale(0) rotate(-40deg);
+  transition-timing-function: ease, cubic-bezier(.5,2,.5,1);
+  transition-duration: .4s, 1s;
+}
 
-  /* .reveal → sobe suavemente e aparece */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .reveal.in { opacity: 1; transform: none; }
-
-  /* .grow → o texto cresce de leve ao aparecer */
-  .grow {
-    opacity: 0;
-    transform: scale(.9) translateY(20px);
-    transform-origin: left top;
-    transition: opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .grow.in { opacity: 1; transform: none; }
-
-  /* .split → título que aparece palavra por palavra
-     (o JavaScript separa as palavras automaticamente) */
-  .word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
-  .word > span {
-    display: inline-block;
-    transform: translateY(110%);
-    transition: transform 1s cubic-bezier(.2,.7,.2,1);
-    transition-delay: calc(var(--i) * 70ms);
-  }
-  .split.in .word > span { transform: none; }
-
-  /* .curtain → foto que se abre como uma cortina */
-  .curtain {
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path 1.4s cubic-bezier(.7,0,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .curtain.in { clip-path: inset(0 0 0 0); }
-
-  /* .rule → linha fina que se desenha da esquerda para a direita */
-  .rule {
-    height: 1px;
-    background: var(--line);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1.4s cubic-bezier(.7,0,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .rule.in { transform: none; }
+/* Sóbrio: desfoca e sobe (empresarial e portfólio) */
+.anim-corp .letra { transform: translateY(40%); filter: blur(8px); transition: opacity .7s, transform .9s, filter .9s; transition-delay: calc(min(var(--i), 45) * 28ms); }
+.anim-corp.in .letra { filter: none; }
 
 
-  /* ═══════════════════════════════════════════════════════════
-     COMPONENTES
-     ═══════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   2. CSS DOS EXEMPLOS
+   Cada tema define suas próprias cores e fontes como variáveis.
+   O restante do código usa essas variáveis, então para mudar o
+   visual de um exemplo basta mexer no bloco dele.
+   ═══════════════════════════════════════════════════════════ */
 
-  /* Caixa de foto (mostra um espaço cinza enquanto não há imagem) */
-  .photo {
-    position: relative;
-    overflow: hidden;
-    background: var(--bg-alt);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-  }
-  .photo img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
-  }
-  .photo:hover img { transform: scale(1.04); }
-  /* Proporção das fotos (CSS puro, não depende do Tailwind) */
-  .ratio-wide     { aspect-ratio: 16 / 10; width: 100%; }
-  .ratio-portrait { aspect-ratio: 4 / 5;   width: 100%; }
+/* Clínica / Saúde: clean, tons claros e beges */
+.tema-saude {
+  --fundo: #f3ece0;  --mini-fundo: #fbf8f2;
+  --texto: #2e2a25;  --suave: #6e665b;
+  --destaque: #3e8e7a; --destaque-texto: #fff;
+  --cartao: #fff;    --borda: #e4d8c4;
+  --fonte-titulo: 'Fraunces', serif; --fonte-texto: 'DM Sans', sans-serif;
+  --raio: 18px;
+}
+/* Automotivo: escuro, vermelho, ousado */
+.tema-auto {
+  --fundo: #0a0a0a;  --mini-fundo: #141414;
+  --texto: #fff;     --suave: #b5b5b5;
+  --destaque: #e10600; --destaque-texto: #fff;
+  --cartao: #1f1f1f; --borda: #2e2e2e;
+  --fonte-titulo: 'Bebas Neue', sans-serif; --fonte-texto: 'Barlow', sans-serif;
+  --raio: 2px;
+}
+/* Pet shop: colorido e divertido */
+.tema-pet {
+  --fundo: #fff3d6;  --mini-fundo: #fffaf0;
+  --texto: #3a2a63;  --suave: #6b5a96;
+  --destaque: #ff7a3d; --destaque-texto: #fff;
+  --cartao: #fff;    --borda: #ffd23f;
+  --fonte-titulo: 'Baloo 2', cursive; --fonte-texto: 'Baloo 2', cursive;
+  --raio: 26px;
+}
+/* Sorveteria: letras redondas e cores vibrantes */
+.tema-sorvete {
+  --fundo: #ffd9ec;  --mini-fundo: #fff;
+  --texto: #4a1d6b;  --suave: #7b3fa3;
+  --destaque: #ff3d9a; --destaque-texto: #fff;
+  --cartao: #fff;    --borda: #4a1d6b;
+  --extra: #00c2d1;  --extra2: #ffe14d;
+  --fonte-titulo: 'Chewy', cursive; --fonte-texto: 'Fredoka', sans-serif;
+  --raio: 30px;
+}
+/* Empresarial: azul marinho e dourado, sóbrio */
+.tema-empresa {
+  --fundo: #e9eef5;  --mini-fundo: #fff;
+  --texto: #12274a;  --suave: #56627a;
+  --destaque: #c8963e; --destaque-texto: #12274a;
+  --cartao: #f4f7fb; --borda: #d5dde9;
+  --fonte-titulo: 'Manrope', sans-serif; --fonte-texto: 'Manrope', sans-serif;
+  --raio: 8px;
+}
 
-  .photo .placeholder {
-    position: absolute; inset: 0;
-    display: grid; place-items: center;
-    padding: 1rem; text-align: center;
-    color: var(--muted); font-size: .85rem;
-  }
+/* ── Estrutura de cada seção de exemplo ── */
+.exemplo {
+  position: relative; overflow: hidden;
+  padding: 110px 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+}
+.exemplo .container { position: relative; z-index: 1; }
+.exemplo-grade { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: center; }
+.exemplo.invertido .exemplo-visual { order: -1; }
 
-  /* Botões */
-  .btn {
-    display: inline-flex; align-items: center; gap: .6rem;
-    padding: 1rem 1.75rem;
-    font-size: .95rem; font-weight: 500;
-    border-radius: 999px;
-    transition: all .35s cubic-bezier(.2,.7,.2,1);
-  }
-  .btn-solid { background: var(--accent); color: #fff; }                 /* botão azul cheio */
-  .btn-solid:hover { background: var(--accent-dark); }
-  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }      /* botão só com borda */
-  .btn-outline:hover { background: var(--ink); color: var(--bg); }
-  .btn .arrow { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
-  .btn:hover .arrow { transform: translate(3px, -3px); }
+.tag { display: inline-flex; gap: .6rem; align-items: center; font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--destaque); }
+.tag b { background: var(--destaque); color: var(--destaque-texto); padding: .2rem .6rem; border-radius: 999px; }
 
-  /* Galeria da seção "Nosso espaço"
-     Cada bloco recebe suas cores pelo atributo style (--tone e --tone-2).
-     --on define a cor do texto (escuro nos blocos claros). */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));   /* celular: 2 colunas */
-    grid-auto-flow: dense;                               /* encaixa os blocos sem buracos */
-    grid-auto-rows: 150px;
-    gap: .75rem;
-    margin-top: 4rem;
-  }
-  @media (min-width: 640px)  { .gallery { grid-auto-rows: 190px; gap: 1rem; } }
-  @media (min-width: 768px)  { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }  /* computador: 4 colunas */
-  @media (min-width: 1024px) { .gallery { grid-auto-rows: 230px; } }
+.exemplo h2 {
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: .98; margin: 1.1rem 0 1.3rem;
+}
+.exemplo h2 em { font-style: normal; color: var(--destaque); }
+.exemplo-texto p { color: var(--suave); line-height: 1.65; font-size: 1.08rem; max-width: 30rem; }
+.lista { margin: 1.6rem 0 2rem; display: grid; gap: .7rem; }
+.lista li { display: flex; gap: .7rem; align-items: center; font-weight: 500; }
+.lista li::before {
+  content: "✓"; flex: none;
+  width: 1.5rem; height: 1.5rem; display: grid; place-items: center;
+  border-radius: 50%; font-size: .8rem;
+  background: var(--destaque); color: var(--destaque-texto);
+}
+.botao-tema {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: 1rem 1.7rem; font-weight: 700;
+  background: var(--destaque); color: var(--destaque-texto);
+  border-radius: var(--raio);
+  transition: transform .3s, box-shadow .3s;
+}
+.botao-tema:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,.25); }
 
-  .tile.wide { grid-column: span 2; }   /* bloco largo (2 colunas) */
-  .tile.tall { grid-row: span 2; }      /* bloco alto (2 linhas)   */
+/* ── Moldura de navegador e de celular ── */
+.exemplo-visual { position: relative; padding-bottom: 46px; }
+.navegador {
+  border-radius: 14px; overflow: hidden; background: #fff;
+  box-shadow: 0 30px 70px rgba(0,0,0,.35);
+  border: 1px solid rgba(0,0,0,.1);
+}
+.barra { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #e9e9ee; }
+.barra i { width: 10px; height: 10px; border-radius: 50%; background: #c2c2cb; }
+.barra span { margin-left: 10px; flex: 1; max-width: 260px; font: 500 .7rem 'Inter', sans-serif; color: #666; background: #fff; padding: 4px 12px; border-radius: 999px; }
 
-  /* .appear → os blocos da galeria surgem subindo e crescendo de leve */
-  .appear {
-    opacity: 0;
-    transform: translateY(24px) scale(.96);
-    transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
-    transition-delay: var(--d, 0s);
-  }
-  .appear.in { opacity: 1; transform: none; }
+.celular {
+  position: absolute; right: -10px; bottom: 0; width: 150px;
+  border: 6px solid #111; border-radius: 26px; overflow: hidden;
+  background: #111; box-shadow: 0 24px 50px rgba(0,0,0,.45);
+}
 
-  .tile {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    color: var(--on, #fff);
-    background: var(--tone);
-  }
-  .tile-bg,
-  .tile img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
-  }
-  .tile-bg {                                   /* degradê suave + brilho no canto */
-    background:
-      radial-gradient(120% 90% at 85% 0%, rgba(255,255,255,.22), transparent 55%),
-      linear-gradient(135deg, var(--tone), var(--tone-2));
-  }
-  .tile:hover .tile-bg,
-  .tile:hover img { transform: scale(1.07); }
-  .tile figcaption {
-    position: absolute; left: 1rem; bottom: .9rem;
-    display: flex; align-items: baseline; gap: .6rem;
-    font-size: .8rem; letter-spacing: .04em;
-    opacity: .9;
-  }
-  .tile figcaption span {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.4rem; letter-spacing: 0; opacity: .7;
-  }
+/* ── Mini-site (a "página do cliente" dentro da moldura) ── */
+.mini {
+  background: var(--mini-fundo); color: var(--texto);
+  font-family: var(--fonte-texto); font-size: .82rem;
+}
+.mini-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 14px 20px; border-bottom: 1px solid var(--borda); }
+.mini-logo { font-family: var(--fonte-titulo); font-size: 1.25rem; }
+.mini-nav nav { display: flex; gap: 1.1rem; color: var(--suave); font-size: .75rem; }
+.mini-botao {
+  display: inline-block; padding: .55rem 1.1rem; font-weight: 700; font-size: .75rem;
+  background: var(--destaque); color: var(--destaque-texto); border-radius: var(--raio);
+}
+.mini-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; align-items: center; padding: 28px 20px; }
+.mini-etiqueta { color: var(--destaque); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .62rem; }
+.mini-hero h3 { font-family: var(--fonte-titulo); font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.02; margin: .5rem 0; }
+.mini-hero h3 em { font-style: normal; color: var(--destaque); }
+.mini-hero p { color: var(--suave); line-height: 1.5; margin-bottom: 1rem; }
+.arte {
+  aspect-ratio: 1; display: grid; place-items: center; font-size: 5rem;
+  background: linear-gradient(145deg, var(--destaque), var(--borda));
+  border-radius: var(--raio);
+}
+.mini-servicos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 20px 20px; }
+.mini-card {
+  background: var(--cartao); border: 1px solid var(--borda); border-radius: var(--raio);
+  padding: 12px 8px; text-align: center; font-weight: 600; font-size: .72rem;
+  transition: transform .3s;
+}
+.mini-card:hover { transform: translateY(-4px); }
+.mini-card span { display: block; font-size: 1.5rem; margin-bottom: 4px; }
 
-  /* Linha de serviço (lista da seção Serviços) */
-  .service {
-    position: relative;
-    display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    gap: 1rem;
-    align-items: start;
-    padding: 2.25rem 0;
-    border-top: 1px solid var(--line);
-    transition: padding .5s cubic-bezier(.2,.7,.2,1);
-  }
-  .service:last-child { border-bottom: 1px solid var(--line); }
-  .service::before {                                  /* fundo que aparece no hover */
-    content: ""; position: absolute; inset: 0 -1.5rem; z-index: -1;
-    background: var(--bg);
-    opacity: 0; transition: opacity .4s; border-radius: 6px;
-  }
-  .service:hover::before { opacity: 1; }
-  .service:hover { padding-left: .75rem; }
-  .service .circle {                                  /* círculo com seta */
-    width: 2.75rem; height: 2.75rem;
-    border: 1px solid var(--line); border-radius: 999px;
-    display: none; place-items: center;
-    transition: all .4s;
-  }
-  .service:hover .circle { background: var(--accent); color: #fff; border-color: var(--accent); transform: rotate(-45deg); }
-  @media (min-width: 768px) {
-    .service { grid-template-columns: 4rem 1.1fr 1.4fr auto; align-items: center; }
-    .service .circle { display: grid; }
-  }
+/* Agendamento de exemplo (os horários são clicáveis) */
+.agenda {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin: 0 20px 20px; padding: 14px;
+  background: var(--cartao); border: 1px dashed var(--destaque); border-radius: var(--raio);
+}
+.agenda strong { font-size: .78rem; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  padding: .35rem .75rem; font-size: .72rem; font-weight: 600;
+  background: transparent; color: var(--texto);
+  border: 1px solid var(--borda); border-radius: 999px;
+  transition: all .25s;
+}
+.chip:hover { border-color: var(--destaque); }
+.chip.ativo { background: var(--destaque); color: var(--destaque-texto); border-color: var(--destaque); }
+.agenda-botao {
+  padding: .45rem 1rem; font-weight: 700; font-size: .72rem;
+  background: var(--texto); color: var(--mini-fundo); border-radius: var(--raio);
+}
+.agenda-aviso { flex-basis: 100%; font-size: .72rem; font-weight: 600; color: var(--destaque); min-height: 1em; }
 
-  /* Menu do topo */
-  #nav { border-bottom: 1px solid transparent; transition: background .4s, border-color .4s; }
-  #nav.scrolled { background: rgba(246,245,241,.88); backdrop-filter: blur(14px); border-color: var(--line); }
-  .nav-link { position: relative; }
-  .nav-link::after {                                  /* sublinhado animado */
-    content: ""; position: absolute; left: 0; bottom: -4px;
-    height: 1px; width: 100%; background: var(--ink);
-    transform: scaleX(0); transform-origin: right; transition: transform .4s;
-  }
-  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+/* Versão pequena para o celular */
+.mini-celular { font-size: .55rem; }
+.mini-celular .mini-nav { padding: 8px 10px; }
+.mini-celular .mini-logo { font-size: .8rem; }
+.mini-celular .mini-hero { grid-template-columns: 1fr; padding: 14px 10px; }
+.mini-celular .mini-hero h3 { font-size: 1.1rem; }
+.mini-celular .mini-botao { padding: .4rem .8rem; font-size: .55rem; }
+.mini-celular .mini-servicos { grid-template-columns: 1fr 1fr; padding: 0 10px 12px; gap: 6px; }
+.mini-celular .mini-card { padding: 8px 4px; font-size: .55rem; }
+.mini-celular .mini-card span { font-size: 1.1rem; }
 
-  /* Barra fina de progresso no topo da página */
-  #progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 100; background: var(--accent); }
 
-  /* Seção de contato (fundo azul) */
-  .section-dark { background: var(--accent); color: #F6F5F1; }
-  .section-dark .muted { color: rgba(246,245,241,.68); }
+/* ═══════════════════════════════════════════════════════════
+   IDENTIDADE VISUAL ESPECÍFICA DE CADA EXEMPLO
+   ═══════════════════════════════════════════════════════════ */
 
-  /* Respeita quem desativou animações no celular/computador */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; }
-    .reveal, .grow, .appear, .word > span { opacity: 1 !important; transform: none !important; }
-    .curtain { clip-path: none !important; }
-    .rule { transform: none !important; }
-  }
+/* ── Saúde: suave, arredondado, muito espaço em branco ── */
+.tema-saude::after {
+  content: ""; position: absolute; top: -140px; right: -140px; width: 420px; height: 420px;
+  border-radius: 50%; background: radial-gradient(circle, #e2d3b8, transparent 70%);
+}
+.tema-saude h2 { font-weight: 400; letter-spacing: -.02em; }
+.tema-saude .mini-botao, .tema-saude .botao-tema { border-radius: 999px; }
+.tema-saude .arte { border-radius: 200px 200px 16px 16px; background: linear-gradient(180deg, #e8dcc8, #cfe3da); }
+
+/* ── Automotivo: diagonais, letras grandes em caixa alta ── */
+.tema-auto::before {
+  content: ""; position: absolute; top: 0; right: -8%; width: 48%; height: 100%;
+  background: linear-gradient(160deg, transparent 0 30%, #e10600 30% 35%, transparent 35% 43%, #7a0300 43% 47%, transparent 47%);
+}
+.tema-auto h2 { font-size: clamp(3.6rem, 9vw, 7.4rem); text-transform: uppercase; letter-spacing: .01em; line-height: .88; text-shadow: 0 4px 0 rgba(225,6,0,.35); }
+.tema-auto .mini-hero h3, .tema-auto .mini-logo { text-transform: uppercase; letter-spacing: .03em; }
+.tema-auto .mini-botao, .tema-auto .botao-tema { clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); border-radius: 0; padding-inline: 1.8rem; text-transform: uppercase; letter-spacing: .06em; }
+.tema-auto .mini-card { border-bottom: 3px solid var(--destaque); }
+.tema-auto .arte { background: radial-gradient(circle, #e1060066, transparent 70%); font-size: 6rem; }
+.tema-auto .navegador { box-shadow: 0 0 0 1px #e10600, 0 30px 70px rgba(225,6,0,.3); }
+
+/* ── Pet shop: cores alegres, cantos bem redondos ── */
+.tema-pet { background-image: radial-gradient(#ffd23f66 3px, transparent 4px); background-size: 34px 34px; }
+.tema-pet h2 { font-weight: 800; font-size: clamp(3rem, 7vw, 5.8rem); }
+.tema-pet h2 .letra:nth-child(4n+1) { color: #ff7a3d; }
+.tema-pet h2 .letra:nth-child(4n+2) { color: #1fb5a8; }
+.tema-pet h2 .letra:nth-child(4n+3) { color: #7b5cff; }
+.tema-pet h2 .letra:nth-child(4n)   { color: #ff4f8b; }
+.tema-pet .mini-card:nth-child(1) { background: #ffe1d1; border-color: #ff7a3d; }
+.tema-pet .mini-card:nth-child(2) { background: #d4f4f0; border-color: #1fb5a8; }
+.tema-pet .mini-card:nth-child(3) { background: #e6defc; border-color: #7b5cff; }
+.tema-pet .mini-card:nth-child(4) { background: #ffd9e6; border-color: #ff4f8b; }
+.tema-pet .mini-card { border-width: 2px; }
+.tema-pet .arte { background: linear-gradient(145deg, #ffd23f, #ff9f43); border-radius: 50% 50% 46% 54%; }
+.tema-pet .navegador { border: 4px solid #ffd23f; }
+
+/* ── Sorveteria: exagerada, borda grossa, sombra dura ── */
+.tema-sorvete { padding-top: 150px; }
+.tema-sorvete::before {      /* "calda" escorrendo no topo */
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 56px;
+  background:
+    radial-gradient(circle at 30px 0, var(--destaque) 28px, transparent 29px) 0 0 / 60px 56px repeat-x,
+    linear-gradient(var(--destaque), var(--destaque)) 0 0 / 100% 18px no-repeat;
+}
+.tema-sorvete h2 {
+  font-size: clamp(3.6rem, 9vw, 7.2rem); font-weight: 400; line-height: .92;
+  text-shadow: 3px 3px 0 #fff, 7px 7px 0 var(--extra);
+}
+.tema-sorvete h2 em { color: var(--destaque); }
+.tema-sorvete .botao-tema, .tema-sorvete .mini-botao { border: 3px solid var(--borda); box-shadow: 4px 4px 0 var(--borda); font-family: var(--fonte-titulo); font-weight: 400; font-size: 1.05rem; }
+.tema-sorvete .mini-botao { font-size: .85rem; box-shadow: 3px 3px 0 var(--borda); }
+.tema-sorvete .navegador { border: 4px solid var(--borda); box-shadow: 10px 10px 0 var(--extra); }
+.tema-sorvete .mini-card { border: 3px solid var(--borda); box-shadow: 3px 3px 0 var(--borda); font-family: var(--fonte-titulo); font-weight: 400; font-size: .95rem; }
+.tema-sorvete .mini-card:nth-child(1) { background: #ffd9ec; }
+.tema-sorvete .mini-card:nth-child(2) { background: #c9f6fa; }
+.tema-sorvete .mini-card:nth-child(3) { background: #fff3a6; }
+.tema-sorvete .mini-card:nth-child(4) { background: #e3d2ff; }
+.tema-sorvete .mini-hero h3 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.8rem); }
+.tema-sorvete .arte { background: radial-gradient(circle at 30% 30%, #fff, var(--extra2)); border: 4px solid var(--borda); border-radius: 50%; font-size: 6rem; }
+.tema-sorvete .celular { border-color: var(--borda); }
+
+/* ── Empresarial: linhas retas, marinho com dourado ── */
+.tema-empresa h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.02; }
+.tema-empresa .tag { color: #9a6f1f; }
+.tema-empresa .mini-nav { background: #12274a; color: #fff; border: 0; }
+.tema-empresa .mini-nav nav { color: rgba(255,255,255,.7); }
+.tema-empresa .arte { background: linear-gradient(145deg, #12274a, #2c4a7e); }
+.tema-empresa .mini-hero h3 { font-weight: 800; letter-spacing: -.03em; }
+.tema-empresa .mini-card { border-top: 3px solid var(--destaque); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   CELULAR: ajustes para telas pequenas
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 980px) {
+  .menu { display: none; }
+  .menu-botao { display: block; }
+  .hero-grade, .exemplo-grade, .sobre-grade, .seu-negocio-topo, .contato .container { grid-template-columns: 1fr; gap: 36px; }
+  .nichos { grid-template-columns: 1fr 1fr; }
+  .vantagem { grid-template-columns: 1fr; gap: .3rem; }
+  .exemplo.invertido .exemplo-visual { order: 0; }
+  .passos { grid-template-columns: 1fr 1fr; }
+  .hero { padding-top: 120px; }
+  .exemplo { padding: 80px 0; }
+}
+@media (max-width: 560px) {
+  .mini-hero { grid-template-columns: 1fr; }
+  .arte { display: none; }
+  .mini-servicos { grid-template-columns: 1fr 1fr; }
+  .mini-nav nav { display: none; }
+  .celular { width: 110px; right: -4px; }
+  .vantagens, .passos { grid-template-columns: 1fr; }
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .letra, .revela { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
 </style>
 </head>
 
-<body class="font-sans antialiased">
-
-<div id="progress"></div>
-
+<body>
 
 <!-- ═══════════════════════════════════════════════════════════
-     MENU DO TOPO
+     TOPO
      ═══════════════════════════════════════════════════════════ -->
-<header id="nav" class="fixed top-0 inset-x-0 z-50">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10 h-20 flex items-center justify-between">
+<header class="topo" id="topo">
+  <div class="container topo-linha">
 
-    <!-- EDITE: logo do cliente (texto ou <img src="logo.png" class="h-8">) -->
-    <a href="#inicio" class="serif text-2xl">SUA LOGO AQUI</a>
+    <a href="#inicio" class="logo">
+      <span class="logo-jv">JV</span>
+      <span class="logo-nome">João Victor <small>Sites que geram resultados</small></span>
+    </a>
 
-    <!-- Links (aparecem só no computador) -->
-    <nav class="hidden md:flex items-center gap-9 text-sm">
-      <a href="#sobre"    class="nav-link">Sobre</a>
-      <a href="#servicos" class="nav-link">Serviços</a>
-      <a href="#espaco"   class="nav-link">Espaço</a>
-      <a href="#local"    class="nav-link">Localização</a>
-      <a href="#contato"  class="btn btn-solid !py-2.5 !px-5 !text-sm">Fale conosco</a>
+    <nav class="menu">
+      <a href="#inicio">Início</a>
+      <a href="#exemplos">Exemplos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#contato">Contato</a>
+      <a href="#contato" class="botao botao-contorno">Solicite um orçamento</a>
     </nav>
 
-    <!-- Botão do menu no celular -->
-    <button id="menuButton" class="md:hidden w-10 h-10 grid place-items-center" aria-label="Abrir menu">
-      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h16M3 15h16"/></svg>
-    </button>
+    <button class="menu-botao" id="menuBotao" aria-label="Abrir menu">☰</button>
   </div>
 
-  <!-- Menu aberto no celular -->
-  <div id="mobileMenu" class="hidden md:hidden border-t border-[var(--line)] bg-[var(--bg)] px-5 py-6 space-y-5 text-lg serif">
-    <a href="#sobre"    class="block">Sobre</a>
-    <a href="#servicos" class="block">Serviços</a>
-    <a href="#espaco"   class="block">Espaço</a>
-    <a href="#local"    class="block">Localização</a>
-    <a href="#contato"  class="block">Fale conosco</a>
+  <div class="menu-celular" id="menuCelular">
+    <a href="#exemplos">Exemplos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#metodologia">Metodologia</a>
+    <a href="#contato">Contato</a>
   </div>
 </header>
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     1) INÍCIO (primeira tela)
+     INÍCIO
      ═══════════════════════════════════════════════════════════ -->
-<section id="inicio" class="relative pt-36 sm:pt-44 pb-20">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <p class="eyebrow">Apresentação institucional</p>
-
-    <!-- EDITE: título principal. Use <em>palavras</em> para deixar em itálico azul -->
-    <h1 id="heroTitle" class="split serif mt-6 text-[3rem] leading-[1.02] sm:text-7xl lg:text-[6.5rem] max-w-6xl">
-      Seu negócio merece uma <em>presença digital</em> profissional.
-    </h1>
-
-    <div class="mt-12 grid lg:grid-cols-12 gap-10 items-end">
-
-      <!-- Texto e botões -->
-      <div class="lg:col-span-5">
-        <!-- EDITE: subtítulo -->
-        <p class="grow text-lg sm:text-xl muted leading-relaxed" style="--d:.7s" data-hero>
-          Apresente sua empresa, seus serviços e tudo o que você oferece em um só lugar.
-        </p>
-
-        <div class="grow mt-9 flex flex-col sm:flex-row gap-3" style="--d:.9s" data-hero>
-          <a href="#servicos" class="btn btn-solid">Conheça nossos serviços <span class="arrow">↗</span></a>
-          <a href="#contato"  class="btn btn-outline">Fale conosco</a>
-        </div>
-      </div>
-
-      <!-- Foto principal -->
-      <div class="lg:col-span-7">
-        <div class="photo appear ratio-wide" style="--d:.5s" data-hero>
-          <!-- EDITE: para usar uma foto, troque a linha abaixo por:
-               <img src="foto-principal.jpg" alt="Descrição da foto" /> -->
-          <div class="placeholder">[Imagem principal do negócio]</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     2) SOBRE NÓS
-     ═══════════════════════════════════════════════════════════ -->
-<section id="sobre" class="py-24 sm:py-36">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <div class="rule"></div>
-
-    <div class="mt-10 grid lg:grid-cols-12 gap-12">
-      <div class="lg:col-span-3 reveal">
-        <p class="eyebrow">01 — Sobre nós</p>
-      </div>
-
-      <div class="lg:col-span-9 grid md:grid-cols-2 gap-12 lg:gap-16">
-
-        <!-- EDITE: textos -->
-        <div>
-          <h2 class="split serif text-5xl sm:text-6xl leading-[1.05]">Conheça nossa <em>empresa</em></h2>
-          <p class="reveal mt-8 text-lg muted leading-relaxed" style="--d:.15s">
-            Aqui você pode contar um pouco sobre sua empresa, sua história e o que torna seu trabalho especial.
-          </p>
-          <p class="reveal mt-5 text-lg muted leading-relaxed" style="--d:.25s">
-            Um espaço para transmitir confiança e mostrar ao cliente por que escolher o seu negócio.
-          </p>
-        </div>
-
-        <!-- EDITE: foto do cliente ou do estabelecimento -->
-        <div class="photo appear ratio-portrait">
-          <div class="placeholder">[Sua foto ou foto do estabelecimento]</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     3) SERVIÇOS
-     Para adicionar um serviço, copie um bloco <a class="service"> inteiro.
-     ═══════════════════════════════════════════════════════════ -->
-<section id="servicos" class="py-24 sm:py-36" style="background:var(--bg-alt)">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <div class="grid lg:grid-cols-12 gap-12">
-      <div class="lg:col-span-3 reveal">
-        <p class="eyebrow">02 — Serviços</p>
-      </div>
-      <div class="lg:col-span-9">
-        <h2 class="split serif text-5xl sm:text-7xl leading-[1.02]">O que <em>oferecemos</em></h2>
-        <p class="reveal mt-6 text-lg muted max-w-xl" style="--d:.15s">
-          Conheça alguns dos nossos principais serviços e soluções.
-        </p>
-      </div>
-    </div>
-
-    <!-- Lista de serviços -->
-    <div class="mt-16 lg:ml-[25%]">
-
-      <!-- EDITE: Serviço 01 -->
-      <a href="#contato" class="service reveal">
-        <span class="serif text-3xl muted">01</span>
-        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 01</h3>
-        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Uma breve descrição do serviço oferecido pela sua empresa.</p>
-        <span class="circle">→</span>
-      </a>
-
-      <!-- EDITE: Serviço 02 -->
-      <a href="#contato" class="service reveal" style="--d:.1s">
-        <span class="serif text-3xl muted">02</span>
-        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 02</h3>
-        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Explique de forma simples como esse serviço pode ajudar seu cliente.</p>
-        <span class="circle">→</span>
-      </a>
-
-      <!-- EDITE: Serviço 03 -->
-      <a href="#contato" class="service reveal" style="--d:.2s">
-        <span class="serif text-3xl muted">03</span>
-        <h3 class="serif text-3xl sm:text-4xl">Serviço / Modalidade 03</h3>
-        <p class="muted leading-relaxed col-start-2 md:col-start-auto">Destaque mais uma opção, especialidade ou produto do seu negócio.</p>
-        <span class="circle">→</span>
-      </a>
-
-    </div>
-
-    <div class="reveal mt-14 lg:ml-[25%]">
-      <a href="#contato" class="btn btn-outline">Ver todos os serviços <span class="arrow">↗</span></a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     4) NOSSO ESPAÇO (galeria com 3 fotos)
-     ═══════════════════════════════════════════════════════════ -->
-<section id="espaco" class="py-24 sm:py-36">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <div class="grid lg:grid-cols-12 gap-12">
-      <div class="lg:col-span-3 reveal">
-        <p class="eyebrow">03 — Nosso espaço</p>
-      </div>
-      <div class="lg:col-span-9">
-        <h2 class="split serif text-5xl sm:text-7xl leading-[1.02]">Conheça um <em>pouco mais</em></h2>
-        <p class="reveal mt-6 text-lg muted max-w-2xl" style="--d:.15s">
-          Use este espaço para apresentar seu ambiente, seus produtos, sua equipe ou alguns dos trabalhos realizados.
-        </p>
-      </div>
-    </div>
-
-    <!-- ─────────────────────────────────────────────────────
-         GALERIA (7 blocos que se encaixam, sem espaços vazios)
-         Celular: 2 colunas  |  Computador: 4 colunas
-         EDITE: para usar uma foto de verdade, dentro do <figure> troque
-         <div class="tile-bg"></div> por:
-         <img src="foto.jpg" alt="Descrição da foto" />
-         O tamanho de cada bloco é controlado pelas classes "wide" (largo,
-         2 colunas) e "tall" (alto, 2 linhas). Sem elas, o bloco é pequeno.
-         ───────────────────────────────────────────────────── -->
-    <div class="gallery">
-
-      <!-- Bloco 01: grande (2 colunas × 2 linhas) -->
-      <figure class="tile appear wide tall" style="--tone:#1B365D; --tone-2:#2F5D8C; --d:0s">
-        <div class="tile-bg"></div>
-        <figcaption><span>01</span>Foto 01</figcaption>
-      </figure>
-
-      <!-- Bloco 02: pequeno -->
-      <figure class="tile appear" style="--tone:#A9C1DC; --tone-2:#C9D9EA; --on:#14171A; --d:.08s">
-        <div class="tile-bg"></div>
-        <figcaption><span>02</span>Foto 02</figcaption>
-      </figure>
-
-      <!-- Bloco 03: alto (1 coluna × 2 linhas) -->
-      <figure class="tile appear tall" style="--tone:#3E6A99; --tone-2:#6F95BD; --d:.16s">
-        <div class="tile-bg"></div>
-        <figcaption><span>03</span>Foto 03</figcaption>
-      </figure>
-
-      <!-- Bloco 04: pequeno -->
-      <figure class="tile appear" style="--tone:#11233D; --tone-2:#1F3F6B; --d:.24s">
-        <div class="tile-bg"></div>
-        <figcaption><span>04</span>Foto 04</figcaption>
-      </figure>
-
-      <!-- Bloco 05: pequeno -->
-      <figure class="tile appear" style="--tone:#DCE6F1; --tone-2:#EEF3F9; --on:#14171A; --d:.32s">
-        <div class="tile-bg"></div>
-        <figcaption><span>05</span>Foto 05</figcaption>
-      </figure>
-
-      <!-- Bloco 06: largo (2 colunas × 1 linha) -->
-      <figure class="tile appear wide" style="--tone:#5B84B1; --tone-2:#8BAACB; --d:.4s">
-        <div class="tile-bg"></div>
-        <figcaption><span>06</span>Foto 06</figcaption>
-      </figure>
-
-      <!-- Bloco 07: pequeno -->
-      <figure class="tile appear" style="--tone:#2A4B78; --tone-2:#4A74A8; --d:.48s">
-        <div class="tile-bg"></div>
-        <figcaption><span>07</span>Foto 07</figcaption>
-      </figure>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     5) POR QUE ESCOLHER A GENTE (3 diferenciais)
-     ═══════════════════════════════════════════════════════════ -->
-<section class="py-24 sm:py-36 border-t border-[var(--line)]">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <p class="eyebrow reveal">04 — Por que escolher a gente?</p>
-
-    <div class="mt-14 grid md:grid-cols-3 gap-x-10 gap-y-14">
-
-      <!-- EDITE: diferencial 01 -->
-      <div>
-        <div class="rule"></div>
-        <p class="serif text-6xl muted mt-8 reveal">01</p>
-        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.1s">Atendimento de qualidade</h3>
-        <p class="reveal mt-4 muted text-lg" style="--d:.2s">Um atendimento pensado para cada cliente.</p>
-      </div>
-
-      <!-- EDITE: diferencial 02 -->
-      <div>
-        <div class="rule" style="--d:.15s"></div>
-        <p class="serif text-6xl muted mt-8 reveal" style="--d:.15s">02</p>
-        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.25s">Experiência e confiança</h3>
-        <p class="reveal mt-4 muted text-lg" style="--d:.35s">Profissionalismo em cada detalhe.</p>
-      </div>
-
-      <!-- EDITE: diferencial 03 -->
-      <div>
-        <div class="rule" style="--d:.3s"></div>
-        <p class="serif text-6xl muted mt-8 reveal" style="--d:.3s">03</p>
-        <h3 class="grow serif text-3xl sm:text-4xl mt-6" style="--d:.4s">Facilidade e praticidade</h3>
-        <p class="reveal mt-4 muted text-lg" style="--d:.5s">Entre em contato de forma rápida e simples.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     6) LOCALIZAÇÃO
-     ═══════════════════════════════════════════════════════════ -->
-<section id="local" class="py-24 sm:py-36" style="background:var(--bg-alt)">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-    <div class="grid lg:grid-cols-12 gap-12">
-
-      <div class="lg:col-span-3 reveal">
-        <p class="eyebrow">05 — Localização</p>
-      </div>
-
-      <div class="lg:col-span-9 grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-        <div>
-          <h2 class="split serif text-5xl sm:text-6xl leading-[1.05]">Venha nos <em>conhecer</em></h2>
-
-          <div class="mt-12 space-y-9">
-            <!-- EDITE: endereço -->
-            <div class="reveal">
-              <p class="eyebrow">Seu endereço aqui</p>
-              <p class="serif text-2xl sm:text-3xl mt-3">Rua Exemplo, 000 – Centro – Sua Cidade/SP</p>
-            </div>
-
-            <!-- EDITE: horários -->
-            <div class="reveal" style="--d:.1s">
-              <p class="eyebrow">Horário de atendimento</p>
-              <p class="mt-3 text-lg">Segunda a sexta: 08h às 18h</p>
-              <p class="text-lg">Sábado: 08h às 12h</p>
-            </div>
-          </div>
-
-          <!-- O link deste botão vem do bloco "DADOS DO CLIENTE" lá embaixo -->
-          <a data-link="mapa" href="#" target="_blank" rel="noopener" class="btn btn-solid mt-12 reveal" style="--d:.2s">
-            Ver no mapa <span class="arrow">↗</span>
-          </a>
-        </div>
-
-        <!-- EDITE: mapa. Para usar o Google Maps, troque o placeholder por:
-             <iframe src="LINK_DE_INCORPORAR_DO_GOOGLE_MAPS" class="absolute inset-0 w-full h-full border-0" loading="lazy"></iframe> -->
-        <div class="photo appear ratio-portrait" style="--d:.2s">
-          <div class="placeholder">[Mapa]</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     7) CONTATO (seção azul)
-     ═══════════════════════════════════════════════════════════ -->
-<section id="contato" class="section-dark py-28 sm:py-44">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10">
-
-    <p class="eyebrow reveal" style="color:rgba(246,245,241,.6)">06 — Entre em contato</p>
-
-    <h2 class="split serif mt-8 text-[3.5rem] leading-[1] sm:text-8xl lg:text-[9rem]">
-      Vamos <em style="color:#fff">conversar?</em>
-    </h2>
-
-    <div class="mt-14 grid lg:grid-cols-12 gap-10 items-end">
-
-      <div class="lg:col-span-6">
-        <p class="grow text-lg sm:text-xl muted leading-relaxed">
-          Tem alguma dúvida ou quer saber mais sobre nossos serviços? Entre em contato diretamente pelo WhatsApp.
-        </p>
-        <!-- O link do WhatsApp vem do bloco "DADOS DO CLIENTE" -->
-        <a data-link="whatsapp" href="#" target="_blank" rel="noopener"
-           class="btn mt-9 reveal" style="background:#F6F5F1; color:var(--accent)">
-          Falar pelo WhatsApp <span class="arrow">↗</span>
-        </a>
-      </div>
-
-      <!-- Telefone e Instagram: o texto e o link vêm do bloco "DADOS DO CLIENTE" -->
-      <div class="lg:col-span-6 lg:pl-16 space-y-5 reveal" style="--d:.2s">
-        <div class="border-t border-white/20 pt-5 flex justify-between gap-4">
-          <span class="muted">Telefone</span>
-          <a data-link="telefone" data-text="telefoneTexto" href="#" class="hover:underline">(00) 00000-0000</a>
-        </div>
-        <div class="border-t border-white/20 pt-5 flex justify-between gap-4">
-          <span class="muted">Instagram</span>
-          <a data-link="instagram" data-text="instagramTexto" href="#" target="_blank" rel="noopener" class="hover:underline">@seunegocio</a>
-        </div>
-        <div class="border-t border-white/20"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     RODAPÉ
-     ═══════════════════════════════════════════════════════════ -->
-<footer class="py-14" style="background:var(--ink); color:#F6F5F1">
-  <div class="mx-auto max-w-7xl px-5 sm:px-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+<section class="hero" id="inicio">
+  <div class="container hero-grade">
 
     <div>
-      <!-- EDITE: logo e frase final -->
-      <p class="serif text-3xl">SUA LOGO AQUI</p>
-      <p class="mt-4 text-white/60 max-w-sm">Seu negócio, agora também com uma presença digital profissional.</p>
+      <span class="etiqueta revela">Seu negócio no mundo digital</span>
+
+      <!-- EDITE: título principal. O que estiver em <em> fica azul. -->
+      <h1 class="letras anim-corp">Veja como podemos colocar sua empresa no mercado com um <em>site profissional.</em></h1>
+
+      <p class="revela">Sites modernos, rápidos e estratégicos para atrair mais clientes, transmitir confiança e facilitar o contato com o seu negócio.</p>
+
+      <div class="hero-botoes revela">
+        <a href="#contato" class="botao botao-azul">Quero um site para minha empresa →</a>
+        <a href="#exemplos" class="botao botao-contorno">Ver exemplos abaixo ↓</a>
+      </div>
     </div>
 
-    <div class="flex gap-8 text-sm text-white/70">
-      <a data-link="instagram" href="#" target="_blank" rel="noopener" class="hover:text-white transition">Instagram</a>
-      <a data-link="whatsapp"  href="#" target="_blank" rel="noopener" class="hover:text-white transition">WhatsApp</a>
-      <a href="#local" class="hover:text-white transition">Localização</a>
+    <!-- Notebook + celular mostrando um exemplo -->
+    <div class="hero-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
+        <div class="mini tema-saude">
+          <div class="mini-nav">
+            <b class="mini-logo">🌿 Clínica Vida</b>
+            <nav><span>Especialidades</span><span>Equipe</span><span>Contato</span></nav>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <h3>Cuidar de você é a nossa <em>especialidade</em></h3>
+              <p>Atendimento humanizado e agendamento online.</p>
+              <span class="mini-botao">Agendar consulta</span>
+            </div>
+            <div class="arte">🩺</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular tema-auto">
+          <div class="mini-nav"><b class="mini-logo">AutoPrime</b><span>☰</span></div>
+          <div class="mini-hero">
+            <div><h3>Estética automotiva <em>de alto nível</em></h3><span class="mini-botao">Orçamento</span></div>
+          </div>
+        </div>
+      </div>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VITRINE RÁPIDA: atalhos para cada exemplo
+     ═══════════════════════════════════════════════════════════ -->
+<section class="faixa">
+  <div class="container">
+    <p class="faixa-texto">Exemplos de estilos. Cada site é feito sob medida para o seu negócio.</p>
+    <div class="pilulas">
+      <a href="#saude"   class="pilula p-saude">Clínicas</a>
+      <a href="#auto"    class="pilula p-auto">Automotivo</a>
+      <a href="#pet"     class="pilula p-pet">Pet shop</a>
+      <a href="#sorvete" class="pilula p-sorvete">Sorveteria</a>
+      <a href="#empresa" class="pilula p-empresa">Empresarial</a>
+      <a href="#seu-negocio" class="pilula p-seu">O seu negócio</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     EXEMPLOS
+     Todos seguem a mesma estrutura:
+       texto (tag, título, descrição, lista, botão) + visual (navegador e celular)
+     Para criar um exemplo novo, copie uma <section class="exemplo ...">
+     inteira e crie um tema novo no CSS.
+     Os emojis são provisórios: troque por fotos reais com
+     <img src="foto.jpg" alt="..."> quando tiver material do cliente.
+     ═══════════════════════════════════════════════════════════ -->
+<div id="exemplos"></div>
+
+
+<!-- ─────────────── 01 · CLÍNICA / SAÚDE ─────────────── -->
+<section class="exemplo tema-saude" id="saude">
+  <div class="container exemplo-grade">
+
+    <div class="exemplo-texto">
+      <span class="tag"><b>01</b> Clínicas e saúde</span>
+      <h2 class="letras anim-suave">Mais confiança para quem cuida de <em>pessoas.</em></h2>
+      <p class="revela">Sites para clínicas e profissionais da saúde que apresentam serviços, equipe e diferenciais, e facilitam o agendamento online.</p>
+      <ul class="lista revela">
+        <li>Apresentação da equipe e especialidades</li>
+        <li>Agendamento online pelo celular</li>
+        <li>Depoimentos de pacientes</li>
+        <li>Localização e contato rápido</li>
+      </ul>
+      <a href="#" data-whatsapp data-assunto="clínica" class="botao-tema revela">Quero um site assim →</a>
+    </div>
+
+    <div class="exemplo-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
+        <div class="mini">
+          <div class="mini-nav">
+            <b class="mini-logo">🌿 Clínica Vida</b>
+            <nav><span>Especialidades</span><span>Equipe</span><span>Contato</span></nav>
+            <span class="mini-botao">Agendar</span>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <small class="mini-etiqueta">Atendimento humanizado</small>
+              <h3>Sua saúde em <em>boas mãos</em></h3>
+              <p>Consultas com hora marcada, equipe experiente e cuidado em cada detalhe.</p>
+              <span class="mini-botao">Agendar consulta</span>
+            </div>
+            <div class="arte">🩺</div>
+          </div>
+          <div class="mini-servicos">
+            <div class="mini-card"><span>🩺</span>Clínico geral</div>
+            <div class="mini-card"><span>🦷</span>Odontologia</div>
+            <div class="mini-card"><span>✨</span>Dermatologia</div>
+            <div class="mini-card"><span>🔬</span>Exames</div>
+          </div>
+          <div class="agenda">
+            <strong>Agende online:</strong>
+            <div class="chips"><button class="chip">09:00</button><button class="chip">10:30</button><button class="chip">14:00</button><button class="chip">16:30</button></div>
+            <button class="agenda-botao">Reservar</button>
+            <p class="agenda-aviso"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular">
+          <div class="mini-nav"><b class="mini-logo">🌿 Vida</b><span>☰</span></div>
+          <div class="mini-hero"><div><h3>Sua saúde em <em>boas mãos</em></h3><span class="mini-botao">Agendar</span></div></div>
+          <div class="mini-servicos"><div class="mini-card"><span>🩺</span>Clínico</div><div class="mini-card"><span>🦷</span>Dentista</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────── 02 · AUTOMOTIVO ─────────────── -->
+<section class="exemplo tema-auto invertido" id="auto">
+  <div class="container exemplo-grade">
+
+    <div class="exemplo-texto">
+      <span class="tag"><b>02</b> Automotivo e carros</span>
+      <h2 class="letras anim-forte">Seu carro em <em>destaque.</em> Sempre.</h2>
+      <p class="revela">Sites para oficinas, estéticas automotivas e lojas de veículos que mostram serviços, resultados e levam o cliente direto ao orçamento.</p>
+      <ul class="lista revela">
+        <li>Galeria de serviços e resultados</li>
+        <li>Formulário de orçamento</li>
+        <li>Integração com WhatsApp</li>
+        <li>Design moderno e impactante</li>
+      </ul>
+      <a href="#" data-whatsapp data-assunto="automotivo" class="botao-tema revela">Quero um site assim →</a>
+    </div>
+
+    <div class="exemplo-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>autoprime.com.br</span></div>
+        <div class="mini">
+          <div class="mini-nav">
+            <b class="mini-logo">AUTOPRIME</b>
+            <nav><span>Serviços</span><span>Galeria</span><span>Contato</span></nav>
+            <span class="mini-botao">Orçamento</span>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <small class="mini-etiqueta">Detalhamento premium</small>
+              <h3>Estética automotiva <em>de alto nível</em></h3>
+              <p>Cuidado profissional que devolve brilho, proteção e valor ao seu carro.</p>
+              <span class="mini-botao">Solicitar orçamento</span>
+            </div>
+            <div class="arte">🏎️</div>
+          </div>
+          <div class="mini-servicos">
+            <div class="mini-card"><span>🚿</span>Lavagem premium</div>
+            <div class="mini-card"><span>✨</span>Polimento</div>
+            <div class="mini-card"><span>💎</span>Cristalização</div>
+            <div class="mini-card"><span>🛡️</span>Vitrificação</div>
+          </div>
+          <div class="agenda">
+            <strong>Agende seu horário:</strong>
+            <div class="chips"><button class="chip">Seg 09h</button><button class="chip">Ter 14h</button><button class="chip">Qui 10h</button><button class="chip">Sex 15h</button></div>
+            <button class="agenda-botao">Reservar</button>
+            <p class="agenda-aviso"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular">
+          <div class="mini-nav"><b class="mini-logo">AUTOPRIME</b><span>☰</span></div>
+          <div class="mini-hero"><div><h3>Estética <em>de alto nível</em></h3><span class="mini-botao">Orçamento</span></div></div>
+          <div class="mini-servicos"><div class="mini-card"><span>✨</span>Polimento</div><div class="mini-card"><span>💎</span>Cristal</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────── 03 · PET SHOP ─────────────── -->
+<section class="exemplo tema-pet" id="pet">
+  <div class="container exemplo-grade">
+
+    <div class="exemplo-texto">
+      <span class="tag"><b>03</b> Pet shop e veterinária</span>
+      <h2 class="letras anim-pulo">Todo pet merece um site <em>cheio de amor!</em></h2>
+      <p class="revela">Sites alegres para pet shops, clínicas veterinárias e banho e tosa. O tutor vê os serviços e já marca o horário do bichinho.</p>
+      <ul class="lista revela">
+        <li>Agendamento de banho e tosa</li>
+        <li>Catálogo de produtos e serviços</li>
+        <li>Fotos dos clientes de quatro patas</li>
+        <li>Botão de WhatsApp sempre à vista</li>
+      </ul>
+      <a href="#" data-whatsapp data-assunto="pet shop" class="botao-tema revela">Quero um site assim →</a>
+    </div>
+
+    <div class="exemplo-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>petalegria.com.br</span></div>
+        <div class="mini">
+          <div class="mini-nav">
+            <b class="mini-logo">🐾 Pet Alegria</b>
+            <nav><span>Serviços</span><span>Loja</span><span>Contato</span></nav>
+            <span class="mini-botao">Agendar</span>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <small class="mini-etiqueta">Banho, tosa e carinho</small>
+              <h3>Seu pet <em>feliz</em>, limpinho e cheio de amor!</h3>
+              <p>Cuidamos do seu melhor amigo como se fosse nosso.</p>
+              <span class="mini-botao">Marcar banho</span>
+            </div>
+            <div class="arte">🐶</div>
+          </div>
+          <div class="mini-servicos">
+            <div class="mini-card"><span>🛁</span>Banho e tosa</div>
+            <div class="mini-card"><span>💉</span>Vacinas</div>
+            <div class="mini-card"><span>🦴</span>Pet shop</div>
+            <div class="mini-card"><span>🐕</span>Creche</div>
+          </div>
+          <div class="agenda">
+            <strong>Marque o banho:</strong>
+            <div class="chips"><button class="chip">Manhã</button><button class="chip">Tarde</button><button class="chip">Sábado</button></div>
+            <button class="agenda-botao">Reservar</button>
+            <p class="agenda-aviso"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular">
+          <div class="mini-nav"><b class="mini-logo">🐾 Pet</b><span>☰</span></div>
+          <div class="mini-hero"><div><h3>Seu pet <em>feliz!</em></h3><span class="mini-botao">Marcar banho</span></div></div>
+          <div class="mini-servicos"><div class="mini-card"><span>🛁</span>Banho</div><div class="mini-card"><span>🦴</span>Loja</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────── 04 · SORVETERIA ─────────────── -->
+<section class="exemplo tema-sorvete invertido" id="sorvete">
+  <div class="container exemplo-grade">
+
+    <div class="exemplo-texto">
+      <span class="tag"><b>04</b> Sorveteria e lojas</span>
+      <h2 class="letras anim-pop">Um site <em>docinho</em> que dá água na boca!</h2>
+      <p class="revela">Para sorveterias, cafeterias e lojas divertidas: cores vibrantes, cardápio apetitoso e encomendas direto pelo celular.</p>
+      <ul class="lista revela">
+        <li>Cardápio com fotos dos sabores</li>
+        <li>Encomendas e reservas online</li>
+        <li>Promoções e novidades em destaque</li>
+        <li>Visual que combina com a sua marca</li>
+      </ul>
+      <a href="#" data-whatsapp data-assunto="sorveteria" class="botao-tema revela">Quero um site assim →</a>
+    </div>
+
+    <div class="exemplo-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>sorvetelandia.com.br</span></div>
+        <div class="mini">
+          <div class="mini-nav">
+            <b class="mini-logo">🍦 Sorvetelândia</b>
+            <nav><span>Sabores</span><span>Festas</span><span>Contato</span></nav>
+            <span class="mini-botao">Encomendar</span>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <small class="mini-etiqueta">Novidade da semana</small>
+              <h3>Sabores que fazem a <em>festa!</em></h3>
+              <p>Casquinhas, milkshakes e açaí gelados do jeito que você ama.</p>
+              <span class="mini-botao">Ver cardápio</span>
+            </div>
+            <div class="arte">🍦</div>
+          </div>
+          <div class="mini-servicos">
+            <div class="mini-card"><span>🍦</span>Casquinhas</div>
+            <div class="mini-card"><span>🍭</span>Picolés</div>
+            <div class="mini-card"><span>🥤</span>Milkshakes</div>
+            <div class="mini-card"><span>🍧</span>Açaí</div>
+          </div>
+          <div class="agenda">
+            <strong>Reserve sua festa:</strong>
+            <div class="chips"><button class="chip">Sex</button><button class="chip">Sáb</button><button class="chip">Dom</button></div>
+            <button class="agenda-botao">Reservar</button>
+            <p class="agenda-aviso"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular">
+          <div class="mini-nav"><b class="mini-logo">🍦 Sorvete</b><span>☰</span></div>
+          <div class="mini-hero"><div><h3>Sabores que fazem a <em>festa!</em></h3><span class="mini-botao">Cardápio</span></div></div>
+          <div class="mini-servicos"><div class="mini-card"><span>🍦</span>Casquinha</div><div class="mini-card"><span>🥤</span>Shake</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────── 05 · EMPRESARIAL ─────────────── -->
+<section class="exemplo tema-empresa" id="empresa">
+  <div class="container exemplo-grade">
+
+    <div class="exemplo-texto">
+      <span class="tag"><b>05</b> Empresarial e corporativo</span>
+      <h2 class="letras anim-corp">Sua empresa mais profissional e <em>competitiva.</em></h2>
+      <p class="revela">Sites institucionais para empresas que querem apresentar produtos, serviços, história e valores com uma comunicação moderna e estratégica.</p>
+      <ul class="lista revela">
+        <li>Apresentação da empresa e da história</li>
+        <li>Catálogo de produtos ou serviços</li>
+        <li>Depoimentos e cases de sucesso</li>
+        <li>Contato direto e pedido de orçamento</li>
+      </ul>
+      <a href="#" data-whatsapp data-assunto="empresa" class="botao-tema revela">Quero um site assim →</a>
+    </div>
+
+    <div class="exemplo-visual revela">
+      <div class="navegador">
+        <div class="barra"><i></i><i></i><i></i><span>construtoraalvorada.com.br</span></div>
+        <div class="mini">
+          <div class="mini-nav">
+            <b class="mini-logo">ALVORADA</b>
+            <nav><span>Sobre</span><span>Projetos</span><span>Contato</span></nav>
+            <span class="mini-botao">Orçamento</span>
+          </div>
+          <div class="mini-hero">
+            <div>
+              <small class="mini-etiqueta">Construtora</small>
+              <h3>Construindo um <em>futuro melhor</em></h3>
+              <p>Projetos sólidos, prazos cumpridos e transparência em cada etapa da obra.</p>
+              <span class="mini-botao">Conheça nossos projetos</span>
+            </div>
+            <div class="arte">🏢</div>
+          </div>
+          <div class="mini-servicos">
+            <div class="mini-card"><span>📐</span>Projetos</div>
+            <div class="mini-card"><span>🏗️</span>Obras</div>
+            <div class="mini-card"><span>🔨</span>Reformas</div>
+            <div class="mini-card"><span>📊</span>Consultoria</div>
+          </div>
+          <div class="agenda">
+            <strong>Visita técnica:</strong>
+            <div class="chips"><button class="chip">Seg</button><button class="chip">Qua</button><button class="chip">Sex</button></div>
+            <button class="agenda-botao">Solicitar</button>
+            <p class="agenda-aviso"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="celular">
+        <div class="mini mini-celular">
+          <div class="mini-nav"><b class="mini-logo">ALVORADA</b><span>☰</span></div>
+          <div class="mini-hero"><div><h3>Construindo um <em>futuro melhor</em></h3><span class="mini-botao">Projetos</span></div></div>
+          <div class="mini-servicos"><div class="mini-card"><span>📐</span>Projetos</div><div class="mini-card"><span>🏗️</span>Obras</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     E O SEU NEGÓCIO?
+     Deixa claro que os exemplos são só amostras: o cliente
+     entende que o site é feito sob medida para qualquer ramo.
+     ═══════════════════════════════════════════════════════════ -->
+<section class="secao seu-negocio" id="seu-negocio">
+  <div class="container">
+
+    <div class="seu-negocio-topo">
+      <div>
+        <span class="eyebrow">Para o seu ramo</span>
+        <h2 class="titulo-secao letras anim-corp">Não viu o seu tipo de negócio? Sem problema.</h2>
+      </div>
+      <p class="sub-secao revela">Estes foram só alguns exemplos. Cada site é criado do zero, com o visual, os textos e as funções que o seu negócio precisa.</p>
+    </div>
+
+    <!-- EDITE: troque ou acrescente ramos -->
+    <div class="nichos revela">
+      <span>Advocacia</span>
+      <span>Academia</span>
+      <span>Restaurante</span>
+      <span>Salão de beleza</span>
+      <span>Imobiliária</span>
+      <span>Escola e cursos</span>
+      <span>Contabilidade</span>
+      <span>Fotografia</span>
+      <span>Barbearia</span>
+      <span>Psicologia</span>
+      <span>Loja de roupas</span>
+      <span>E qualquer outro ramo</span>
+    </div>
+
+    <a href="#" data-whatsapp data-assunto="" class="botao botao-escuro revela">Conte sobre o seu negócio →</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SOBRE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="secao sobre" id="sobre">
+  <div class="container sobre-grade">
+
+    <div>
+      <span class="eyebrow">Sobre</span>
+      <h2 class="titulo-secao letras anim-corp">Um site que trabalha por você.</h2>
+      <!-- EDITE: conte sua história com suas palavras -->
+      <p class="revela">Sou João Victor e crio sites para negócios que querem ser encontrados, admirados e contatados. Cada projeto parte da identidade do cliente, porque uma clínica, uma oficina e uma sorveteria não podem ter a mesma cara.</p>
+      <p class="revela">O resultado é um site bonito, rápido e fácil de usar, que ajuda o cliente a chegar até você em poucos toques.</p>
+    </div>
+
+    <div class="vantagens">
+      <div class="vantagem revela"><strong>Responsivo</strong><small>Perfeito no celular, tablet e computador.</small></div>
+      <div class="vantagem revela" style="transition-delay:.08s"><strong>Rápido</strong><small>Carrega depressa e não deixa o cliente esperando.</small></div>
+      <div class="vantagem revela" style="transition-delay:.16s"><strong>Visível no Google</strong><small>Estrutura pensada para ser encontrado nas buscas.</small></div>
+      <div class="vantagem revela" style="transition-delay:.24s"><strong>Atendimento fácil</strong><small>WhatsApp e agendamento online a um toque.</small></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     METODOLOGIA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="secao metodologia" id="metodologia">
+  <div class="container">
+    <span class="eyebrow">Metodologia</span>
+    <h2 class="titulo-secao letras anim-corp">Como o seu site nasce</h2>
+    <p class="sub-secao revela">Um processo simples, com você participando de cada etapa.</p>
+
+    <div class="passos">
+      <div class="passo revela"><b>01</b><h3>Conversa</h3><p>Entendo seu negócio, seu público e o que você quer que o site faça.</p></div>
+      <div class="passo revela" style="transition-delay:.1s"><b>02</b><h3>Design</h3><p>Crio a identidade visual do site, com cores e fontes que combinam com sua marca.</p></div>
+      <div class="passo revela" style="transition-delay:.2s"><b>03</b><h3>Construção</h3><p>Desenvolvo o site completo, com WhatsApp, mapa e agendamento online.</p></div>
+      <div class="passo revela" style="transition-delay:.3s"><b>04</b><h3>Lançamento</h3><p>Publico o site, te ensino a usar e continuo por perto para o que precisar.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     CONTATO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="secao contato" id="contato">
+  <div class="container">
+    <h2 class="letras anim-corp">Vamos transformar sua presença digital?</h2>
+    <div>
+      <p class="revela">Seu negócio merece um site que trabalha por você. Chame no WhatsApp e vamos conversar sobre o seu projeto.</p>
+      <a href="#" data-whatsapp data-assunto="" class="botao revela">Solicitar um orçamento →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="container">
+    <span>© João Victor · Sites que geram resultados</span>
+    <!-- EDITE: coloque seu Instagram -->
+    <a href="https://instagram.com/seuinstagram" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     JAVASCRIPT
+     4. JAVASCRIPT
      ═══════════════════════════════════════════════════════════ -->
 <script>
 /* ───────────────────────────────────────────────────────────
-   DADOS DO CLIENTE  → EDITE: troque só os valores entre aspas
-   Os botões do site já puxam daqui automaticamente.
+   SEUS DADOS  →  EDITE: troque só o que está entre aspas
    ─────────────────────────────────────────────────────────── */
-const CLIENTE = {
-  whatsapp:       "5500000000000",   // só números: 55 + DDD + número
-  mensagem:       "Olá! Vim pelo site e gostaria de mais informações.",
-  telefoneTexto:  "(00) 00000-0000", // como aparece escrito na tela
-  instagramUser:  "seunegocio",      // sem o @
-  mapa:           "https://maps.google.com"  // link do Google Maps
+const CONTATO = {
+  whatsapp: "5515998554798",   // só números: 55 + DDD + número
+  mensagem: "Olá João! Vi seu portfólio e quero um site para o meu negócio."
 };
 
 
 /* ───────────────────────────────────────────────────────────
-   1) Preenche os links com os dados do cliente
+   1) Botões de WhatsApp
+      Todo link com o atributo data-whatsapp recebe o endereço certo.
+      O atributo data-assunto diz qual exemplo o cliente gostou.
    ─────────────────────────────────────────────────────────── */
-const apenasNumeros = CLIENTE.whatsapp.replace(/\D/g, "");
+document.querySelectorAll("[data-whatsapp]").forEach(link => {
+  const assunto = link.dataset.assunto;
+  const texto = assunto
+    ? `${CONTATO.mensagem} Gostei do exemplo de ${assunto}.`
+    : CONTATO.mensagem;
 
-const links = {
-  whatsapp:  `https://wa.me/${apenasNumeros}?text=${encodeURIComponent(CLIENTE.mensagem)}`,
-  telefone:  `tel:+${apenasNumeros}`,
-  instagram: `https://instagram.com/${CLIENTE.instagramUser}`,
-  mapa:      CLIENTE.mapa
-};
-
-const textos = {
-  telefoneTexto:  CLIENTE.telefoneTexto,
-  instagramTexto: "@" + CLIENTE.instagramUser
-};
-
-document.querySelectorAll("[data-link]").forEach(el => {
-  el.href = links[el.dataset.link];
-});
-document.querySelectorAll("[data-text]").forEach(el => {
-  el.textContent = textos[el.dataset.text];
+  link.href = `https://wa.me/${CONTATO.whatsapp}?text=${encodeURIComponent(texto)}`;
+  link.target = "_blank";
+  link.rel = "noopener";
 });
 
 
 /* ───────────────────────────────────────────────────────────
-   2) Títulos que aparecem palavra por palavra
-      Pega todo elemento com a classe "split" e separa as palavras.
+   2) Títulos que aparecem letra por letra
+      Pega todo título com a classe "letras" e envolve cada letra
+      em um <span>. As letras ficam agrupadas por palavra para o
+      texto nunca quebrar no meio de uma palavra.
    ─────────────────────────────────────────────────────────── */
-function separarPalavras(titulo) {
-  let contador = 0;
+function dividirEmLetras(titulo) {
+  let contador = 0;   // número da letra, usado para o atraso da animação
 
   function processar(no) {
-    // Se for texto, quebra em palavras
     if (no.nodeType === Node.TEXT_NODE) {
-      const fragmento = document.createDocumentFragment();
+      const pedacos = document.createDocumentFragment();
 
       no.textContent.split(/(\s+)/).forEach(parte => {
-        if (!parte.trim()) {                       // espaço em branco: mantém
-          fragmento.appendChild(document.createTextNode(parte));
+        if (!parte) return;
+
+        // Espaço entre palavras: mantém um espaço normal
+        if (/^\s+$/.test(parte)) {
+          pedacos.appendChild(document.createTextNode(" "));
           return;
         }
-        const caixa = document.createElement("span");
-        caixa.className = "word";
+
+        // Palavra: uma caixa com um <span> para cada letra
         const palavra = document.createElement("span");
-        palavra.style.setProperty("--i", contador++);   // ordem da palavra (para o atraso)
-        palavra.textContent = parte;
-        caixa.appendChild(palavra);
-        fragmento.appendChild(caixa);
+        palavra.className = "palavra";
+        palavra.setAttribute("aria-hidden", "true");
+
+        [...parte].forEach(caractere => {
+          const letra = document.createElement("span");
+          letra.className = "letra";
+          letra.style.setProperty("--i", contador++);
+          letra.textContent = caractere;
+          palavra.appendChild(letra);
+        });
+
+        pedacos.appendChild(palavra);
       });
 
-      no.replaceWith(fragmento);
+      no.replaceWith(pedacos);
     }
-    // Se for uma tag (ex.: <em>), entra nela e continua
+    // Se for uma tag (por exemplo <em>), entra nela e continua
     else if (no.nodeType === Node.ELEMENT_NODE) {
       [...no.childNodes].forEach(processar);
     }
   }
 
+  // Leitores de tela leem o texto original, não as letras separadas
+  titulo.setAttribute("aria-label", titulo.textContent.trim());
   [...titulo.childNodes].forEach(processar);
 }
 
-document.querySelectorAll(".split").forEach(separarPalavras);
+document.querySelectorAll(".letras").forEach(dividirEmLetras);
 
 
 /* ───────────────────────────────────────────────────────────
-   3) Anima os elementos quando aparecem na tela
+   3) Dispara as animações quando o item aparece na tela
    ─────────────────────────────────────────────────────────── */
-const observador = new IntersectionObserver((entradas) => {
-  entradas.forEach(entrada => {
-    if (entrada.isIntersecting) {
-      entrada.target.classList.add("in");       // dispara a animação do CSS
-      observador.unobserve(entrada.target);     // anima só uma vez
-    }
-  });
-}, { threshold: 0.18, rootMargin: "0px 0px -50px 0px" });
+const animaveis = document.querySelectorAll(".letras, .revela");
 
-const animaveis = document.querySelectorAll(".reveal, .grow, .split, .curtain, .rule, .appear");
+if ("IntersectionObserver" in window) {
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("in");
+        observador.unobserve(entrada.target);   // anima só uma vez
+      }
+    });
+  }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
 
-// Plano B: se o navegador não suportar o observador, mostra tudo de uma vez
-if (!("IntersectionObserver" in window)) {
+  animaveis.forEach(el => observador.observe(el));
+} else {
+  // Navegador antigo: mostra tudo de uma vez
   animaveis.forEach(el => el.classList.add("in"));
 }
 
-animaveis.forEach(el => {
-  const ehPrimeiraTela = el.hasAttribute("data-hero") || el.id === "heroTitle";
-
-  if (ehPrimeiraTela) {
-    // Itens da primeira tela animam assim que a página carrega
-    setTimeout(() => el.classList.add("in"), 150);
-  } else if ("IntersectionObserver" in window) {
-    observador.observe(el);
-  }
-});
-
 
 /* ───────────────────────────────────────────────────────────
-   4) Menu do topo: fundo ao rolar + barra de progresso
+   4) Topo: ganha fundo ao rolar + menu do celular
    ─────────────────────────────────────────────────────────── */
-const menu  = document.getElementById("nav");
-const barra = document.getElementById("progress");
+const topo = document.getElementById("topo");
+window.addEventListener("scroll", () => {
+  topo.classList.toggle("rolou", window.scrollY > 30);
+}, { passive: true });
 
-function aoRolar() {
-  const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
-  barra.style.width = (window.scrollY / alturaTotal * 100) + "%";
-  menu.classList.toggle("scrolled", window.scrollY > 30);
-}
-window.addEventListener("scroll", aoRolar, { passive: true });
-aoRolar();
-
-
-/* ───────────────────────────────────────────────────────────
-   5) Menu do celular (abrir e fechar)
-   ─────────────────────────────────────────────────────────── */
-const menuCelular = document.getElementById("mobileMenu");
-
-document.getElementById("menuButton").addEventListener("click", () => {
-  menuCelular.classList.toggle("hidden");
+const menuCelular = document.getElementById("menuCelular");
+document.getElementById("menuBotao").addEventListener("click", () => {
+  menuCelular.classList.toggle("aberto");
 });
 menuCelular.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => menuCelular.classList.add("hidden"));
+  link.addEventListener("click", () => menuCelular.classList.remove("aberto"));
 });
 
 
 /* ───────────────────────────────────────────────────────────
-   6) Efeito parallax leve nas fotos (elas se movem um pouco ao rolar)
+   5) Agendamento de exemplo
+      Mostra ao cliente como funciona: escolhe um horário
+      e clica em "Reservar". É só uma demonstração.
    ─────────────────────────────────────────────────────────── */
-const semAnimacao = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll(".agenda").forEach(agenda => {
+  const chips = agenda.querySelectorAll(".chip");
+  const botao = agenda.querySelector(".agenda-botao");
+  const aviso = agenda.querySelector(".agenda-aviso");
 
-if (!semAnimacao) {
-  const fotos = document.querySelectorAll(".photo");
-
-  window.addEventListener("scroll", () => {
-    fotos.forEach(foto => {
-      const caixa = foto.getBoundingClientRect();
-      const visivel = caixa.bottom > 0 && caixa.top < window.innerHeight;
-      if (!visivel) return;
-
-      const conteudo = foto.firstElementChild;   // a <img> ou o placeholder
-      if (!conteudo) return;
-
-      const deslocamento = (caixa.top + caixa.height / 2 - window.innerHeight / 2) / window.innerHeight;
-      conteudo.style.transform = `translateY(${deslocamento * -18}px) scale(1.06)`;
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      chips.forEach(outro => outro.classList.remove("ativo"));
+      chip.classList.add("ativo");
+      aviso.textContent = "";
     });
-  }, { passive: true });
-}
+  });
+
+  botao.addEventListener("click", () => {
+    const escolhido = agenda.querySelector(".chip.ativo");
+    aviso.textContent = escolhido
+      ? `✓ ${escolhido.textContent} reservado (exemplo de demonstração)`
+      : "Escolha uma opção primeiro";
+  });
+});
 </script>
 
 </body>
