@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,31 +6,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>João Victor | Sites que geram resultados</title>
 <meta name="description" content="Portfólio de sites profissionais para clínicas, estética automotiva, pet shops, sorveterias e empresas." />
-<meta name="theme-color" content="#0b1220" />
-
+<meta name="theme-color" content="#0e1013" />
+ 
 <!-- Favicon vazio, para o navegador não mostrar ícone de outro projeto -->
 <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" />
-
+ 
 <!-- Fontes: cada exemplo de site usa as suas -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@400;600&family=DM+Sans:wght@400;500;700&family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Baloo+2:wght@500;700;800&family=Chewy&family=Fredoka:wght@400;500;600&family=Manrope:wght@400;600;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Fraunces:wght@400;500&family=DM+Sans:wght@400;500;700&family=Archivo:wdth,wght@100..125,400..900&family=Nunito:wght@400;600;800;900&family=Chewy&family=Fredoka:wght@400;500;600&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet" />
+ 
 <!--
   ┌────────────────────────────────────────────────────────────┐
   │  COMO ESTE ARQUIVO É ORGANIZADO                            │
   │                                                            │
-  │  1. CSS GERAL       → reset, botões, topo, seções          │
-  │  2. CSS DOS EXEMPLOS → um bloco de cores/fontes por tema   │
-  │  3. HTML            → topo, início, vitrine, 5 exemplos,   │
-  │                       sobre, metodologia, contato          │
-  │  4. JAVASCRIPT      → seu WhatsApp (no começo), animação   │
-  │                       das letras e agendamento de exemplo  │
+  │  1. CSS GERAL        → topo, início, seções do portfólio   │
+  │  2. CSS DOS EXEMPLOS → um bloco por site de exemplo        │
+  │  3. HTML             → desenhos, topo, início, 5 exemplos, │
+  │                        seu negócio, sobre, metodologia,    │
+  │                        contato                             │
+  │  4. JAVASCRIPT       → seu WhatsApp (no começo), animação  │
+  │                        das letras e agendamento de exemplo │
   │                                                            │
   │  Procure por "EDITE" (Ctrl+F) para achar o que trocar.     │
+  │                                                            │
+  │  IMAGENS DOS EXEMPLOS: são cenas desenhadas (SVG) que      │
+  │  fingem ser fotos. Para usar foto real, troque o           │
+  │  <svg class="cena"> por <img class="cena" src="foto.jpg">  │
   └────────────────────────────────────────────────────────────┘
 -->
-
+ 
 <style>
 /* ═══════════════════════════════════════════════════════════
    1. CSS GERAL
@@ -39,15 +45,15 @@
   --navy2: #15181c;   /* fundo escuro alternativo               */
   --azul:  #1f6bff;   /* cor principal da sua marca             */
   --linha: rgba(255,255,255,.14);
-
+ 
   /* Seções claras do portfólio (fora dos exemplos) */
-  --papel:  #f6f5f1;  /* fundo claro                            */
-  --papel2: #ecebe6;  /* fundo claro alternativo                */
-  --tinta:  #14171a;  /* texto sobre fundo claro                */
-  --cinza:  #666b73;  /* texto secundário sobre fundo claro     */
+  --papel:  #f6f5f1;
+  --papel2: #ecebe6;
+  --tinta:  #14171a;
+  --cinza:  #666b73;
   --linha-clara: #d8d8d2;
 }
-
+ 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -60,9 +66,9 @@ body {
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 button { font: inherit; cursor: pointer; border: 0; }
-
+ 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
+ 
 /* ── Botões do portfólio ── */
 .botao {
   display: inline-flex; align-items: center; gap: .6rem;
@@ -76,7 +82,9 @@ button { font: inherit; cursor: pointer; border: 0; }
 .botao-azul:hover { background: #3b82ff; }
 .botao-contorno { border: 1px solid rgba(255,255,255,.55); }
 .botao-contorno:hover { background: #fff; color: var(--navy); }
-
+.botao-escuro { background: var(--tinta); color: #fff; }
+.botao-escuro:hover { background: #000; }
+ 
 /* ── Topo (menu) ── */
 .topo {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
@@ -101,10 +109,10 @@ button { font: inherit; cursor: pointer; border: 0; }
 .menu-celular { display: none; background: var(--navy2); padding: 1rem 24px 1.5rem; }
 .menu-celular a { display: block; padding: .8rem 0; border-bottom: 1px solid var(--linha); }
 .menu-celular.aberto { display: block; }
-
+ 
 /* ── Início (hero) ── */
-.hero { padding: 150px 0 90px; background: var(--navy); }
-.hero-grade { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; }
+.hero { padding: 150px 0 100px; background: var(--navy); }
+.hero-grade { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
 .etiqueta {
   display: inline-flex; align-items: center; gap: .8rem;
   font-size: .72rem; font-weight: 500;
@@ -121,9 +129,13 @@ button { font: inherit; cursor: pointer; border: 0; }
 .hero h1 em { font-style: italic; color: #8fb4ff; }
 .hero p { font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 30rem; }
 .hero-botoes { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-.hero-visual { position: relative; padding-bottom: 50px; }
-
-/* ── Faixa de atalhos: texto simples com um ponto da cor de cada exemplo ── */
+ 
+/* Duas telas sobrepostas no início */
+.hero-visual { position: relative; padding-bottom: 70px; }
+.hero-visual .mock-b { position: absolute; right: -2%; bottom: 0; width: 56%; }
+.hero-visual .mock-b .s-palco { aspect-ratio: 16 / 9.5; }
+ 
+/* ── Faixa de atalhos ── */
 .faixa { padding: 26px 0; background: var(--navy); border-top: 1px solid var(--linha); }
 .faixa .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 40px; }
 .faixa-texto { font-size: .85rem; color: rgba(255,255,255,.55); }
@@ -134,378 +146,404 @@ button { font: inherit; cursor: pointer; border: 0; }
 .pilulas .pilula:hover { opacity: 1; }
 .p-saude   { --ponto: #e4d8c4; }
 .p-auto    { --ponto: #e10600; }
-.p-pet     { --ponto: #ffd23f; }
-.p-sorvete { --ponto: #ff3d9a; }
+.p-pet     { --ponto: #ffc933; }
+.p-sorvete { --ponto: #ff4f9a; }
 .p-empresa { --ponto: #c8963e; }
 .p-seu::before { background: transparent; border: 1px solid rgba(255,255,255,.7); }
-
+ 
 /* ── Seções claras (fora dos exemplos) ── */
 .seu-negocio, .sobre { background: var(--papel); color: var(--tinta); }
 .metodologia { background: var(--papel2); color: var(--tinta); }
-
 .eyebrow { display: block; margin-bottom: 1.4rem; font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--cinza); }
 .titulo-secao { font-family: 'Instrument Serif', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; letter-spacing: -.02em; line-height: 1.05; }
 .sub-secao { margin-top: 1.2rem; color: var(--cinza); max-width: 36rem; line-height: 1.65; }
-
 .secao { padding: 110px 0; }
-
-/* "E o seu negócio?": título à esquerda, lista de ramos em linhas finas */
+ 
 .seu-negocio-topo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: end; }
 .seu-negocio .sub-secao { margin-top: 0; }
 .nichos { margin: 3.5rem 0 2.8rem; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 40px; border-top: 1px solid var(--linha-clara); }
 .nichos span { padding: 1.1rem 0; border-bottom: 1px solid var(--linha-clara); font-size: 1.02rem; }
-.botao-escuro { background: var(--tinta); color: #fff; }
-.botao-escuro:hover { background: #000; }
-
-/* Sobre: texto à esquerda, diferenciais em linhas à direita */
+ 
 .sobre-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
 .sobre p { color: var(--cinza); line-height: 1.75; margin-top: 1.4rem; }
 .vantagens { border-bottom: 1px solid var(--linha-clara); }
 .vantagem { display: grid; grid-template-columns: 10rem 1fr; gap: 1rem; padding: 1.3rem 0; border-top: 1px solid var(--linha-clara); }
 .vantagem strong { font-weight: 600; }
 .vantagem small { color: var(--cinza); line-height: 1.55; }
-
-/* Metodologia: quatro etapas numeradas */
+ 
 .passos { margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 .passo { border-top: 1px solid var(--tinta); padding-top: 1.2rem; }
 .passo b { font-family: 'Instrument Serif', serif; font-size: 2.8rem; font-weight: 400; color: var(--cinza); }
 .passo h3 { margin: .6rem 0 .5rem; font-size: 1.1rem; font-weight: 600; }
 .passo p { color: var(--cinza); line-height: 1.6; font-size: .95rem; }
-
-/* Contato */
+ 
 .contato { background: var(--navy); }
 .contato .container { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: end; }
 .contato h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.8rem, 6vw, 5.2rem); letter-spacing: -.02em; line-height: 1.02; }
 .contato p { margin-bottom: 2rem; color: rgba(255,255,255,.65); line-height: 1.65; max-width: 26rem; }
 .contato .botao { background: #fff; color: var(--tinta); }
 .contato .botao:hover { background: #dfe8ff; }
-
+ 
 .rodape { padding: 32px 0; background: var(--navy); border-top: 1px solid var(--linha); color: rgba(255,255,255,.5); font-size: .85rem; }
 .rodape .container { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .rodape a:hover { color: #fff; }
-
+ 
 /* ── Animações de entrada gerais ── */
 .revela { opacity: 0; transform: translateY(30px); transition: opacity .9s, transform .9s cubic-bezier(.2,.7,.2,1); }
 .revela.in { opacity: 1; transform: none; }
-
-
+ 
+ 
 /* ═══════════════════════════════════════════════════════════
    ANIMAÇÃO DAS LETRAS
    O JavaScript separa cada título (.letras) em letras e depois
    adiciona a classe ".in" quando ele aparece na tela.
-   Cada exemplo usa um estilo diferente (anim-suave, anim-forte...).
+   Cada exemplo usa um estilo diferente.
    ═══════════════════════════════════════════════════════════ */
 .palavra { display: inline-block; white-space: nowrap; }
 .letra {
   display: inline-block;
   opacity: 0;
   transition: opacity .6s ease, transform .8s cubic-bezier(.2,.7,.2,1);
-  transition-delay: calc(min(var(--i), 45) * 30ms);   /* uma letra após a outra */
+  transition-delay: calc(min(var(--i), 45) * 30ms);
 }
 .letras.in .letra { opacity: 1; transform: none; }
-
-/* Suave: sobe devagar (clínica) */
-.anim-suave .letra { transform: translateY(30px); }
-
-/* Forte: entra rápido, inclinado, vindo da esquerda (automotivo) */
-.anim-forte .letra {
+ 
+.anim-suave .letra { transform: translateY(30px); }                       /* clínica: sobe devagar        */
+.anim-forte .letra {                                                       /* automotivo: entra inclinado  */
   transform: translateX(-80px) skewX(-28deg);
   transition-duration: .5s, .55s;
   transition-delay: calc(min(var(--i), 45) * 22ms);
 }
-
-/* Pulo: cai de baixo e quica (pet shop) */
-.anim-pulo .letra {
-  transform: translateY(100px) rotate(-14deg);
+.anim-pulo .letra {                                                        /* pet: cai e quica             */
+  transform: translateY(90px) rotate(-12deg);
   transition-timing-function: ease, cubic-bezier(.34,1.9,.64,1);
   transition-duration: .5s, .9s;
 }
-
-/* Pop: surge girando, como uma bolha (sorveteria) */
-.anim-pop .letra {
+.anim-pop .letra {                                                         /* sorveteria: surge girando    */
   transform: scale(0) rotate(-40deg);
   transition-timing-function: ease, cubic-bezier(.5,2,.5,1);
   transition-duration: .4s, 1s;
 }
-
-/* Sóbrio: desfoca e sobe (empresarial e portfólio) */
 .anim-corp .letra { transform: translateY(40%); filter: blur(8px); transition: opacity .7s, transform .9s, filter .9s; transition-delay: calc(min(var(--i), 45) * 28ms); }
 .anim-corp.in .letra { filter: none; }
-
-
+ 
+ 
 /* ═══════════════════════════════════════════════════════════
    2. CSS DOS EXEMPLOS
-   Cada tema define suas próprias cores e fontes como variáveis.
-   O restante do código usa essas variáveis, então para mudar o
-   visual de um exemplo basta mexer no bloco dele.
    ═══════════════════════════════════════════════════════════ */
-
-/* Clínica / Saúde: clean, tons claros e beges */
-.tema-saude {
-  --fundo: #f3ece0;  --mini-fundo: #fbf8f2;
-  --texto: #2e2a25;  --suave: #6e665b;
-  --destaque: #3e8e7a; --destaque-texto: #fff;
-  --cartao: #fff;    --borda: #e4d8c4;
-  --fonte-titulo: 'Fraunces', serif; --fonte-texto: 'DM Sans', sans-serif;
-  --raio: 18px;
-}
-/* Automotivo: escuro, vermelho, ousado */
-.tema-auto {
-  --fundo: #0a0a0a;  --mini-fundo: #141414;
-  --texto: #fff;     --suave: #b5b5b5;
-  --destaque: #e10600; --destaque-texto: #fff;
-  --cartao: #1f1f1f; --borda: #2e2e2e;
-  --fonte-titulo: 'Bebas Neue', sans-serif; --fonte-texto: 'Barlow', sans-serif;
-  --raio: 2px;
-}
-/* Pet shop: colorido e divertido */
-.tema-pet {
-  --fundo: #fff3d6;  --mini-fundo: #fffaf0;
-  --texto: #3a2a63;  --suave: #6b5a96;
-  --destaque: #ff7a3d; --destaque-texto: #fff;
-  --cartao: #fff;    --borda: #ffd23f;
-  --fonte-titulo: 'Baloo 2', cursive; --fonte-texto: 'Baloo 2', cursive;
-  --raio: 26px;
-}
-/* Sorveteria: letras redondas e cores vibrantes */
-.tema-sorvete {
-  --fundo: #ffd9ec;  --mini-fundo: #fff;
-  --texto: #4a1d6b;  --suave: #7b3fa3;
-  --destaque: #ff3d9a; --destaque-texto: #fff;
-  --cartao: #fff;    --borda: #4a1d6b;
-  --extra: #00c2d1;  --extra2: #ffe14d;
-  --fonte-titulo: 'Chewy', cursive; --fonte-texto: 'Fredoka', sans-serif;
-  --raio: 30px;
-}
-/* Empresarial: azul marinho e dourado, sóbrio */
-.tema-empresa {
-  --fundo: #e9eef5;  --mini-fundo: #fff;
-  --texto: #12274a;  --suave: #56627a;
-  --destaque: #c8963e; --destaque-texto: #12274a;
-  --cartao: #f4f7fb; --borda: #d5dde9;
-  --fonte-titulo: 'Manrope', sans-serif; --fonte-texto: 'Manrope', sans-serif;
-  --raio: 8px;
-}
-
-/* ── Estrutura de cada seção de exemplo ── */
+ 
+/* ── 2.1  Seção de cada exemplo (texto em cima, site embaixo) ── */
 .exemplo {
-  position: relative; overflow: hidden;
   padding: 110px 0;
   background: var(--fundo);
   color: var(--texto);
   font-family: var(--fonte-texto);
 }
-.exemplo .container { position: relative; z-index: 1; }
-.exemplo-grade { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: center; }
-.exemplo.invertido .exemplo-visual { order: -1; }
-
-.tag { display: inline-flex; gap: .6rem; align-items: center; font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--destaque); }
-.tag b { background: var(--destaque); color: var(--destaque-texto); padding: .2rem .6rem; border-radius: 999px; }
-
+.exemplo-topo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: end; margin-bottom: 56px; }
+.tag { display: flex; align-items: center; gap: .9rem; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--suave); }
+.tag b { font-weight: 700; color: var(--realce); }
+.tag::after { content: ""; width: 40px; height: 1px; background: currentColor; opacity: .5; }
 .exemplo h2 {
+  margin-top: 1.2rem;
   font-family: var(--fonte-titulo);
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  line-height: .98; margin: 1.1rem 0 1.3rem;
+  font-weight: var(--peso-titulo, 400);
+  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+  line-height: 1.02; letter-spacing: -.02em;
 }
-.exemplo h2 em { font-style: normal; color: var(--destaque); }
-.exemplo-texto p { color: var(--suave); line-height: 1.65; font-size: 1.08rem; max-width: 30rem; }
-.lista { margin: 1.6rem 0 2rem; display: grid; gap: .7rem; }
-.lista li { display: flex; gap: .7rem; align-items: center; font-weight: 500; }
-.lista li::before {
-  content: "✓"; flex: none;
-  width: 1.5rem; height: 1.5rem; display: grid; place-items: center;
-  border-radius: 50%; font-size: .8rem;
-  background: var(--destaque); color: var(--destaque-texto);
-}
+.exemplo h2 em { font-style: normal; color: var(--realce); }
+.exemplo-lado p { color: var(--suave); line-height: 1.65; max-width: 30rem; }
+.lista { margin: 1.4rem 0 1.8rem; border-top: 1px solid var(--borda); }
+.lista li { padding: .7rem 0; border-bottom: 1px solid var(--borda); font-size: .98rem; }
 .botao-tema {
   display: inline-flex; align-items: center; gap: .6rem;
-  padding: 1rem 1.7rem; font-weight: 700;
+  padding: 1rem 1.7rem; font-weight: 600;
   background: var(--destaque); color: var(--destaque-texto);
   border-radius: var(--raio);
-  transition: transform .3s, box-shadow .3s;
+  transition: transform .3s, opacity .3s;
 }
-.botao-tema:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0,0,0,.25); }
-
-/* ── Moldura de navegador e de celular ── */
-.exemplo-visual { position: relative; padding-bottom: 46px; }
-.navegador {
-  border-radius: 14px; overflow: hidden; background: #fff;
-  box-shadow: 0 30px 70px rgba(0,0,0,.35);
-  border: 1px solid rgba(0,0,0,.1);
+.botao-tema:hover { transform: translateY(-2px); opacity: .9; }
+.mock-legenda { margin-top: 1rem; font-size: .78rem; color: var(--suave); }
+ 
+/* Cores e fontes de cada seção (fora do mini-site) */
+.tema-saude {
+  --fundo: #f3ece0; --texto: #2b2722; --suave: #6b6355; --borda: #dccfb8;
+  --destaque: #2f7d6b; --destaque-texto: #fff; --realce: #2f7d6b;
+  --fonte-titulo: 'Fraunces', serif; --fonte-texto: 'DM Sans', sans-serif; --raio: 999px;
 }
-.barra { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #e9e9ee; }
-.barra i { width: 10px; height: 10px; border-radius: 50%; background: #c2c2cb; }
-.barra span { margin-left: 10px; flex: 1; max-width: 260px; font: 500 .7rem 'Inter', sans-serif; color: #666; background: #fff; padding: 4px 12px; border-radius: 999px; }
-
-.celular {
-  position: absolute; right: -10px; bottom: 0; width: 150px;
-  border: 6px solid #111; border-radius: 26px; overflow: hidden;
-  background: #111; box-shadow: 0 24px 50px rgba(0,0,0,.45);
+.tema-saude h2 em { font-style: italic; }
+ 
+.tema-auto {
+  --fundo: #0a0a0a; --texto: #fff; --suave: #a3a3a3; --borda: #2a2a2a;
+  --destaque: #e10600; --destaque-texto: #fff; --realce: #e10600;
+  --fonte-titulo: 'Archivo', sans-serif; --fonte-texto: 'Archivo', sans-serif; --raio: 0;
+  --peso-titulo: 800;
 }
-
-/* ── Mini-site (a "página do cliente" dentro da moldura) ── */
-.mini {
-  background: var(--mini-fundo); color: var(--texto);
-  font-family: var(--fonte-texto); font-size: .82rem;
+.tema-auto h2 { font-stretch: 125%; text-transform: uppercase; font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: 1.04; }
+.tema-auto .botao-tema { text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; font-stretch: 125%; }
+ 
+.tema-pet {
+  --fundo: #fff3cf; --texto: #2d1b5e; --suave: #5f4d8f; --borda: #f0d98c;
+  --destaque: #ff6b2c; --destaque-texto: #fff; --realce: #ff6b2c;
+  --fonte-titulo: 'Nunito', sans-serif; --fonte-texto: 'Nunito', sans-serif; --raio: 999px;
+  --peso-titulo: 900;
 }
-.mini-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 14px 20px; border-bottom: 1px solid var(--borda); }
-.mini-logo { font-family: var(--fonte-titulo); font-size: 1.25rem; }
-.mini-nav nav { display: flex; gap: 1.1rem; color: var(--suave); font-size: .75rem; }
-.mini-botao {
-  display: inline-block; padding: .55rem 1.1rem; font-weight: 700; font-size: .75rem;
-  background: var(--destaque); color: var(--destaque-texto); border-radius: var(--raio);
+ 
+.tema-sorvete {
+  --fundo: #ffe3ef; --texto: #4a1450; --suave: #7a3a7e; --borda: #f0b6d2;
+  --destaque: #ff4f9a; --destaque-texto: #fff; --realce: #ff4f9a;
+  --fonte-titulo: 'Chewy', cursive; --fonte-texto: 'Fredoka', sans-serif; --raio: 999px;
 }
-.mini-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; align-items: center; padding: 28px 20px; }
-.mini-etiqueta { color: var(--destaque); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .62rem; }
-.mini-hero h3 { font-family: var(--fonte-titulo); font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.02; margin: .5rem 0; }
-.mini-hero h3 em { font-style: normal; color: var(--destaque); }
-.mini-hero p { color: var(--suave); line-height: 1.5; margin-bottom: 1rem; }
-.arte {
-  aspect-ratio: 1; display: grid; place-items: center; font-size: 5rem;
-  background: linear-gradient(145deg, var(--destaque), var(--borda));
-  border-radius: var(--raio);
+.tema-sorvete h2 { font-size: clamp(3rem, 6vw, 5rem); line-height: .98; }
+.tema-sorvete .botao-tema { font-family: 'Fredoka', sans-serif; font-weight: 600; }
+ 
+.tema-empresa {
+  --fundo: #e8edf4; --texto: #12274a; --suave: #55627a; --borda: #cfd8e6;
+  --destaque: #12274a; --destaque-texto: #fff; --realce: #b8842c;
+  --fonte-titulo: 'Manrope', sans-serif; --fonte-texto: 'Manrope', sans-serif; --raio: 6px;
+  --peso-titulo: 800;
 }
-.mini-servicos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 20px 20px; }
-.mini-card {
-  background: var(--cartao); border: 1px solid var(--borda); border-radius: var(--raio);
-  padding: 12px 8px; text-align: center; font-weight: 600; font-size: .72rem;
-  transition: transform .3s;
+.tema-empresa h2 { letter-spacing: -.035em; }
+ 
+ 
+/* ── 2.2  Moldura de navegador ──
+   Tudo dentro do site usa "em" e o tamanho base acompanha a largura da
+   moldura (container query). Assim o site inteiro encolhe junto e
+   continua proporcional em qualquer tela. */
+.mock {
+  container-type: inline-size;
+  border-radius: 10px; overflow: hidden; background: #fff;
+  box-shadow: 0 40px 80px -24px rgba(0,0,0,.5);
+  border: 1px solid rgba(0,0,0,.14);
 }
-.mini-card:hover { transform: translateY(-4px); }
-.mini-card span { display: block; font-size: 1.5rem; margin-bottom: 4px; }
-
-/* Agendamento de exemplo (os horários são clicáveis) */
+.mock-barra { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #ececf0; }
+.mock-barra i { width: 10px; height: 10px; border-radius: 50%; background: #c6c6ce; }
+.mock-barra span { margin-left: 12px; flex: 0 1 300px; text-align: center; font: 500 .72rem 'Inter', sans-serif; color: #666; background: #fff; padding: 4px 12px; border-radius: 999px; }
+ 
+.site { position: relative; overflow: hidden; font-size: clamp(9px, 1.316cqw, 16px); line-height: 1.45; background: var(--s-fundo); color: var(--s-texto); }
+ 
+/* Peças comuns a todos os sites */
+.s-nav { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 2em; padding: 1.2em 2.6em; }
+.s-links { display: flex; gap: 2.2em; font-size: .9em; }
+.s-btn {
+  display: inline-flex; align-items: center; gap: .7em;
+  padding: .85em 1.6em; font-weight: 600; font-size: .9em; white-space: nowrap;
+  background: var(--s-acento); color: var(--s-acento-texto);
+  border-radius: var(--s-btn-raio, 999px);
+}
+.s-btn.contorno { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+.s-acoes { display: flex; flex-wrap: wrap; gap: .8em; margin-top: 1.8em; }
+.s-kicker { text-transform: uppercase; letter-spacing: .18em; font-size: .75em; font-weight: 700; }
+.s-circulo { width: 3.3em; height: 3.3em; flex: none; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 50%; }
+.s-circulo svg { width: 1.2em; height: 1.2em; }
+.cena { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+ 
+/* Pontinhos e botão de pausa (como em sites com banner em rotação) */
+.s-pontos { position: absolute; z-index: 3; left: 50%; bottom: 4%; transform: translateX(-50%); display: flex; align-items: center; gap: 1.2em; }
+.s-pontos i { width: .5em; height: .5em; border-radius: 50%; background: rgba(255,255,255,.6); }
+.s-pontos i.ativo { width: 1.7em; height: 1.7em; background: transparent; border: 2px solid #fff; }
+.s-pausa { position: absolute; z-index: 3; right: 2em; bottom: 2em; width: 2.8em; height: 2.8em; border: 2px solid rgba(255,255,255,.85); border-radius: 50%; display: grid; place-items: center; font-size: .8em; font-weight: 800; letter-spacing: .1em; color: #fff; }
+ 
+/* Agendamento de demonstração (os horários são clicáveis) */
+.s-faixa-agenda { padding: 0 2.6em 2.4em; background: var(--s-fundo); }
 .agenda {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-  margin: 0 20px 20px; padding: 14px;
-  background: var(--cartao); border: 1px dashed var(--destaque); border-radius: var(--raio);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1em 1.4em;
+  padding: 1.1em 1.6em;
+  background: var(--s-card); border: 1px solid var(--s-borda); border-radius: var(--s-raio-card);
 }
-.agenda strong { font-size: .78rem; }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.agenda strong { font-size: .95em; }
+.chips { display: flex; flex-wrap: wrap; gap: .6em; }
 .chip {
-  padding: .35rem .75rem; font-size: .72rem; font-weight: 600;
-  background: transparent; color: var(--texto);
-  border: 1px solid var(--borda); border-radius: 999px;
+  padding: .55em 1.1em; font-size: .85em; font-weight: 600; font-family: inherit;
+  background: transparent; color: inherit;
+  border: 1px solid var(--s-borda); border-radius: var(--s-raio-chip);
   transition: all .25s;
 }
-.chip:hover { border-color: var(--destaque); }
-.chip.ativo { background: var(--destaque); color: var(--destaque-texto); border-color: var(--destaque); }
+.chip:hover { border-color: var(--s-acento); }
+.chip.ativo { background: var(--s-acento); color: var(--s-acento-texto); border-color: var(--s-acento); }
 .agenda-botao {
-  padding: .45rem 1rem; font-weight: 700; font-size: .72rem;
-  background: var(--texto); color: var(--mini-fundo); border-radius: var(--raio);
+  margin-left: auto; padding: .7em 1.4em; font-size: .85em; font-weight: 700; font-family: inherit;
+  background: var(--s-texto); color: var(--s-fundo); border-radius: var(--s-btn-raio, 999px);
 }
-.agenda-aviso { flex-basis: 100%; font-size: .72rem; font-weight: 600; color: var(--destaque); min-height: 1em; }
-
-/* Versão pequena para o celular */
-.mini-celular { font-size: .55rem; }
-.mini-celular .mini-nav { padding: 8px 10px; }
-.mini-celular .mini-logo { font-size: .8rem; }
-.mini-celular .mini-hero { grid-template-columns: 1fr; padding: 14px 10px; }
-.mini-celular .mini-hero h3 { font-size: 1.1rem; }
-.mini-celular .mini-botao { padding: .4rem .8rem; font-size: .55rem; }
-.mini-celular .mini-servicos { grid-template-columns: 1fr 1fr; padding: 0 10px 12px; gap: 6px; }
-.mini-celular .mini-card { padding: 8px 4px; font-size: .55rem; }
-.mini-celular .mini-card span { font-size: 1.1rem; }
-
-
-/* ═══════════════════════════════════════════════════════════
-   IDENTIDADE VISUAL ESPECÍFICA DE CADA EXEMPLO
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── Saúde: suave, arredondado, muito espaço em branco ── */
-.tema-saude::after {
-  content: ""; position: absolute; top: -140px; right: -140px; width: 420px; height: 420px;
-  border-radius: 50%; background: radial-gradient(circle, #e2d3b8, transparent 70%);
+.agenda-aviso { flex-basis: 100%; margin: 0; font-size: .85em; font-weight: 600; color: var(--s-acento); }
+.agenda-aviso:empty { display: none; }
+ 
+ 
+/* ── 2.3  Site de CLÍNICA: clean, beges, tipografia serifada ── */
+.site-saude {
+  --s-fundo: #f6f1e7; --s-card: #fff; --s-borda: #e3d9c6; --s-texto: #2b2722;
+  --s-acento: #2f7d6b; --s-acento-texto: #fff;
+  --s-raio-card: 1em; --s-raio-chip: 999px;
+  font-family: 'DM Sans', sans-serif;
 }
-.tema-saude h2 { font-weight: 400; letter-spacing: -.02em; }
-.tema-saude .mini-botao, .tema-saude .botao-tema { border-radius: 999px; }
-.tema-saude .arte { border-radius: 200px 200px 16px 16px; background: linear-gradient(180deg, #e8dcc8, #cfe3da); }
-
-/* ── Automotivo: diagonais, letras grandes em caixa alta ── */
-.tema-auto::before {
-  content: ""; position: absolute; top: 0; right: -8%; width: 48%; height: 100%;
-  background: linear-gradient(160deg, transparent 0 30%, #e10600 30% 35%, transparent 35% 43%, #7a0300 43% 47%, transparent 47%);
+.site-saude .s-nav { border-bottom: 1px solid var(--s-borda); }
+.site-saude .s-logo { display: flex; align-items: center; gap: .5em; font-family: 'Fraunces', serif; font-size: 1.5em; }
+.site-saude .s-logo svg { width: 1.2em; height: 1.2em; }
+.site-saude .s-links { color: #6b6355; }
+.site-saude .s-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3em; align-items: center; padding: 3.2em 2.6em 2.6em; }
+.site-saude .s-kicker { color: #2f7d6b; }
+.site-saude .s-titulo { margin: .5em 0 .6em; font-family: 'Fraunces', serif; font-weight: 400; font-size: 3.2em; line-height: 1.04; letter-spacing: -.02em; }
+.site-saude .s-titulo em { font-style: italic; color: #2f7d6b; }
+.site-saude .s-copy p { max-width: 30em; color: #6b6355; line-height: 1.65; }
+.site-saude .s-fatos { display: flex; gap: 2.4em; margin-top: 2.2em; padding-top: 1.3em; border-top: 1px solid var(--s-borda); }
+.site-saude .s-fatos b { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.8em; line-height: 1.1; }
+.site-saude .s-fatos span { font-size: .8em; color: #6b6355; }
+.site-saude .s-foto { position: relative; aspect-ratio: 4 / 4.5; overflow: hidden; border-radius: 50em 50em 1em 1em; background: #d9c9a8; }
+.site-saude .s-ficha { position: absolute; z-index: 2; left: 1.1em; right: 1.1em; bottom: 1.1em; display: flex; align-items: center; gap: 1em; padding: 1em 1.2em; background: rgba(255,255,255,.93); border-radius: 1em; }
+.site-saude .s-ficha i { width: 2.8em; height: 2.8em; flex: none; display: grid; place-items: center; border-radius: 50%; background: #2f7d6b; color: #fff; font-style: normal; font-weight: 700; font-size: .9em; }
+.site-saude .s-ficha b { display: block; font-size: .95em; }
+.site-saude .s-ficha span { font-size: .8em; color: #6b6355; }
+ 
+ 
+/* ── 2.4  Site AUTOMOTIVO: escuro, vermelho, fonte larga em caixa alta ── */
+.site-auto {
+  --s-fundo: #0b0b0c; --s-card: #151618; --s-borda: #2a2b2e; --s-texto: #fff;
+  --s-acento: #e10600; --s-acento-texto: #fff;
+  --s-raio-card: 0; --s-raio-chip: 0; --s-btn-raio: 0;
+  font-family: 'Archivo', 'Arial', sans-serif; font-stretch: 125%;
 }
-.tema-auto h2 { font-size: clamp(3.6rem, 9vw, 7.4rem); text-transform: uppercase; letter-spacing: .01em; line-height: .88; text-shadow: 0 4px 0 rgba(225,6,0,.35); }
-.tema-auto .mini-hero h3, .tema-auto .mini-logo { text-transform: uppercase; letter-spacing: .03em; }
-.tema-auto .mini-botao, .tema-auto .botao-tema { clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); border-radius: 0; padding-inline: 1.8rem; text-transform: uppercase; letter-spacing: .06em; }
-.tema-auto .mini-card { border-bottom: 3px solid var(--destaque); }
-.tema-auto .arte { background: radial-gradient(circle, #e1060066, transparent 70%); font-size: 6rem; }
-.tema-auto .navegador { box-shadow: 0 0 0 1px #e10600, 0 30px 70px rgba(225,6,0,.3); }
-
-/* ── Pet shop: cores alegres, cantos bem redondos ── */
-.tema-pet { background-image: radial-gradient(#ffd23f66 3px, transparent 4px); background-size: 34px 34px; }
-.tema-pet h2 { font-weight: 800; font-size: clamp(3rem, 7vw, 5.8rem); }
-.tema-pet h2 .letra:nth-child(4n+1) { color: #ff7a3d; }
-.tema-pet h2 .letra:nth-child(4n+2) { color: #1fb5a8; }
-.tema-pet h2 .letra:nth-child(4n+3) { color: #7b5cff; }
-.tema-pet h2 .letra:nth-child(4n)   { color: #ff4f8b; }
-.tema-pet .mini-card:nth-child(1) { background: #ffe1d1; border-color: #ff7a3d; }
-.tema-pet .mini-card:nth-child(2) { background: #d4f4f0; border-color: #1fb5a8; }
-.tema-pet .mini-card:nth-child(3) { background: #e6defc; border-color: #7b5cff; }
-.tema-pet .mini-card:nth-child(4) { background: #ffd9e6; border-color: #ff4f8b; }
-.tema-pet .mini-card { border-width: 2px; }
-.tema-pet .arte { background: linear-gradient(145deg, #ffd23f, #ff9f43); border-radius: 50% 50% 46% 54%; }
-.tema-pet .navegador { border: 4px solid #ffd23f; }
-
-/* ── Sorveteria: exagerada, borda grossa, sombra dura ── */
-.tema-sorvete { padding-top: 150px; }
-.tema-sorvete::before {      /* "calda" escorrendo no topo */
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 56px;
-  background:
-    radial-gradient(circle at 30px 0, var(--destaque) 28px, transparent 29px) 0 0 / 60px 56px repeat-x,
-    linear-gradient(var(--destaque), var(--destaque)) 0 0 / 100% 18px no-repeat;
+.site-auto .s-nav { background: #0d0d0e; padding: 1.1em 2.6em; }
+.site-auto .s-logo { font-weight: 800; letter-spacing: .2em; font-size: 1.05em; }
+.site-auto .s-links { text-transform: uppercase; font-weight: 700; letter-spacing: .05em; font-size: .82em; }
+.site-auto .s-extra { text-transform: uppercase; font-weight: 700; letter-spacing: .05em; font-size: .82em; }
+.site-auto .s-palco { position: relative; aspect-ratio: 16 / 7.4; background: #0b0b0c; }
+.site-auto .s-palco::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+.site-auto .s-centro { position: absolute; z-index: 2; left: 0; right: 0; bottom: 15%; text-align: center; }
+.site-auto .s-kicker { font-size: 1em; letter-spacing: 0; text-transform: none; font-weight: 700; }
+.site-auto .s-titulo { margin: .25em 0 1em; font-weight: 800; text-transform: uppercase; font-size: 3em; line-height: 1.05; }
+.site-auto .s-chamada { display: inline-flex; align-items: center; gap: 1.2em; text-transform: uppercase; font-weight: 700; font-size: .9em; letter-spacing: .02em; }
+.site-auto .s-btn { text-transform: uppercase; letter-spacing: .06em; }
+ 
+ 
+/* ── 2.5  Site de PET SHOP: colorido, redondo, direto ── */
+.site-pet {
+  --s-fundo: #fff6e0; --s-card: #fff; --s-borda: #f0dfae; --s-texto: #2d1b5e;
+  --s-acento: #ff6b2c; --s-acento-texto: #fff;
+  --s-raio-card: 1.4em; --s-raio-chip: 999px;
+  font-family: 'Nunito', sans-serif;
 }
-.tema-sorvete h2 {
-  font-size: clamp(3.6rem, 9vw, 7.2rem); font-weight: 400; line-height: .92;
-  text-shadow: 3px 3px 0 #fff, 7px 7px 0 var(--extra);
+.site-pet .s-nav { background: #fff; }
+.site-pet .s-logo { display: flex; align-items: center; gap: .5em; font-weight: 900; font-size: 1.35em; color: #2d1b5e; }
+.site-pet .s-logo svg { width: 1.3em; height: 1.3em; color: #ff6b2c; }
+.site-pet .s-links { font-weight: 700; }
+.site-pet .s-hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3em; align-items: center; padding: 2.8em 2.6em 2.2em; }
+.site-pet .s-kicker { color: #12b5a6; }
+.site-pet .s-titulo { margin: .45em 0 .5em; font-weight: 900; font-size: 3.4em; line-height: 1; letter-spacing: -.02em; }
+.site-pet .s-titulo em { font-style: normal; color: #ff6b2c; }
+.site-pet .s-copy p { max-width: 30em; color: #5f4d8f; line-height: 1.6; font-weight: 600; }
+.site-pet .s-btn { font-weight: 800; }
+.site-pet .s-btn.contorno { color: #2d1b5e; }
+.pet-colagem { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: .9em; aspect-ratio: 1.12 / 1; }
+.pet-bloco { position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 1em; border-radius: 1.8em; }
+.pet-bloco svg { position: absolute; width: 62%; right: -6%; top: -4%; color: rgba(255,255,255,.38); }
+.pet-bloco span { position: relative; padding: .4em .95em; border-radius: 999px; background: #fff; color: #2d1b5e; font-weight: 800; font-size: .8em; }
+.pet-b1 { grid-row: span 2; background: linear-gradient(160deg, #18c3b0, #0b8f94); }
+.pet-b1 svg { width: 90%; top: 6%; right: -12%; }
+.pet-b2 { background: linear-gradient(160deg, #ff8fb3, #ff5c8a); }
+.pet-b3 { background: linear-gradient(160deg, #ffd54a, #ffab2e); }
+.pet-servicos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1em; padding: 0 2.6em 1.4em; }
+.pet-servico { padding: 1.1em 1.2em; background: #fff; border-radius: 1.4em; border-top: .35em solid var(--cor); }
+.pet-servico b { display: block; font-weight: 900; font-size: 1.05em; }
+.pet-servico span { font-size: .82em; color: #5f4d8f; font-weight: 600; }
+ 
+ 
+/* ── 2.6  Site de SORVETERIA: letras redondas, cores vibrantes ── */
+.site-sorvete {
+  --s-fundo: #fff7ec; --s-card: #fff; --s-borda: #f3c9dc; --s-texto: #4a1450;
+  --s-acento: #ff4f9a; --s-acento-texto: #fff;
+  --s-raio-card: 1.6em; --s-raio-chip: 999px;
+  font-family: 'Fredoka', sans-serif;
 }
-.tema-sorvete h2 em { color: var(--destaque); }
-.tema-sorvete .botao-tema, .tema-sorvete .mini-botao { border: 3px solid var(--borda); box-shadow: 4px 4px 0 var(--borda); font-family: var(--fonte-titulo); font-weight: 400; font-size: 1.05rem; }
-.tema-sorvete .mini-botao { font-size: .85rem; box-shadow: 3px 3px 0 var(--borda); }
-.tema-sorvete .navegador { border: 4px solid var(--borda); box-shadow: 10px 10px 0 var(--extra); }
-.tema-sorvete .mini-card { border: 3px solid var(--borda); box-shadow: 3px 3px 0 var(--borda); font-family: var(--fonte-titulo); font-weight: 400; font-size: .95rem; }
-.tema-sorvete .mini-card:nth-child(1) { background: #ffd9ec; }
-.tema-sorvete .mini-card:nth-child(2) { background: #c9f6fa; }
-.tema-sorvete .mini-card:nth-child(3) { background: #fff3a6; }
-.tema-sorvete .mini-card:nth-child(4) { background: #e3d2ff; }
-.tema-sorvete .mini-hero h3 { font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 2.8rem); }
-.tema-sorvete .arte { background: radial-gradient(circle at 30% 30%, #fff, var(--extra2)); border: 4px solid var(--borda); border-radius: 50%; font-size: 6rem; }
-.tema-sorvete .celular { border-color: var(--borda); }
-
-/* ── Empresarial: linhas retas, marinho com dourado ── */
-.tema-empresa h2 { font-weight: 800; letter-spacing: -.035em; line-height: 1.02; }
-.tema-empresa .tag { color: #9a6f1f; }
-.tema-empresa .mini-nav { background: #12274a; color: #fff; border: 0; }
-.tema-empresa .mini-nav nav { color: rgba(255,255,255,.7); }
-.tema-empresa .arte { background: linear-gradient(145deg, #12274a, #2c4a7e); }
-.tema-empresa .mini-hero h3 { font-weight: 800; letter-spacing: -.03em; }
-.tema-empresa .mini-card { border-top: 3px solid var(--destaque); }
-
-
-/* ═══════════════════════════════════════════════════════════
-   CELULAR: ajustes para telas pequenas
-   ═══════════════════════════════════════════════════════════ */
+.site-sorvete .s-topo { position: relative; background: #ff4f9a; color: #fff; overflow: hidden; }
+.site-sorvete .s-nav { padding: 1.3em 2.6em; }
+.site-sorvete .s-logo { font-family: 'Chewy', cursive; font-size: 1.9em; line-height: 1; }
+.site-sorvete .s-links { font-weight: 500; }
+.site-sorvete .s-btn { background: #fff; color: #ff4f9a; font-weight: 600; }
+.site-sorvete .s-btn.contorno { background: transparent; color: #fff; }
+.site-sorvete .s-hero { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 2em; align-items: center; padding: 1.6em 2.6em 7em; }
+.site-sorvete .s-kicker { color: #ffe14d; letter-spacing: .14em; }
+.site-sorvete .s-titulo { margin: .3em 0 .5em; font-family: 'Chewy', cursive; font-weight: 400; font-size: 4.5em; line-height: .94; text-shadow: .035em .045em 0 #5a1458; }
+.site-sorvete .s-titulo em { font-style: normal; color: #ffe14d; }
+.site-sorvete .s-copy p { max-width: 28em; line-height: 1.6; font-size: 1.05em; }
+.sorv-cena { position: relative; display: grid; place-items: center; }
+.sorv-cena::before { content: ""; position: absolute; width: 82%; aspect-ratio: 1; border-radius: 50%; background: #00c8d6; }
+.sorv-cena::after { content: ""; position: absolute; width: 22%; aspect-ratio: 1; border-radius: 50%; background: #ffe14d; right: 4%; bottom: 6%; }
+.sorv-cena svg { position: relative; z-index: 1; width: 58%; transform: rotate(8deg); filter: drop-shadow(0 .7em 0 rgba(90,20,88,.25)); }
+.sorv-onda { position: absolute; z-index: 3; left: 0; bottom: -1px; width: 100%; height: 5em; display: block; }
+.sorv-sabores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1em; padding: .4em 2.6em 1.8em; background: #fff7ec; }
+.sabor { padding: 1.2em 1em; text-align: center; background: #fff; border-radius: 2em; font-family: 'Chewy', cursive; font-size: 1.3em; box-shadow: 0 .25em 0 rgba(74,20,80,.12); }
+.sabor i { display: block; width: 4em; height: 4em; margin: 0 auto .5em; border-radius: 50%; background: var(--cor); box-shadow: inset -.5em -.5em 0 rgba(0,0,0,.08), inset .5em .5em 0 rgba(255,255,255,.35); }
+ 
+ 
+/* ── 2.7  Site EMPRESARIAL: marinho e dourado, linhas retas ── */
+.site-empresa {
+  --s-fundo: #fff; --s-card: #f4f7fb; --s-borda: #d5dde9; --s-texto: #12274a;
+  --s-acento: #12274a; --s-acento-texto: #fff;
+  --s-raio-card: .6em; --s-raio-chip: .4em; --s-btn-raio: .35em;
+  font-family: 'Manrope', sans-serif;
+}
+.site-empresa .s-nav { background: #fff; border-bottom: 1px solid var(--s-borda); }
+.site-empresa .s-logo { font-weight: 800; letter-spacing: .22em; font-size: 1.15em; }
+.site-empresa .s-logo small { display: block; letter-spacing: .3em; font-weight: 600; font-size: .52em; color: #b8842c; }
+.site-empresa .s-links { font-weight: 600; color: #55627a; }
+.site-empresa .s-palco { position: relative; aspect-ratio: 16 / 8; background: #0f2a55; }
+.site-empresa .s-palco::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,24,52,.92) 0%, rgba(10,24,52,.65) 42%, rgba(10,24,52,0) 75%); }
+.site-empresa .s-texto { position: absolute; z-index: 2; left: 2.6em; top: 50%; transform: translateY(-50%); max-width: 31em; color: #fff; }
+.site-empresa .s-kicker { color: #e3b567; }
+.site-empresa .s-titulo { margin: .6em 0 .5em; font-weight: 800; font-size: 3.2em; line-height: 1.04; letter-spacing: -.035em; }
+.site-empresa .s-titulo em { font-style: normal; color: #e3b567; }
+.site-empresa .s-texto p { color: rgba(255,255,255,.8); line-height: 1.65; max-width: 28em; }
+.site-empresa .s-btn.ouro { background: #e3b567; color: #12274a; }
+.site-empresa .s-btn.contorno { color: #fff; }
+.site-empresa .s-numeros { display: grid; grid-template-columns: repeat(4, 1fr); background: #12274a; color: #fff; }
+.site-empresa .s-numeros div { padding: 1.6em 2.6em; border-left: 1px solid rgba(255,255,255,.14); }
+.site-empresa .s-numeros div:first-child { border-left: 0; }
+.site-empresa .s-numeros b { display: block; font-size: 2em; font-weight: 800; letter-spacing: -.03em; }
+.site-empresa .s-numeros span { font-size: .8em; color: rgba(255,255,255,.65); }
+.site-empresa .s-faixa-agenda { padding-top: 2em; }
+ 
+ 
+/* ── 2.8  Telas pequenas: o site de exemplo se reorganiza ── */
+@container (max-width: 560px) {
+  .s-links { display: none; }
+}
+@container (max-width: 470px) {
+  .site { font-size: 3cqw; }
+  .s-nav { padding: 1em 1.4em; }
+  .site-saude .s-hero, .site-pet .s-hero, .site-sorvete .s-hero { grid-template-columns: 1fr; gap: 2em; padding: 2em 1.6em; }
+  .site-sorvete .s-hero { padding-bottom: 6em; }
+  .site-saude .s-titulo, .site-pet .s-titulo { font-size: 2.5em; }
+  .site-sorvete .s-titulo { font-size: 3.4em; }
+  .site-saude .s-fatos { gap: 1.4em; }
+  .site-auto .s-palco { aspect-ratio: 4 / 4.4; }
+  .site-auto .s-titulo { font-size: 1.9em; }
+  .site-empresa .s-palco { aspect-ratio: 4 / 4.4; }
+  .site-empresa .s-titulo { font-size: 2.1em; }
+  .site-empresa .s-numeros { grid-template-columns: 1fr 1fr; }
+  .site-empresa .s-numeros div { padding: 1.2em 1.6em; }
+  .site-empresa .s-numeros div:nth-child(3) { border-left: 0; }
+  .pet-servicos, .sorv-sabores { grid-template-columns: 1fr 1fr; padding-left: 1.6em; padding-right: 1.6em; }
+  .s-faixa-agenda { padding: 0 1.6em 1.8em; }
+  .agenda-botao { margin-left: 0; }
+}
+ 
+/* ── 2.9  Telas pequenas: portfólio ── */
 @media (max-width: 980px) {
   .menu { display: none; }
   .menu-botao { display: block; }
-  .hero-grade, .exemplo-grade, .sobre-grade, .seu-negocio-topo, .contato .container { grid-template-columns: 1fr; gap: 36px; }
+  .hero-grade, .exemplo-topo, .sobre-grade, .seu-negocio-topo, .contato .container { grid-template-columns: 1fr; gap: 36px; }
   .nichos { grid-template-columns: 1fr 1fr; }
   .vantagem { grid-template-columns: 1fr; gap: .3rem; }
-  .exemplo.invertido .exemplo-visual { order: 0; }
   .passos { grid-template-columns: 1fr 1fr; }
   .hero { padding-top: 120px; }
   .exemplo { padding: 80px 0; }
+  .exemplo-topo { margin-bottom: 36px; }
 }
 @media (max-width: 560px) {
-  .mini-hero { grid-template-columns: 1fr; }
-  .arte { display: none; }
-  .mini-servicos { grid-template-columns: 1fr 1fr; }
-  .mini-nav nav { display: none; }
-  .celular { width: 110px; right: -4px; }
-  .vantagens, .passos { grid-template-columns: 1fr; }
+  .passos { grid-template-columns: 1fr; }
+  .hero-visual { padding-bottom: 0; }
+  .hero-visual .mock-b { display: none; }
 }
-
+ 
 /* Respeita quem prefere menos movimento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -513,20 +551,102 @@ button { font: inherit; cursor: pointer; border: 0; }
 }
 </style>
 </head>
-
+ 
 <body>
-
+ 
+<!-- ═══════════════════════════════════════════════════════════
+     DESENHOS (invisível)
+     Aqui ficam as cenas que fingem ser fotos. Os sites de exemplo
+     chamam cada uma por <use href="#nome">.
+     ═══════════════════════════════════════════════════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Gradientes -->
+    <linearGradient id="a-fundo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#454a50"/><stop offset=".5" stop-color="#17191c"/><stop offset="1" stop-color="#070707"/></linearGradient>
+    <radialGradient id="a-brilho" cx=".5" cy=".4" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="a-chao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#202327"/><stop offset="1" stop-color="#050505"/></linearGradient>
+    <linearGradient id="a-corpo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3bbc4"/><stop offset=".45" stop-color="#555d66"/><stop offset="1" stop-color="#1c1f23"/></linearGradient>
+    <linearGradient id="a-vidro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3138"/><stop offset="1" stop-color="#0d0f11"/></linearGradient>
+ 
+    <linearGradient id="o-ceu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2a55"/><stop offset=".55" stop-color="#3d6aa8"/><stop offset="1" stop-color="#b9cbe8"/></linearGradient>
+    <linearGradient id="o-vidro" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a4d82"/><stop offset=".5" stop-color="#6f93c6"/><stop offset="1" stop-color="#27477a"/></linearGradient>
+    <pattern id="o-janelas" width="30" height="34" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="24" height="26" fill="#d6e4ff" opacity=".2"/><rect x="3" y="4" width="24" height="3" fill="#fff" opacity=".2"/></pattern>
+ 
+    <linearGradient id="c-fundo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6ecd6"/><stop offset=".55" stop-color="#dccdaa"/><stop offset="1" stop-color="#a9b99f"/></linearGradient>
+ 
+    <!-- Cena: carro em estúdio escuro (automotivo) -->
+    <g id="cena-auto">
+      <rect width="1600" height="740" fill="url(#a-fundo)"/>
+      <g fill="#fff" opacity=".05"><circle cx="220" cy="180" r="90"/><circle cx="1340" cy="130" r="120"/><circle cx="1490" cy="310" r="70"/></g>
+      <rect width="1600" height="740" fill="url(#a-brilho)"/>
+      <rect y="384" width="1600" height="356" fill="url(#a-chao)"/>
+      <path d="M0 384H1600" stroke="#fff" stroke-opacity=".12"/>
+      <path d="M-50 560L1650 470" stroke="#e10600" stroke-opacity=".55" stroke-width="3"/>
+      <path d="M-50 650L1650 560" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
+      <ellipse cx="808" cy="384" rx="470" ry="16" fill="#000" opacity=".6"/>
+      <g transform="translate(380 170) scale(1.05)">
+        <path d="M40 160C40 130 55 118 90 112L200 98C250 60 310 42 380 42C450 42 500 60 540 92L690 112C740 118 770 132 775 160Z" fill="url(#a-corpo)"/>
+        <path d="M200 98C250 60 310 42 380 42C450 42 500 60 540 92" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2"/>
+        <path d="M255 96C292 68 338 56 380 56C430 56 468 68 502 93Z" fill="url(#a-vidro)"/>
+        <path d="M60 150H760" stroke="#e10600" stroke-width="2"/>
+        <path d="M705 124L762 138" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <g><circle cx="190" cy="160" r="40" fill="#0b0b0c"/><circle cx="190" cy="160" r="34" fill="#17181a"/><circle cx="190" cy="160" r="21" fill="#9aa0a6"/><circle cx="190" cy="160" r="7" fill="#2a2c2f"/></g>
+        <g><circle cx="620" cy="160" r="40" fill="#0b0b0c"/><circle cx="620" cy="160" r="34" fill="#17181a"/><circle cx="620" cy="160" r="21" fill="#9aa0a6"/><circle cx="620" cy="160" r="7" fill="#2a2c2f"/></g>
+      </g>
+    </g>
+ 
+    <!-- Cena: ambiente de clínica, luz de janela e planta (saúde) -->
+    <g id="cena-clinica">
+      <rect width="400" height="460" fill="url(#c-fundo)"/>
+      <polygon points="40,40 210,40 210,270 40,270" fill="#fff" opacity=".6"/>
+      <path d="M125 40V270M40 155H210" stroke="#d8c9a8" stroke-width="5"/>
+      <polygon points="40,270 210,270 330,460 120,460" fill="#fff" opacity=".22"/>
+      <rect y="400" width="400" height="60" fill="#8fa38a" opacity=".5"/>
+      <g fill="#6f8f73"><ellipse cx="300" cy="360" rx="22" ry="80" transform="rotate(-28 300 360)"/><ellipse cx="338" cy="352" rx="20" ry="86" transform="rotate(8 338 352)"/><ellipse cx="318" cy="370" rx="18" ry="70" transform="rotate(36 318 370)"/></g>
+      <path d="M296 460Q306 410 322 410Q338 410 346 460Z" fill="#cdb48a"/>
+    </g>
+ 
+    <!-- Cena: prédios de uma construtora (empresarial) -->
+    <g id="cena-obra">
+      <rect width="1600" height="740" fill="url(#o-ceu)"/>
+      <g fill="#27456f" opacity=".55"><rect x="760" y="380" width="120" height="380"/><rect x="900" y="300" width="90" height="460"/><rect x="1000" y="240" width="70" height="520"/><rect x="1400" y="290" width="110" height="470"/><rect x="1510" y="350" width="100" height="410"/></g>
+      <rect x="860" y="470" width="230" height="270" fill="url(#o-vidro)"/><rect x="860" y="470" width="230" height="270" fill="url(#o-janelas)"/>
+      <rect x="1090" y="60" width="300" height="680" fill="url(#o-vidro)"/><rect x="1090" y="60" width="300" height="680" fill="url(#o-janelas)"/>
+      <rect x="1090" y="60" width="12" height="680" fill="#0e2146" opacity=".5"/>
+      <g fill="#ffd98a" opacity=".85"><rect x="1123" y="154" width="24" height="26"/><rect x="1213" y="256" width="24" height="26"/><rect x="1303" y="188" width="24" height="26"/><rect x="1153" y="358" width="24" height="26"/><rect x="1273" y="426" width="24" height="26"/><rect x="1213" y="528" width="24" height="26"/><rect x="1333" y="596" width="24" height="26"/><rect x="893" y="540" width="24" height="26"/><rect x="983" y="608" width="24" height="26"/></g>
+      <rect y="700" width="1600" height="40" fill="#0b1a33"/>
+    </g>
+ 
+    <!-- Sorvete em casquinha -->
+    <g id="cone">
+      <polygon points="82,212 218,212 150,430" fill="#f0b05c"/>
+      <path d="M100 240L190 380M130 228L172 400M168 224L120 392M196 232L110 330M104 292L194 292M120 340L180 340" stroke="#d58f3a" stroke-width="3" fill="none"/>
+      <circle cx="150" cy="168" r="80" fill="#00c8d6"/>
+      <g fill="#00c8d6"><circle cx="86" cy="214" r="15"/><circle cx="118" cy="226" r="15"/><circle cx="150" cy="222" r="15"/><circle cx="182" cy="226" r="15"/><circle cx="214" cy="214" r="15"/></g>
+      <circle cx="150" cy="112" r="68" fill="#fff"/>
+      <circle cx="150" cy="58" r="52" fill="#ffe14d"/>
+      <path d="M150 8Q156 -14 176 -22" stroke="#2d8a3e" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="150" cy="14" r="14" fill="#e8173f"/>
+      <g fill="#fff" opacity=".45"><ellipse cx="116" cy="140" rx="14" ry="26" transform="rotate(20 116 140)"/><ellipse cx="124" cy="86" rx="12" ry="22" transform="rotate(20 124 86)"/><ellipse cx="128" cy="38" rx="9" ry="16" transform="rotate(20 128 38)"/></g>
+    </g>
+ 
+    <!-- Pata de bicho (ícone) -->
+    <g id="pata" fill="currentColor"><ellipse cx="50" cy="68" rx="23" ry="19"/><circle cx="22" cy="42" r="10"/><circle cx="41" cy="28" r="10"/><circle cx="61" cy="28" r="10"/><circle cx="80" cy="42" r="10"/></g>
+  </defs>
+</svg>
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      TOPO
      ═══════════════════════════════════════════════════════════ -->
 <header class="topo" id="topo">
   <div class="container topo-linha">
-
+ 
     <a href="#inicio" class="logo">
       <span class="logo-jv">JV</span>
       <span class="logo-nome">João Victor <small>Sites que geram resultados</small></span>
     </a>
-
+ 
     <nav class="menu">
       <a href="#inicio">Início</a>
       <a href="#exemplos">Exemplos</a>
@@ -535,10 +655,10 @@ button { font: inherit; cursor: pointer; border: 0; }
       <a href="#contato">Contato</a>
       <a href="#contato" class="botao botao-contorno">Solicite um orçamento</a>
     </nav>
-
+ 
     <button class="menu-botao" id="menuBotao" aria-label="Abrir menu">☰</button>
   </div>
-
+ 
   <div class="menu-celular" id="menuCelular">
     <a href="#exemplos">Exemplos</a>
     <a href="#sobre">Sobre</a>
@@ -546,64 +666,74 @@ button { font: inherit; cursor: pointer; border: 0; }
     <a href="#contato">Contato</a>
   </div>
 </header>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      INÍCIO
      ═══════════════════════════════════════════════════════════ -->
 <section class="hero" id="inicio">
   <div class="container hero-grade">
-
+ 
     <div>
       <span class="etiqueta revela">Seu negócio no mundo digital</span>
-
-      <!-- EDITE: título principal. O que estiver em <em> fica azul. -->
+ 
+      <!-- EDITE: título principal. O que estiver em <em> fica em itálico azul. -->
       <h1 class="letras anim-corp">Veja como podemos colocar sua empresa no mercado com um <em>site profissional.</em></h1>
-
+ 
       <p class="revela">Sites modernos, rápidos e estratégicos para atrair mais clientes, transmitir confiança e facilitar o contato com o seu negócio.</p>
-
+ 
       <div class="hero-botoes revela">
         <a href="#contato" class="botao botao-azul">Quero um site para minha empresa →</a>
         <a href="#exemplos" class="botao botao-contorno">Ver exemplos abaixo ↓</a>
       </div>
     </div>
-
-    <!-- Notebook + celular mostrando um exemplo -->
+ 
+    <!-- Duas telas de exemplo sobrepostas -->
     <div class="hero-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
-        <div class="mini tema-saude">
-          <div class="mini-nav">
-            <b class="mini-logo">🌿 Clínica Vida</b>
-            <nav><span>Especialidades</span><span>Equipe</span><span>Contato</span></nav>
-          </div>
-          <div class="mini-hero">
-            <div>
-              <h3>Cuidar de você é a nossa <em>especialidade</em></h3>
-              <p>Atendimento humanizado e agendamento online.</p>
-              <span class="mini-botao">Agendar consulta</span>
+ 
+      <div class="mock mock-a">
+        <div class="mock-barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
+        <div class="site site-saude">
+          <header class="s-nav">
+            <span class="s-logo"><svg viewBox="0 0 24 24"><path d="M12 21c-5-3-8-7-8-11a8 8 0 0 1 16 0c0 4-3 8-8 11z" fill="#2f7d6b"/><path d="M12 8v9M12 12c-2-1-3-2-3-4" stroke="#fff" stroke-width="1.4" fill="none"/></svg>Clínica Vida</span>
+            <nav class="s-links"><span>Especialidades</span><span>Equipe</span><span>Contato</span></nav>
+            <span class="s-btn">Agendar consulta</span>
+          </header>
+          <div class="s-hero">
+            <div class="s-copy">
+              <span class="s-kicker">Clínica médica e odontológica</span>
+              <h3 class="s-titulo">Cuidado atento, <em>do primeiro contato</em> ao retorno.</h3>
+              <p>Consultas com hora marcada e agendamento online.</p>
             </div>
-            <div class="arte">🩺</div>
+            <div class="s-foto"><svg class="cena" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice"><use href="#cena-clinica"/></svg></div>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular tema-auto">
-          <div class="mini-nav"><b class="mini-logo">AutoPrime</b><span>☰</span></div>
-          <div class="mini-hero">
-            <div><h3>Estética automotiva <em>de alto nível</em></h3><span class="mini-botao">Orçamento</span></div>
+ 
+      <div class="mock mock-b">
+        <div class="mock-barra"><i></i><i></i><i></i><span>autoprime.com.br</span></div>
+        <div class="site site-auto">
+          <header class="s-nav">
+            <span class="s-logo">AUTOPRIME</span>
+            <nav class="s-links"><span>Serviços</span><span>Galeria</span></nav>
+            <span class="s-extra">Orçamento</span>
+          </header>
+          <div class="s-palco">
+            <svg class="cena" viewBox="0 0 1600 740" preserveAspectRatio="xMidYMid slice"><use href="#cena-auto"/></svg>
+            <div class="s-centro">
+              <h3 class="s-titulo">Seu carro em destaque</h3>
+            </div>
           </div>
         </div>
       </div>
+ 
     </div>
-
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
-     VITRINE RÁPIDA: atalhos para cada exemplo
+     FAIXA DE ATALHOS
      ═══════════════════════════════════════════════════════════ -->
 <section class="faixa">
   <div class="container">
@@ -618,335 +748,352 @@ button { font: inherit; cursor: pointer; border: 0; }
     </div>
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      EXEMPLOS
      Todos seguem a mesma estrutura:
-       texto (tag, título, descrição, lista, botão) + visual (navegador e celular)
+       texto (etiqueta, título, descrição, lista, botão)
+       + o site de exemplo dentro de uma moldura de navegador.
      Para criar um exemplo novo, copie uma <section class="exemplo ...">
      inteira e crie um tema novo no CSS.
-     Os emojis são provisórios: troque por fotos reais com
-     <img src="foto.jpg" alt="..."> quando tiver material do cliente.
      ═══════════════════════════════════════════════════════════ -->
 <div id="exemplos"></div>
-
-
+ 
+ 
 <!-- ─────────────── 01 · CLÍNICA / SAÚDE ─────────────── -->
 <section class="exemplo tema-saude" id="saude">
-  <div class="container exemplo-grade">
-
-    <div class="exemplo-texto">
-      <span class="tag"><b>01</b> Clínicas e saúde</span>
-      <h2 class="letras anim-suave">Mais confiança para quem cuida de <em>pessoas.</em></h2>
-      <p class="revela">Sites para clínicas e profissionais da saúde que apresentam serviços, equipe e diferenciais, e facilitam o agendamento online.</p>
-      <ul class="lista revela">
-        <li>Apresentação da equipe e especialidades</li>
-        <li>Agendamento online pelo celular</li>
-        <li>Depoimentos de pacientes</li>
-        <li>Localização e contato rápido</li>
-      </ul>
-      <a href="#" data-whatsapp data-assunto="clínica" class="botao-tema revela">Quero um site assim →</a>
+  <div class="container">
+ 
+    <div class="exemplo-topo">
+      <div>
+        <span class="tag"><b>01</b> Clínicas e saúde</span>
+        <h2 class="letras anim-suave">Mais confiança para quem cuida de <em>pessoas.</em></h2>
+      </div>
+      <div class="exemplo-lado">
+        <p class="revela">Sites para clínicas e profissionais da saúde que apresentam serviços, equipe e diferenciais, e facilitam o agendamento online.</p>
+        <ul class="lista revela">
+          <li>Apresentação da equipe e das especialidades</li>
+          <li>Agendamento online pelo celular</li>
+          <li>Depoimentos de pacientes</li>
+          <li>Localização e contato rápido</li>
+        </ul>
+        <a href="#" data-whatsapp data-assunto="clínica" class="botao-tema revela">Quero um site assim →</a>
+      </div>
     </div>
-
-    <div class="exemplo-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
-        <div class="mini">
-          <div class="mini-nav">
-            <b class="mini-logo">🌿 Clínica Vida</b>
-            <nav><span>Especialidades</span><span>Equipe</span><span>Contato</span></nav>
-            <span class="mini-botao">Agendar</span>
-          </div>
-          <div class="mini-hero">
-            <div>
-              <small class="mini-etiqueta">Atendimento humanizado</small>
-              <h3>Sua saúde em <em>boas mãos</em></h3>
-              <p>Consultas com hora marcada, equipe experiente e cuidado em cada detalhe.</p>
-              <span class="mini-botao">Agendar consulta</span>
+ 
+    <div class="mock revela">
+      <div class="mock-barra"><i></i><i></i><i></i><span>clinicavida.com.br</span></div>
+      <div class="site site-saude">
+        <header class="s-nav">
+          <span class="s-logo"><svg viewBox="0 0 24 24"><path d="M12 21c-5-3-8-7-8-11a8 8 0 0 1 16 0c0 4-3 8-8 11z" fill="#2f7d6b"/><path d="M12 8v9M12 12c-2-1-3-2-3-4" stroke="#fff" stroke-width="1.4" fill="none"/></svg>Clínica Vida</span>
+          <nav class="s-links"><span>Especialidades</span><span>Equipe</span><span>Convênios</span><span>Contato</span></nav>
+          <span class="s-btn">Agendar consulta</span>
+        </header>
+ 
+        <div class="s-hero">
+          <div class="s-copy">
+            <span class="s-kicker">Clínica médica e odontológica</span>
+            <h3 class="s-titulo">Cuidado atento, <em>do primeiro contato</em> ao retorno.</h3>
+            <p>Consultas com hora marcada, equipe experiente e acompanhamento próximo. Tudo para você cuidar da saúde sem complicação.</p>
+            <div class="s-acoes">
+              <span class="s-btn">Agendar consulta</span>
+              <span class="s-btn contorno">Conhecer a equipe</span>
             </div>
-            <div class="arte">🩺</div>
+            <ul class="s-fatos">
+              <li><b>12</b><span>especialidades</span></li>
+              <li><b>4,9</b><span>avaliação dos pacientes</span></li>
+              <li><b>15 anos</b><span>de atendimento</span></li>
+            </ul>
           </div>
-          <div class="mini-servicos">
-            <div class="mini-card"><span>🩺</span>Clínico geral</div>
-            <div class="mini-card"><span>🦷</span>Odontologia</div>
-            <div class="mini-card"><span>✨</span>Dermatologia</div>
-            <div class="mini-card"><span>🔬</span>Exames</div>
+          <!-- EDITE: para foto real, troque o <svg class="cena"> por <img class="cena" src="foto.jpg" alt="..."> -->
+          <div class="s-foto">
+            <svg class="cena" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice"><use href="#cena-clinica"/></svg>
+            <div class="s-ficha"><i>HD</i><div><b>Dra. Helena Duarte</b><span>Dermatologia · próximo horário às 14:30</span></div></div>
           </div>
+        </div>
+ 
+        <div class="s-faixa-agenda">
           <div class="agenda">
             <strong>Agende online:</strong>
-            <div class="chips"><button class="chip">09:00</button><button class="chip">10:30</button><button class="chip">14:00</button><button class="chip">16:30</button></div>
-            <button class="agenda-botao">Reservar</button>
+            <div class="chips"><button class="chip">Hoje 14:30</button><button class="chip">Hoje 16:00</button><button class="chip">Amanhã 09:00</button><button class="chip">Amanhã 10:30</button></div>
+            <button class="agenda-botao">Confirmar horário</button>
             <p class="agenda-aviso"></p>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular">
-          <div class="mini-nav"><b class="mini-logo">🌿 Vida</b><span>☰</span></div>
-          <div class="mini-hero"><div><h3>Sua saúde em <em>boas mãos</em></h3><span class="mini-botao">Agendar</span></div></div>
-          <div class="mini-servicos"><div class="mini-card"><span>🩺</span>Clínico</div><div class="mini-card"><span>🦷</span>Dentista</div></div>
-        </div>
-      </div>
     </div>
-
+    <p class="mock-legenda">Exemplo ilustrativo. Imagens, nomes e dados fictícios; no projeto real entram os do seu negócio.</p>
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ─────────────── 02 · AUTOMOTIVO ─────────────── -->
-<section class="exemplo tema-auto invertido" id="auto">
-  <div class="container exemplo-grade">
-
-    <div class="exemplo-texto">
-      <span class="tag"><b>02</b> Automotivo e carros</span>
-      <h2 class="letras anim-forte">Seu carro em <em>destaque.</em> Sempre.</h2>
-      <p class="revela">Sites para oficinas, estéticas automotivas e lojas de veículos que mostram serviços, resultados e levam o cliente direto ao orçamento.</p>
-      <ul class="lista revela">
-        <li>Galeria de serviços e resultados</li>
-        <li>Formulário de orçamento</li>
-        <li>Integração com WhatsApp</li>
-        <li>Design moderno e impactante</li>
-      </ul>
-      <a href="#" data-whatsapp data-assunto="automotivo" class="botao-tema revela">Quero um site assim →</a>
+<section class="exemplo tema-auto" id="auto">
+  <div class="container">
+ 
+    <div class="exemplo-topo">
+      <div>
+        <span class="tag"><b>02</b> Automotivo e carros</span>
+        <h2 class="letras anim-forte">Seu carro em <em>destaque.</em> Sempre.</h2>
+      </div>
+      <div class="exemplo-lado">
+        <p class="revela">Sites para oficinas, estéticas automotivas e lojas de veículos que mostram serviços, resultados e levam o cliente direto ao orçamento.</p>
+        <ul class="lista revela">
+          <li>Galeria de serviços e resultados</li>
+          <li>Formulário de orçamento</li>
+          <li>Integração com WhatsApp</li>
+          <li>Design moderno e impactante</li>
+        </ul>
+        <a href="#" data-whatsapp data-assunto="automotivo" class="botao-tema revela">Quero um site assim →</a>
+      </div>
     </div>
-
-    <div class="exemplo-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>autoprime.com.br</span></div>
-        <div class="mini">
-          <div class="mini-nav">
-            <b class="mini-logo">AUTOPRIME</b>
-            <nav><span>Serviços</span><span>Galeria</span><span>Contato</span></nav>
-            <span class="mini-botao">Orçamento</span>
+ 
+    <div class="mock revela">
+      <div class="mock-barra"><i></i><i></i><i></i><span>autoprime.com.br</span></div>
+      <div class="site site-auto">
+        <header class="s-nav">
+          <span class="s-logo">AUTOPRIME</span>
+          <nav class="s-links"><span>Serviços</span><span>Proteção cerâmica</span><span>Galeria</span><span>Sobre</span></nav>
+          <span class="s-extra">Orçamento</span>
+        </header>
+ 
+        <div class="s-palco">
+          <!-- EDITE: para foto real, troque o <svg class="cena"> por <img class="cena" src="foto.jpg" alt="..."> -->
+          <svg class="cena" viewBox="0 0 1600 740" preserveAspectRatio="xMidYMid slice"><use href="#cena-auto"/></svg>
+          <div class="s-centro">
+            <span class="s-kicker">Estética automotiva</span>
+            <h3 class="s-titulo">Seu carro em destaque</h3>
+            <span class="s-chamada">Conheça nossos serviços <span class="s-circulo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 5l7 7-7 7"/></svg></span></span>
           </div>
-          <div class="mini-hero">
-            <div>
-              <small class="mini-etiqueta">Detalhamento premium</small>
-              <h3>Estética automotiva <em>de alto nível</em></h3>
-              <p>Cuidado profissional que devolve brilho, proteção e valor ao seu carro.</p>
-              <span class="mini-botao">Solicitar orçamento</span>
-            </div>
-            <div class="arte">🏎️</div>
-          </div>
-          <div class="mini-servicos">
-            <div class="mini-card"><span>🚿</span>Lavagem premium</div>
-            <div class="mini-card"><span>✨</span>Polimento</div>
-            <div class="mini-card"><span>💎</span>Cristalização</div>
-            <div class="mini-card"><span>🛡️</span>Vitrificação</div>
-          </div>
+          <div class="s-pontos"><i class="ativo"></i><i></i><i></i></div>
+          <span class="s-pausa">II</span>
+        </div>
+ 
+        <div class="s-faixa-agenda" style="padding-top:2em">
           <div class="agenda">
-            <strong>Agende seu horário:</strong>
+            <strong>AGENDE SEU HORÁRIO</strong>
             <div class="chips"><button class="chip">Seg 09h</button><button class="chip">Ter 14h</button><button class="chip">Qui 10h</button><button class="chip">Sex 15h</button></div>
-            <button class="agenda-botao">Reservar</button>
+            <button class="agenda-botao">RESERVAR</button>
             <p class="agenda-aviso"></p>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular">
-          <div class="mini-nav"><b class="mini-logo">AUTOPRIME</b><span>☰</span></div>
-          <div class="mini-hero"><div><h3>Estética <em>de alto nível</em></h3><span class="mini-botao">Orçamento</span></div></div>
-          <div class="mini-servicos"><div class="mini-card"><span>✨</span>Polimento</div><div class="mini-card"><span>💎</span>Cristal</div></div>
-        </div>
-      </div>
     </div>
-
+    <p class="mock-legenda">Exemplo ilustrativo. Imagens, nomes e dados fictícios; no projeto real entram os do seu negócio.</p>
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ─────────────── 03 · PET SHOP ─────────────── -->
 <section class="exemplo tema-pet" id="pet">
-  <div class="container exemplo-grade">
-
-    <div class="exemplo-texto">
-      <span class="tag"><b>03</b> Pet shop e veterinária</span>
-      <h2 class="letras anim-pulo">Todo pet merece um site <em>cheio de amor!</em></h2>
-      <p class="revela">Sites alegres para pet shops, clínicas veterinárias e banho e tosa. O tutor vê os serviços e já marca o horário do bichinho.</p>
-      <ul class="lista revela">
-        <li>Agendamento de banho e tosa</li>
-        <li>Catálogo de produtos e serviços</li>
-        <li>Fotos dos clientes de quatro patas</li>
-        <li>Botão de WhatsApp sempre à vista</li>
-      </ul>
-      <a href="#" data-whatsapp data-assunto="pet shop" class="botao-tema revela">Quero um site assim →</a>
+  <div class="container">
+ 
+    <div class="exemplo-topo">
+      <div>
+        <span class="tag"><b>03</b> Pet shop e veterinária</span>
+        <h2 class="letras anim-pulo">Pet shops que passam <em>confiança</em> e lotam a agenda.</h2>
+      </div>
+      <div class="exemplo-lado">
+        <p class="revela">Sites alegres e organizados para pet shops, clínicas veterinárias e banho e tosa. O tutor vê os serviços e já marca o horário do bichinho.</p>
+        <ul class="lista revela">
+          <li>Agendamento de banho e tosa</li>
+          <li>Catálogo de produtos e serviços</li>
+          <li>Fotos dos clientes de quatro patas</li>
+          <li>Botão de WhatsApp sempre à vista</li>
+        </ul>
+        <a href="#" data-whatsapp data-assunto="pet shop" class="botao-tema revela">Quero um site assim →</a>
+      </div>
     </div>
-
-    <div class="exemplo-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>petalegria.com.br</span></div>
-        <div class="mini">
-          <div class="mini-nav">
-            <b class="mini-logo">🐾 Pet Alegria</b>
-            <nav><span>Serviços</span><span>Loja</span><span>Contato</span></nav>
-            <span class="mini-botao">Agendar</span>
-          </div>
-          <div class="mini-hero">
-            <div>
-              <small class="mini-etiqueta">Banho, tosa e carinho</small>
-              <h3>Seu pet <em>feliz</em>, limpinho e cheio de amor!</h3>
-              <p>Cuidamos do seu melhor amigo como se fosse nosso.</p>
-              <span class="mini-botao">Marcar banho</span>
+ 
+    <div class="mock revela">
+      <div class="mock-barra"><i></i><i></i><i></i><span>petamigo.com.br</span></div>
+      <div class="site site-pet">
+        <header class="s-nav">
+          <span class="s-logo"><svg viewBox="0 0 100 100"><use href="#pata"/></svg>Pet Amigo</span>
+          <nav class="s-links"><span>Serviços</span><span>Loja</span><span>Veterinária</span><span>Contato</span></nav>
+          <span class="s-btn">Agendar banho</span>
+        </header>
+ 
+        <div class="s-hero">
+          <div class="s-copy">
+            <span class="s-kicker">Pet shop · Veterinária · Banho e tosa</span>
+            <h3 class="s-titulo">Cuidado de verdade para <em>quem você ama.</em></h3>
+            <p>Banho, tosa, consultas e tudo para o seu pet em um só lugar, com agendamento rápido pelo celular.</p>
+            <div class="s-acoes">
+              <span class="s-btn">Agendar banho</span>
+              <span class="s-btn contorno">Ver serviços</span>
             </div>
-            <div class="arte">🐶</div>
           </div>
-          <div class="mini-servicos">
-            <div class="mini-card"><span>🛁</span>Banho e tosa</div>
-            <div class="mini-card"><span>💉</span>Vacinas</div>
-            <div class="mini-card"><span>🦴</span>Pet shop</div>
-            <div class="mini-card"><span>🐕</span>Creche</div>
+          <!-- EDITE: troque cada bloco colorido por uma foto real (<img>) -->
+          <div class="pet-colagem">
+            <div class="pet-bloco pet-b1"><svg viewBox="0 0 100 100"><use href="#pata"/></svg><span>Banho e tosa</span></div>
+            <div class="pet-bloco pet-b2"><svg viewBox="0 0 100 100"><use href="#pata"/></svg><span>Consultas</span></div>
+            <div class="pet-bloco pet-b3"><svg viewBox="0 0 100 100"><use href="#pata"/></svg><span>Pet shop</span></div>
           </div>
+        </div>
+ 
+        <div class="pet-servicos">
+          <div class="pet-servico" style="--cor:#18c3b0"><b>Banho e tosa</b><span>Agende em 1 minuto</span></div>
+          <div class="pet-servico" style="--cor:#ff5c8a"><b>Veterinária</b><span>Consultas e vacinas</span></div>
+          <div class="pet-servico" style="--cor:#ffab2e"><b>Pet shop</b><span>Rações e acessórios</span></div>
+          <div class="pet-servico" style="--cor:#6b4cff"><b>Hotel e creche</b><span>Diárias e day care</span></div>
+        </div>
+ 
+        <div class="s-faixa-agenda">
           <div class="agenda">
-            <strong>Marque o banho:</strong>
-            <div class="chips"><button class="chip">Manhã</button><button class="chip">Tarde</button><button class="chip">Sábado</button></div>
+            <strong>Marque o banho do seu pet:</strong>
+            <div class="chips"><button class="chip">Hoje à tarde</button><button class="chip">Amanhã de manhã</button><button class="chip">Sábado</button></div>
             <button class="agenda-botao">Reservar</button>
             <p class="agenda-aviso"></p>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular">
-          <div class="mini-nav"><b class="mini-logo">🐾 Pet</b><span>☰</span></div>
-          <div class="mini-hero"><div><h3>Seu pet <em>feliz!</em></h3><span class="mini-botao">Marcar banho</span></div></div>
-          <div class="mini-servicos"><div class="mini-card"><span>🛁</span>Banho</div><div class="mini-card"><span>🦴</span>Loja</div></div>
-        </div>
-      </div>
     </div>
-
+    <p class="mock-legenda">Exemplo ilustrativo. Imagens, nomes e dados fictícios; no projeto real entram os do seu negócio.</p>
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ─────────────── 04 · SORVETERIA ─────────────── -->
-<section class="exemplo tema-sorvete invertido" id="sorvete">
-  <div class="container exemplo-grade">
-
-    <div class="exemplo-texto">
-      <span class="tag"><b>04</b> Sorveteria e lojas</span>
-      <h2 class="letras anim-pop">Um site <em>docinho</em> que dá água na boca!</h2>
-      <p class="revela">Para sorveterias, cafeterias e lojas divertidas: cores vibrantes, cardápio apetitoso e encomendas direto pelo celular.</p>
-      <ul class="lista revela">
-        <li>Cardápio com fotos dos sabores</li>
-        <li>Encomendas e reservas online</li>
-        <li>Promoções e novidades em destaque</li>
-        <li>Visual que combina com a sua marca</li>
-      </ul>
-      <a href="#" data-whatsapp data-assunto="sorveteria" class="botao-tema revela">Quero um site assim →</a>
+<section class="exemplo tema-sorvete" id="sorvete">
+  <div class="container">
+ 
+    <div class="exemplo-topo">
+      <div>
+        <span class="tag"><b>04</b> Sorveteria e lojas</span>
+        <h2 class="letras anim-pop">Um site tão <em>cremoso</em> quanto o seu sorvete.</h2>
+      </div>
+      <div class="exemplo-lado">
+        <p class="revela">Para sorveterias, cafeterias e lojas com personalidade: cores vibrantes, cardápio apetitoso e encomendas direto pelo celular.</p>
+        <ul class="lista revela">
+          <li>Cardápio com fotos dos sabores</li>
+          <li>Encomendas e reservas online</li>
+          <li>Promoções e novidades em destaque</li>
+          <li>Visual que combina com a sua marca</li>
+        </ul>
+        <a href="#" data-whatsapp data-assunto="sorveteria" class="botao-tema revela">Quero um site assim →</a>
+      </div>
     </div>
-
-    <div class="exemplo-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>sorvetelandia.com.br</span></div>
-        <div class="mini">
-          <div class="mini-nav">
-            <b class="mini-logo">🍦 Sorvetelândia</b>
-            <nav><span>Sabores</span><span>Festas</span><span>Contato</span></nav>
-            <span class="mini-botao">Encomendar</span>
-          </div>
-          <div class="mini-hero">
-            <div>
-              <small class="mini-etiqueta">Novidade da semana</small>
-              <h3>Sabores que fazem a <em>festa!</em></h3>
-              <p>Casquinhas, milkshakes e açaí gelados do jeito que você ama.</p>
-              <span class="mini-botao">Ver cardápio</span>
+ 
+    <div class="mock revela">
+      <div class="mock-barra"><i></i><i></i><i></i><span>cremosa.com.br</span></div>
+      <div class="site site-sorvete">
+ 
+        <div class="s-topo">
+          <header class="s-nav">
+            <span class="s-logo">Cremosa</span>
+            <nav class="s-links"><span>Sabores</span><span>Festas</span><span>Lojas</span><span>Contato</span></nav>
+            <span class="s-btn">Encomendar</span>
+          </header>
+          <div class="s-hero">
+            <div class="s-copy">
+              <span class="s-kicker">Sorveteria artesanal</span>
+              <h3 class="s-titulo">O sorvete mais <em>cremoso</em> da cidade!</h3>
+              <p>Mais de 40 sabores feitos todos os dias. Peça na loja, no delivery ou encomende para a sua festa.</p>
+              <div class="s-acoes">
+                <span class="s-btn">Ver cardápio</span>
+                <span class="s-btn contorno">Encomendar</span>
+              </div>
             </div>
-            <div class="arte">🍦</div>
+            <div class="sorv-cena"><svg viewBox="-20 -40 340 480"><use href="#cone"/></svg></div>
           </div>
-          <div class="mini-servicos">
-            <div class="mini-card"><span>🍦</span>Casquinhas</div>
-            <div class="mini-card"><span>🍭</span>Picolés</div>
-            <div class="mini-card"><span>🥤</span>Milkshakes</div>
-            <div class="mini-card"><span>🍧</span>Açaí</div>
-          </div>
+          <svg class="sorv-onda" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40C240 90 480 0 720 40S1200 80 1440 30V80H0Z" fill="#fff7ec"/></svg>
+        </div>
+ 
+        <div class="sorv-sabores">
+          <div class="sabor" style="--cor:#ff6fa5"><i></i>Morango</div>
+          <div class="sabor" style="--cor:#8ed081"><i></i>Pistache</div>
+          <div class="sabor" style="--cor:#7a4a2e"><i></i>Chocolate</div>
+          <div class="sabor" style="--cor:#ffd23f"><i></i>Maracujá</div>
+        </div>
+ 
+        <div class="s-faixa-agenda">
           <div class="agenda">
-            <strong>Reserve sua festa:</strong>
-            <div class="chips"><button class="chip">Sex</button><button class="chip">Sáb</button><button class="chip">Dom</button></div>
+            <strong>Reserve a sua festa:</strong>
+            <div class="chips"><button class="chip">Sexta</button><button class="chip">Sábado</button><button class="chip">Domingo</button></div>
             <button class="agenda-botao">Reservar</button>
             <p class="agenda-aviso"></p>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular">
-          <div class="mini-nav"><b class="mini-logo">🍦 Sorvete</b><span>☰</span></div>
-          <div class="mini-hero"><div><h3>Sabores que fazem a <em>festa!</em></h3><span class="mini-botao">Cardápio</span></div></div>
-          <div class="mini-servicos"><div class="mini-card"><span>🍦</span>Casquinha</div><div class="mini-card"><span>🥤</span>Shake</div></div>
-        </div>
-      </div>
     </div>
-
+    <p class="mock-legenda">Exemplo ilustrativo. Imagens, nomes e dados fictícios; no projeto real entram os do seu negócio.</p>
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ─────────────── 05 · EMPRESARIAL ─────────────── -->
 <section class="exemplo tema-empresa" id="empresa">
-  <div class="container exemplo-grade">
-
-    <div class="exemplo-texto">
-      <span class="tag"><b>05</b> Empresarial e corporativo</span>
-      <h2 class="letras anim-corp">Sua empresa mais profissional e <em>competitiva.</em></h2>
-      <p class="revela">Sites institucionais para empresas que querem apresentar produtos, serviços, história e valores com uma comunicação moderna e estratégica.</p>
-      <ul class="lista revela">
-        <li>Apresentação da empresa e da história</li>
-        <li>Catálogo de produtos ou serviços</li>
-        <li>Depoimentos e cases de sucesso</li>
-        <li>Contato direto e pedido de orçamento</li>
-      </ul>
-      <a href="#" data-whatsapp data-assunto="empresa" class="botao-tema revela">Quero um site assim →</a>
+  <div class="container">
+ 
+    <div class="exemplo-topo">
+      <div>
+        <span class="tag"><b>05</b> Empresarial e corporativo</span>
+        <h2 class="letras anim-corp">Sua empresa mais profissional e <em>competitiva.</em></h2>
+      </div>
+      <div class="exemplo-lado">
+        <p class="revela">Sites institucionais para empresas que querem apresentar produtos, serviços, história e valores com uma comunicação moderna e estratégica.</p>
+        <ul class="lista revela">
+          <li>Apresentação da empresa e da história</li>
+          <li>Catálogo de produtos ou serviços</li>
+          <li>Depoimentos e cases de sucesso</li>
+          <li>Contato direto e pedido de orçamento</li>
+        </ul>
+        <a href="#" data-whatsapp data-assunto="empresa" class="botao-tema revela">Quero um site assim →</a>
+      </div>
     </div>
-
-    <div class="exemplo-visual revela">
-      <div class="navegador">
-        <div class="barra"><i></i><i></i><i></i><span>construtoraalvorada.com.br</span></div>
-        <div class="mini">
-          <div class="mini-nav">
-            <b class="mini-logo">ALVORADA</b>
-            <nav><span>Sobre</span><span>Projetos</span><span>Contato</span></nav>
-            <span class="mini-botao">Orçamento</span>
-          </div>
-          <div class="mini-hero">
-            <div>
-              <small class="mini-etiqueta">Construtora</small>
-              <h3>Construindo um <em>futuro melhor</em></h3>
-              <p>Projetos sólidos, prazos cumpridos e transparência em cada etapa da obra.</p>
-              <span class="mini-botao">Conheça nossos projetos</span>
+ 
+    <div class="mock revela">
+      <div class="mock-barra"><i></i><i></i><i></i><span>construtoraalvorada.com.br</span></div>
+      <div class="site site-empresa">
+        <header class="s-nav">
+          <span class="s-logo">ALVORADA<small>CONSTRUTORA</small></span>
+          <nav class="s-links"><span>Sobre</span><span>Projetos</span><span>Metodologia</span><span>Contato</span></nav>
+          <span class="s-btn">Solicitar orçamento</span>
+        </header>
+ 
+        <div class="s-palco">
+          <!-- EDITE: para foto real, troque o <svg class="cena"> por <img class="cena" src="foto.jpg" alt="..."> -->
+          <svg class="cena" viewBox="0 0 1600 740" preserveAspectRatio="xMidYMid slice"><use href="#cena-obra"/></svg>
+          <div class="s-texto">
+            <span class="s-kicker">Construtora e incorporadora</span>
+            <h3 class="s-titulo">Construindo com solidez. <em>Entregando com transparência.</em></h3>
+            <p>Projetos residenciais e comerciais com prazo cumprido e acompanhamento em cada etapa da obra.</p>
+            <div class="s-acoes">
+              <span class="s-btn ouro">Conheça nossos projetos</span>
+              <span class="s-btn contorno">Falar com um consultor</span>
             </div>
-            <div class="arte">🏢</div>
           </div>
-          <div class="mini-servicos">
-            <div class="mini-card"><span>📐</span>Projetos</div>
-            <div class="mini-card"><span>🏗️</span>Obras</div>
-            <div class="mini-card"><span>🔨</span>Reformas</div>
-            <div class="mini-card"><span>📊</span>Consultoria</div>
-          </div>
+        </div>
+ 
+        <div class="s-numeros">
+          <div><b>28 anos</b><span>de mercado</span></div>
+          <div><b>340+</b><span>obras entregues</span></div>
+          <div><b>1,2 mi m²</b><span>construídos</span></div>
+          <div><b>98%</b><span>de clientes satisfeitos</span></div>
+        </div>
+ 
+        <div class="s-faixa-agenda">
           <div class="agenda">
-            <strong>Visita técnica:</strong>
-            <div class="chips"><button class="chip">Seg</button><button class="chip">Qua</button><button class="chip">Sex</button></div>
+            <strong>Solicite uma visita técnica:</strong>
+            <div class="chips"><button class="chip">Segunda</button><button class="chip">Quarta</button><button class="chip">Sexta</button></div>
             <button class="agenda-botao">Solicitar</button>
             <p class="agenda-aviso"></p>
           </div>
         </div>
       </div>
-
-      <div class="celular">
-        <div class="mini mini-celular">
-          <div class="mini-nav"><b class="mini-logo">ALVORADA</b><span>☰</span></div>
-          <div class="mini-hero"><div><h3>Construindo um <em>futuro melhor</em></h3><span class="mini-botao">Projetos</span></div></div>
-          <div class="mini-servicos"><div class="mini-card"><span>📐</span>Projetos</div><div class="mini-card"><span>🏗️</span>Obras</div></div>
-        </div>
-      </div>
     </div>
-
+    <p class="mock-legenda">Exemplo ilustrativo. Imagens, nomes e números fictícios; no projeto real entram os da sua empresa.</p>
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      E O SEU NEGÓCIO?
      Deixa claro que os exemplos são só amostras: o cliente
@@ -954,7 +1101,7 @@ button { font: inherit; cursor: pointer; border: 0; }
      ═══════════════════════════════════════════════════════════ -->
 <section class="secao seu-negocio" id="seu-negocio">
   <div class="container">
-
+ 
     <div class="seu-negocio-topo">
       <div>
         <span class="eyebrow">Para o seu ramo</span>
@@ -962,7 +1109,7 @@ button { font: inherit; cursor: pointer; border: 0; }
       </div>
       <p class="sub-secao revela">Estes foram só alguns exemplos. Cada site é criado do zero, com o visual, os textos e as funções que o seu negócio precisa.</p>
     </div>
-
+ 
     <!-- EDITE: troque ou acrescente ramos -->
     <div class="nichos revela">
       <span>Advocacia</span>
@@ -978,18 +1125,18 @@ button { font: inherit; cursor: pointer; border: 0; }
       <span>Loja de roupas</span>
       <span>E qualquer outro ramo</span>
     </div>
-
+ 
     <a href="#" data-whatsapp data-assunto="" class="botao botao-escuro revela">Conte sobre o seu negócio →</a>
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      SOBRE
      ═══════════════════════════════════════════════════════════ -->
 <section class="secao sobre" id="sobre">
   <div class="container sobre-grade">
-
+ 
     <div>
       <span class="eyebrow">Sobre</span>
       <h2 class="titulo-secao letras anim-corp">Um site que trabalha por você.</h2>
@@ -997,18 +1144,18 @@ button { font: inherit; cursor: pointer; border: 0; }
       <p class="revela">Sou João Victor e crio sites para negócios que querem ser encontrados, admirados e contatados. Cada projeto parte da identidade do cliente, porque uma clínica, uma oficina e uma sorveteria não podem ter a mesma cara.</p>
       <p class="revela">O resultado é um site bonito, rápido e fácil de usar, que ajuda o cliente a chegar até você em poucos toques.</p>
     </div>
-
+ 
     <div class="vantagens">
       <div class="vantagem revela"><strong>Responsivo</strong><small>Perfeito no celular, tablet e computador.</small></div>
       <div class="vantagem revela" style="transition-delay:.08s"><strong>Rápido</strong><small>Carrega depressa e não deixa o cliente esperando.</small></div>
       <div class="vantagem revela" style="transition-delay:.16s"><strong>Visível no Google</strong><small>Estrutura pensada para ser encontrado nas buscas.</small></div>
       <div class="vantagem revela" style="transition-delay:.24s"><strong>Atendimento fácil</strong><small>WhatsApp e agendamento online a um toque.</small></div>
     </div>
-
+ 
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      METODOLOGIA
      ═══════════════════════════════════════════════════════════ -->
@@ -1017,7 +1164,7 @@ button { font: inherit; cursor: pointer; border: 0; }
     <span class="eyebrow">Metodologia</span>
     <h2 class="titulo-secao letras anim-corp">Como o seu site nasce</h2>
     <p class="sub-secao revela">Um processo simples, com você participando de cada etapa.</p>
-
+ 
     <div class="passos">
       <div class="passo revela"><b>01</b><h3>Conversa</h3><p>Entendo seu negócio, seu público e o que você quer que o site faça.</p></div>
       <div class="passo revela" style="transition-delay:.1s"><b>02</b><h3>Design</h3><p>Crio a identidade visual do site, com cores e fontes que combinam com sua marca.</p></div>
@@ -1026,8 +1173,8 @@ button { font: inherit; cursor: pointer; border: 0; }
     </div>
   </div>
 </section>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      CONTATO
      ═══════════════════════════════════════════════════════════ -->
@@ -1040,7 +1187,7 @@ button { font: inherit; cursor: pointer; border: 0; }
     </div>
   </div>
 </section>
-
+ 
 <footer class="rodape">
   <div class="container">
     <span>© João Victor · Sites que geram resultados</span>
@@ -1048,8 +1195,8 @@ button { font: inherit; cursor: pointer; border: 0; }
     <a href="https://instagram.com/seuinstagram" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
-
-
+ 
+ 
 <!-- ═══════════════════════════════════════════════════════════
      4. JAVASCRIPT
      ═══════════════════════════════════════════════════════════ -->
@@ -1061,8 +1208,8 @@ const CONTATO = {
   whatsapp: "5515998554798",   // só números: 55 + DDD + número
   mensagem: "Olá João! Vi seu portfólio e quero um site para o meu negócio."
 };
-
-
+ 
+ 
 /* ───────────────────────────────────────────────────────────
    1) Botões de WhatsApp
       Todo link com o atributo data-whatsapp recebe o endereço certo.
@@ -1073,13 +1220,13 @@ document.querySelectorAll("[data-whatsapp]").forEach(link => {
   const texto = assunto
     ? `${CONTATO.mensagem} Gostei do exemplo de ${assunto}.`
     : CONTATO.mensagem;
-
+ 
   link.href = `https://wa.me/${CONTATO.whatsapp}?text=${encodeURIComponent(texto)}`;
   link.target = "_blank";
   link.rel = "noopener";
 });
-
-
+ 
+ 
 /* ───────────────────────────────────────────────────────────
    2) Títulos que aparecem letra por letra
       Pega todo título com a classe "letras" e envolve cada letra
@@ -1088,25 +1235,25 @@ document.querySelectorAll("[data-whatsapp]").forEach(link => {
    ─────────────────────────────────────────────────────────── */
 function dividirEmLetras(titulo) {
   let contador = 0;   // número da letra, usado para o atraso da animação
-
+ 
   function processar(no) {
     if (no.nodeType === Node.TEXT_NODE) {
       const pedacos = document.createDocumentFragment();
-
+ 
       no.textContent.split(/(\s+)/).forEach(parte => {
         if (!parte) return;
-
+ 
         // Espaço entre palavras: mantém um espaço normal
         if (/^\s+$/.test(parte)) {
           pedacos.appendChild(document.createTextNode(" "));
           return;
         }
-
+ 
         // Palavra: uma caixa com um <span> para cada letra
         const palavra = document.createElement("span");
         palavra.className = "palavra";
         palavra.setAttribute("aria-hidden", "true");
-
+ 
         [...parte].forEach(caractere => {
           const letra = document.createElement("span");
           letra.className = "letra";
@@ -1114,10 +1261,10 @@ function dividirEmLetras(titulo) {
           letra.textContent = caractere;
           palavra.appendChild(letra);
         });
-
+ 
         pedacos.appendChild(palavra);
       });
-
+ 
       no.replaceWith(pedacos);
     }
     // Se for uma tag (por exemplo <em>), entra nela e continua
@@ -1125,20 +1272,20 @@ function dividirEmLetras(titulo) {
       [...no.childNodes].forEach(processar);
     }
   }
-
+ 
   // Leitores de tela leem o texto original, não as letras separadas
   titulo.setAttribute("aria-label", titulo.textContent.trim());
   [...titulo.childNodes].forEach(processar);
 }
-
+ 
 document.querySelectorAll(".letras").forEach(dividirEmLetras);
-
-
+ 
+ 
 /* ───────────────────────────────────────────────────────────
    3) Dispara as animações quando o item aparece na tela
    ─────────────────────────────────────────────────────────── */
 const animaveis = document.querySelectorAll(".letras, .revela");
-
+ 
 if ("IntersectionObserver" in window) {
   const observador = new IntersectionObserver((entradas) => {
     entradas.forEach(entrada => {
@@ -1147,15 +1294,15 @@ if ("IntersectionObserver" in window) {
         observador.unobserve(entrada.target);   // anima só uma vez
       }
     });
-  }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
-
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+ 
   animaveis.forEach(el => observador.observe(el));
 } else {
   // Navegador antigo: mostra tudo de uma vez
   animaveis.forEach(el => el.classList.add("in"));
 }
-
-
+ 
+ 
 /* ───────────────────────────────────────────────────────────
    4) Topo: ganha fundo ao rolar + menu do celular
    ─────────────────────────────────────────────────────────── */
@@ -1163,7 +1310,7 @@ const topo = document.getElementById("topo");
 window.addEventListener("scroll", () => {
   topo.classList.toggle("rolou", window.scrollY > 30);
 }, { passive: true });
-
+ 
 const menuCelular = document.getElementById("menuCelular");
 document.getElementById("menuBotao").addEventListener("click", () => {
   menuCelular.classList.toggle("aberto");
@@ -1171,18 +1318,18 @@ document.getElementById("menuBotao").addEventListener("click", () => {
 menuCelular.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => menuCelular.classList.remove("aberto"));
 });
-
-
+ 
+ 
 /* ───────────────────────────────────────────────────────────
    5) Agendamento de exemplo
       Mostra ao cliente como funciona: escolhe um horário
-      e clica em "Reservar". É só uma demonstração.
+      e clica no botão. É só uma demonstração.
    ─────────────────────────────────────────────────────────── */
 document.querySelectorAll(".agenda").forEach(agenda => {
   const chips = agenda.querySelectorAll(".chip");
   const botao = agenda.querySelector(".agenda-botao");
   const aviso = agenda.querySelector(".agenda-aviso");
-
+ 
   chips.forEach(chip => {
     chip.addEventListener("click", () => {
       chips.forEach(outro => outro.classList.remove("ativo"));
@@ -1190,15 +1337,16 @@ document.querySelectorAll(".agenda").forEach(agenda => {
       aviso.textContent = "";
     });
   });
-
+ 
   botao.addEventListener("click", () => {
     const escolhido = agenda.querySelector(".chip.ativo");
     aviso.textContent = escolhido
-      ? `✓ ${escolhido.textContent} reservado (exemplo de demonstração)`
+      ? `Confirmado: ${escolhido.textContent} (exemplo de demonstração)`
       : "Escolha uma opção primeiro";
   });
 });
 </script>
-
+ 
 </body>
 </html>
+
